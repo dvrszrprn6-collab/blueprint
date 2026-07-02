@@ -118,6 +118,67 @@ h3{font-size:15px;font-weight:700;}
 .oddrow{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:var(--muted);border-bottom:1px dashed rgba(30,41,59,.6);}
 .pulse-now{animation:pulse 2.5s ease-in-out infinite;}
 
+/* ═══ COACH + MY SPACE + BRIEFING ═══ */
+#briefing{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);width:min(560px,94vw);z-index:998;display:flex;flex-direction:column;gap:8px;}
+.brf{background:rgba(13,21,38,.96);backdrop-filter:blur(14px);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:fadeInUp .5s ease;}
+.brf.urgent{border-left-color:var(--red);}
+.brf .bm{flex:1;font-size:12.5px;color:#e2e8f0;line-height:1.45;}
+.brf .bm small{color:var(--muted);display:block;font-size:10px;margin-top:2px;}
+.brfgo{background:var(--gold);color:#111;border:none;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.brf.urgent .brfgo{background:var(--red);color:#fff;}
+.brfx{background:none;border:none;color:var(--muted);font-size:15px;cursor:pointer;padding:2px 6px;}
+.flashhl{animation:glow 1.2s ease-in-out 2;outline:2px solid var(--gold);outline-offset:4px;border-radius:12px;transition:outline .3s;}
+.chip{background:var(--bg3);border:1px solid var(--border);color:#cbd5e1;border-radius:20px;padding:6px 13px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.chip:hover{border-color:var(--gold);color:var(--gold);}
+.chip.sel{background:var(--gold);color:#111;border-color:var(--gold);font-weight:700;}
+.chiprow{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px;}
+.gmsg{max-width:88%;border-radius:14px;padding:11px 14px;margin-bottom:9px;font-size:13px;line-height:1.6;animation:fadeInUp .4s ease;}
+.gmsg.coach{background:linear-gradient(135deg,#1a1040,#141c33);border:1px solid #3730a3;color:#dbe3f0;border-bottom-left-radius:4px;}
+.gmsg.me{background:var(--bg3);color:#cbd5e1;margin-left:auto;border-bottom-right-radius:4px;}
+.gmsg .gt{font-size:9.5px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:1px;}
+#g-chat{max-height:420px;overflow-y:auto;padding:4px 2px;display:flex;flex-direction:column;}
+.gplan{background:linear-gradient(135deg,#1a1040,#0c1526);border:1px solid #3730a3;border-radius:14px;padding:16px;margin-bottom:12px;}
+.spark{display:flex;align-items:flex-end;gap:2px;height:56px;margin:8px 0;}
+.spark div{flex:1;border-radius:2px 2px 0 0;min-height:2px;background:var(--bg3);}
+.trow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px dashed rgba(30,41,59,.6);}
+.tbtn2{background:var(--bg3);border:1px solid var(--border);color:var(--gold);border-radius:8px;width:30px;height:30px;font-size:15px;font-weight:800;cursor:pointer;flex-shrink:0;}
+.winrow{display:flex;gap:10px;align-items:baseline;padding:7px 4px;border-bottom:1px dashed rgba(30,41,59,.5);}
+.gsend{background:var(--gold);color:#111;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;}
+textarea.ccin{resize:vertical;min-height:54px;}
+
+/* ═══ GLASS + POINTER LAYER ═══ */
+#ambient{position:fixed;inset:-12%;z-index:-1;pointer-events:none;overflow:hidden;will-change:transform;}
+.amb{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
+#amb1{width:560px;height:460px;left:-4%;top:2%;background:rgba(99,102,241,.30);animation:ambA 26s ease-in-out infinite alternate;}
+#amb2{width:470px;height:400px;right:-3%;top:16%;background:rgba(251,191,36,.15);animation:ambB 33s ease-in-out infinite alternate;}
+#amb3{width:640px;height:520px;left:26%;bottom:-6%;background:rgba(45,212,191,.20);animation:ambC 39s ease-in-out infinite alternate;}
+#amb4{width:420px;height:380px;right:10%;bottom:18%;background:rgba(232,121,249,.13);animation:ambA 30s ease-in-out infinite alternate-reverse;}
+@keyframes ambA{from{transform:translate(0,0) scale(1);}to{transform:translate(110px,80px) scale(1.18);}}
+@keyframes ambB{from{transform:translate(0,0) scale(1.1);}to{transform:translate(-90px,100px) scale(.92);}}
+@keyframes ambC{from{transform:translate(0,0) scale(.94);}to{transform:translate(80px,-90px) scale(1.14);}}
+.card,.ccstat,.gplan,.backup{background:rgba(46,58,92,.36)!important;backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-color:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 6px 22px rgba(0,0,0,.28);position:relative;overflow:hidden;transition:transform .07s ease-out,border-color .12s,box-shadow .12s;will-change:transform;}
+section>h2,.hero-inner h1{display:inline-block;padding:5px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:12px;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+.label{display:inline-block;padding:2px 10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.stat-box{background:rgba(255,255,255,.08)!important;backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border-color:rgba(255,255,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
+.bar-wrap,.tag,.chip,.ccbtn,.ccin{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.card::after,.ccstat::after,.gplan::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .12s;background:radial-gradient(var(--gr,130px) circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,var(--gi,.12)),rgba(255,255,255,.035) 42%,transparent 70%);}
+.card.pt::after,.ccstat.pt::after,.gplan.pt::after{opacity:1;}
+.card.pt,.ccstat.pt,.gplan.pt{border-color:rgba(255,255,255,.30)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 36px rgba(0,0,0,.40);}
+nav{background:rgba(20,28,50,.52)!important;backdrop-filter:blur(28px) saturate(1.9);-webkit-backdrop-filter:blur(28px) saturate(1.9);border-bottom-color:rgba(255,255,255,.10)!important;}
+.brf{background:rgba(46,58,92,.48)!important;backdrop-filter:blur(28px) saturate(1.9);-webkit-backdrop-filter:blur(28px) saturate(1.9);border-color:rgba(255,255,255,.16)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 34px rgba(0,0,0,.45);}
+.daily-hero{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+@media (prefers-reduced-motion:reduce){.card,.ccstat,.gplan{transition:none;}}
+/* capsule + vault + report */
+.capshell{border:1px dashed rgba(251,191,36,.35);border-radius:12px;padding:12px;margin-top:10px;}
+.lockpill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;padding:5px 12px;border-radius:20px;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--gold);}
+.lockpill.locked{color:var(--red);border-color:rgba(248,113,113,.4);}
+.grade{font-size:52px;font-weight:900;line-height:1;text-shadow:0 0 30px rgba(251,191,36,.35);}
+.wrcrow{display:flex;justify-content:space-between;font-size:12.5px;color:#94a3b8;padding:5px 0;border-bottom:1px dashed rgba(30,41,59,.6);}
+.wrcrow b{color:#e2e8f0;}
+.gcompose{display:flex;gap:6px;margin-top:10px;}
+.gcompose input{flex:1;}
+.planrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px dashed rgba(30,41,59,.5);font-size:12.5px;color:#cbd5e1;}
+
 </style>
 </head>
 <body>
@@ -127,6 +188,8 @@ h3{font-size:15px;font-weight:700;}
 <nav id="topnav">
   <button class="active" onclick="goTo('hero',this)">🏠 Start</button>
   <button onclick="goTo('command',this)">🚀 Command</button>
+  <button onclick="goTo('guru',this)">🧭 Coach</button>
+  <button onclick="goTo('myspace',this)">🎨 My Space</button>
   <button onclick="goTo('profile',this)">👤 Profile</button>
   <button onclick="goTo('gapmonth',this)">⚡ This Month</button>
   <button onclick="goTo('year1',this)">Y1</button>
@@ -172,6 +235,28 @@ h3{font-size:15px;font-weight:700;}
   <div class="card" id="cc-odds"></div>
   <div class="card" id="cc-insights"></div>
   <div class="card" id="cc-settings"></div>
+</section>
+
+<!-- COACH -->
+<section id="guru" style="border-top:1px solid var(--border);">
+  <div class="label" style="color:var(--purple)">Your Study Companion · Learns Your Pattern</div>
+  <h2 style="margin-bottom:6px;">🧭 Coach</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Log every study session — what, where, how it felt. Coach reads your history, your phase in the blueprint, and today's rhythm, then replies with suggestions and questions. <span style="color:#4b5563;">Rule-based engine, works fully offline — for big strategy decisions, bring them to Claude.</span></p>
+  <div class="gplan" id="g-plan"></div>
+  <div class="card"><h3 style="margin-bottom:8px;">📝 Log a Session</h3><div id="g-form"></div></div>
+  <div class="card"><h3 style="margin-bottom:8px;">💬 Conversation</h3><div id="g-chat"></div></div>
+  <div class="card" id="g-stats"></div>
+</section>
+
+<!-- MY SPACE -->
+<section id="myspace" style="border-top:1px solid var(--border);">
+  <div class="label" style="color:var(--teal)">Yours To Shape</div>
+  <h2 style="margin-bottom:6px;">🎨 My Space</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">The section you build yourself — your own trackers, your own reminders, your trend history, and the Wins Log that becomes your SOP and interview ammunition in Year 3.</p>
+  <div class="card" id="ms-spark"></div>
+  <div class="card" id="ms-trackers"></div>
+  <div class="card" id="ms-reminders"></div>
+  <div class="card" id="ms-wins"></div>
 </section>
 
 <!-- PROFILE -->
@@ -1306,7 +1391,9 @@ function rOdds(){
 function rInsights(){
  const e=engine();const out=[];
  const wk=d=>Math.max(1,Math.round(dTo(d)/7));
- if(dTo(e.cfa)>0){const h=Math.ceil(350/wk(e.cfa));out.push(`<b>CFA pace-maker:</b> ${dTo(e.cfa)} days to the August L1 sitting. 350 hours needed = <b>${h} hrs/week from today</b>. ${h<=8?'Comfortably inside your 2-daily-hours budget.':h<=14?'Tight but feasible — weekends carry the load.':'Not feasible at this start date — this is exactly why prep begins in Sem 3, not later.'}`);}
+ const prep=addM(anchor(),12);
+ if(today<prep&&dTo(e.cfa)>0){const w2=Math.max(1,Math.round((dTo(e.cfa)-dTo(prep))/7));out.push(`<b>CFA pace-maker:</b> CFA needs <b>zero hours from you right now</b> — prep begins Sem 3 (${fmt(prep)}), exactly as the blueprint says. From that day to the August L1 sitting: 350 hours over ${w2} weeks = <b>${Math.ceil(350/w2)} hrs/week</b>, which fits your 2-daily-hours budget. Until then, this phase belongs to its own work only.`);}
+ else if(dTo(e.cfa)>0){const h=Math.ceil(350/wk(e.cfa));out.push(`<b>CFA pace-maker:</b> ${dTo(e.cfa)} days to the August L1 sitting. 350 hours needed = <b>${h} hrs/week from today</b>. ${h<=8?'Comfortably inside your 2-daily-hours budget.':h<=14?'Tight but feasible — weekends carry the load.':'Behind pace — add weekend hours now, do not borrow from CGPA hours.'}`);}
  if(dTo(e.cat)>0){const hrs=Math.round(dTo(e.cat)*20/60);out.push(`<b>The invisible compounding:</b> the 20-min daily editorial habit between now and CAT = <b>~${hrs} hours of RC training</b> — more than most aspirants' entire paid verbal course, acquired at breakfast.`);}
  const cagr=Math.round((Math.pow(50/6,1/6)-1)*100);
  out.push(`<b>The salary math decoded:</b> ₹6 → ₹50 LPA in 6 years = <b>${cagr}% compound growth per year</b>. Sounds impossible — but it decomposes into 3 job switches at +45% each plus normal promotions. The ladder is standard in analytics/finance; what's rare is starting it at 22 with certs already done.`);
@@ -1397,6 +1484,674 @@ window.ccReset=()=>{if(confirm('Erase ALL tracked progress? This cannot be undon
 
 /* ─── INIT ─── */
 rStats();rCountdowns();rCGPA();rDaily();rTimer();rMilestones();rOdds();rInsights();rSettings();rArsenal();
+})();
+
+</script>
+<script>
+/* ═══════════ COACH · MY SPACE · BRIEFING ENGINE ═══════════ */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const K='eco.v2.';
+const S={get(k,d){try{const v=localStorage.getItem(K+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem(K+k,JSON.stringify(v));}catch(e){}}};
+const DAY=864e5,now=new Date();
+const today=new Date(now.getFullYear(),now.getMonth(),now.getDate(),12);
+const hour=now.getHours(),dow=today.getDay();
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const tIso=iso(today);
+const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+const esc=s=>String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ─── shared state readers (v1 layer) ─── */
+const anchor=()=>new Date(S.get('anchor','2026-08-01')+'T12:00:00');
+const addM=(d,n)=>new Date(d.getFullYear(),d.getMonth()+n,d.getDate(),12);
+const msDone=id=>!!S.get('ms.'+id,false);
+const MS_TOTAL=39;
+function msCount(){let c=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith(K+'ms.')&&localStorage.getItem(k)==='true')c++;}return c;}
+const daily=()=>S.get('daily',{});
+const dTicks=d=>{const v=daily()[d];return v?v.filter(Boolean).length:0;};
+
+/* ─── phase engine (mirror of v1) ─── */
+const PHN=['Gap Month','Year 1 · Sem 1','Year 1 · Sem 2','Year 2 · Sem 3','Year 2 · Sem 4','Year 3 · Sem 5','Year 3 · Sem 6','Launch','Compounding'];
+const PRI=[ // per-phase priority subject + focus line + topic chips
+ {s:'Math',f:'NCERT Math bridge — 4 topics, nothing else matters more',t:['Functions & Limits','Differentiation','Integration','Matrices','Probability','Linear Programming']},
+ {s:'College',f:'Every lecture + Sem 1 CGPA 8.5 target',t:['Micro concepts','Stats course','Math course','NISM XII prep','Revision']},
+ {s:'Python',f:'Python basics + Google DA cert + NISM V-A',t:['Python basics','Excel','Google DA cert','NISM V-A','College revision']},
+ {s:'CFA',f:'CFA prep begins — Ethics first, 8–10 hrs/week',t:['CFA Ethics','CFA Quant','SQL','Tableau','NISM VIII']},
+ {s:'CFA',f:'CFA continues + internship applications daily',t:['CFA FRA','CFA Econ','GitHub project','Internship apps','Mocks']},
+ {s:'CFA',f:'CFA final stretch (Aug) → then CAT mocks',t:['CFA mocks','CAT mocks','DILR sets','RC passages','Dissertation']},
+ {s:'CAT',f:'Decision locked. CUET PG revision + past papers',t:['CUET revision','Past papers','Dissertation','Applications']},
+ {s:'Work',f:'First job / masters — CFA L2 momentum',t:['CFA L2','Work skills','RBI Grade B','Networking']},
+ {s:'Work',f:'Compound. Switch smart. 2033 target',t:['Leadership','Job switch prep','Actuarial CS1','CFA L3']}];
+function phIdx(){const A=anchor();const b=[-1.2,0,6,12,18,24,30,34,58].map(m=>m===-1.2?new Date(A.getTime()-35*DAY):addM(A,m));let i=0;for(let j=0;j<b.length;j++)if(today>=b[j])i=j;if(today<b[0])i=0;return i;}
+function phStart(){const A=anchor();const b=[-1.2,0,6,12,18,24,30,34,58];const i=phIdx();return b[i]===-1.2?new Date(A.getTime()-35*DAY):addM(A,b[i]);}
+const PH_MS=[['g1','g2','g3','g4','g5','g6'],['y1a','y1b','y1c','y1d','y1e','y1h','y1i'],['y1f','y1g','y1j'],['y2a','y2b','y2e','y2f'],['y2c','y2d','y2g','y2h','y2i'],['y3a','y3b','y3c'],['y3d','y3e','y3f','y3g','y3h'],['p1','p2'],['p3','p4','p5','p6']];
+
+/* ─── data stores ─── */
+const slog=()=>S.get('slog',[]);
+const wins=()=>S.get('wins',[]);
+const trk=()=>S.get('trk',[]);
+const rem=()=>S.get('rem',[]);
+const coachA=()=>S.get('coachA',{});
+
+/* ─── history snapshot (trend data, once per day) ─── */
+(function snap(){const h=S.get('snap',{});h[tIso]={ex:Math.round(msCount()/MS_TOTAL*100),dd:dTicks(tIso),n:(slog().filter(e=>e.d===tIso)).length};S.set('snap',h);})();
+
+/* ─── PHRASE BANKS ─── */
+const GREET={m:['Subah ka scholar — sabse strong version of you.','Good morning. Aaj ka din blank page hai — likh de kuch solid.','Uth gaye champion. Chalo, pehla arrow chala do.'],
+a:['Dopahar ho gayi — thoda slow feel ho raha ho toh normal hai. Ek chhota task utha lo.','Afternoon check-in. Consistency > intensity, yaad hai na?'],
+e:['Shaam ho gayi. Ab distraction ka time hai ya deep work ka — tu decide.','Evening slot — din ka sabse important do ghante yahi hain.'],
+n:['Raat ho gayi. Jo ho gaya so ho gaya — kal ka plan 2 minute mein set karo aur so jao.','Late night? Neend bhi syllabus ka hissa hai — 7 ghante non-negotiable.']};
+const REACT={fire:['Zabardast! Flow state mein the — yehi feeling yaad rakhna jab mushkil din aaye.','Excellent session. Jab flow aaye, agle din same time, same jagah — pattern lock karo.','🔥 Aag laga di. Ye momentum kal tak le jaana.'],
+ok:['Solid work. Har din heroic nahi hota — dikhna sirf zaroori hai. Aur tu dikha.','Done is done. Ek aur eent deewar mein lag gayi.','Theek chala. Ab ek chhoti si cheez revise kar lena sone se pehle — cement ho jayega.'],
+hard:['Struggle ka matlab dimaag stretch ho raha hai — wahi toh growth hai. Bas kal wapas aana.','Mushkil laga? Good. Aasaan hota toh sab kar lete. Kal wahi topic, fresh dimaag, 25-min timer.','Tough session. Ek baat yaad rakh — jo topic aaj torture laga, 2 hafte baad woh warm-up hoga.']};
+const NUDGEBANK=['Ek kaam abhi karo, 30 second ka:','Chhota sa reminder, dost:','Professional note:','Seedhi baat:'];
+
+/* ═══════════ BRIEFING ENGINE ═══════════ */
+function nudges(){
+ const L=[];const pi=phIdx();
+ const dd=dTicks(tIso);
+ // daily unticked
+ if(dd===0&&hour>=20)L.push({id:'d0',u:1,m:'Aaj ke non-negotiables abhi tak blank hain — streak aadhi raat ko marta hai. 2 minute lagenge.',t:'cc-daily'});
+ else if(dd>0&&dd<4&&hour>=21)L.push({id:'d1',u:1,m:`Aaj ${dd}/5 hua hai — streak ke liye 4 chahiye. Ek aur tick, bas.`,t:'cc-daily'});
+ else if(dd===0&&hour>=12)L.push({id:'d2',u:0,m:'Din ke non-negotiables pending hain. Jaldi tick maar do jo ho chuka hai.',t:'cc-daily'});
+ // sgpa missing after semester ends (~5 months per sem)
+ const A=anchor();const sg=S.get('sgpa',[]);
+ for(let s=0;s<6;s++){const end=addM(A,(s+1)*6-1);if(today>end&&!(sg[s]>0)){L.push({id:'sg'+s,u:1,m:`Semester ${s+1} khatam ho chuka hai par SGPA box khaali hai — odds engine andha chal raha hai. Bhar do.`,t:'cc-settings'});break;}}
+ // phase progress behind
+ const ps=phStart();const el=Math.max(1,Math.round((today-ps)/DAY));
+ const ids=PH_MS[pi]||[];const dn=ids.filter(msDone).length;
+ const phLen=pi===0?35:180;const expected=Math.min(1,el/phLen);
+ if(ids.length&&dn/ids.length<expected-0.25)L.push({id:'ph'+pi+'.'+Math.floor(expected*4),u:1,m:`${PHN[pi]} — Day ${el}, par milestones ${dn}/${ids.length} hi ticked hain. Plan se peeche ho. Aaj ek close karo.`,t:'cc-milestones'});
+ // countdown red zone
+ const Y=A.getFullYear();const evs=[['CFA Level 1',new Date(Y+2,7,20,12)],['CAT',new Date(Y+2,10,24,12)],['CUET PG',new Date(Y+3,2,15,12)]];
+ evs.forEach(e=>{const d=Math.round((e[1]-today)/DAY);if(d>0&&d<=60)L.push({id:'ev'+e[0]+wk(d),u:1,m:`${e[0]} sirf ${d} din door hai. Red zone. Har din ab exam day hai.`,t:'cc-countdowns'});});
+ // custom reminders due
+ rem().forEach((r,i)=>{if(!r.done&&r.date<=tIso)L.push({id:'rm'+i+r.date,u:1,m:`Tumhara apna reminder: "${esc(r.text)}"`,t:'ms-reminders'});});
+ // absence
+ const lo=S.get('lastOpen',null);
+ if(lo){const gap=Math.round((today-new Date(lo+'T12:00:00'))/DAY);if(gap>=4)L.push({id:'ab'+tIso,u:1,m:`${gap} din baad wapas aaye ho. Koi baat nahi — plan wahi hai, tu bhi wahi hai. Aaj sirf ek cheez karo: daily ticks.`,t:'cc-daily'});}
+ S.set('lastOpen',tIso);
+ // export monthly
+ const ex=S.get('expAt',null);
+ if(!ex||Math.round((today-new Date(ex+'T12:00:00'))/DAY)>30)L.push({id:'ex'+tIso.slice(0,7),u:0,m:'Is mahine ka backup nahi hua — Export dabao, 10 second ka kaam, 3 saal ka data safe.',t:'cc-settings'});
+ // study log today
+ if(hour>=19&&!slog().some(e=>e.d===tIso))L.push({id:'sl'+tIso,u:0,m:'Aaj ka study log khaali hai. Coach ko batao kya padha — pattern wahi se banta hai.',t:'guru'});
+ const dis=S.get('dis',{});
+ return L.filter(n=>dis[n.id]!==tIso).sort((a,b)=>b.u-a.u).slice(0,3);
+}
+const wk=d=>Math.ceil(d/7);
+function rBrief(){
+ let el=$('briefing');
+ if(!el){el=document.createElement('div');el.id='briefing';document.body.appendChild(el);}
+ const L=nudges();
+ el.innerHTML=L.map(n=>`<div class="brf ${n.u?'urgent':''}"><div class="bm">${n.m}<small>${pick(NUDGEBANK)} tap karke seedha wahan pahuncho</small></div><button class="brfgo" onclick="ccGo('${n.t}','${n.id}')">Le chalo →</button><button class="brfx" onclick="ccDis('${n.id}')">✕</button></div>`).join('');
+}
+window.ccGo=(t,id)=>{window.ccDis(id);const el=$(t);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('flashhl');setTimeout(()=>el.classList.remove('flashhl'),2600);}};
+window.ccDis=id=>{const d=S.get('dis',{});d[id]=tIso;S.set('dis',d);rBrief();};
+
+/* ═══════════ COACH ═══════════ */
+let f={s:null,dur:null,w:null,mood:null};
+const SUBJ=['Math','Stats','Econ','Python','SQL','Excel','CFA','NISM','CAT','College','Archery','Other'];
+function subjOrder(){const c={};slog().slice(-30).forEach(e=>c[e.s]=(c[e.s]||0)+1);return [...SUBJ].sort((a,b)=>(c[b]||0)-(c[a]||0));}
+function rForm(){
+ $('g-form').innerHTML=`
+ <p style="font-size:11px;color:var(--muted);margin-bottom:2px;">KYA padha? <span style="color:#4b5563">(tumhare pattern ke hisaab se sorted)</span></p>
+ <div class="chiprow">${subjOrder().map(s=>`<button class="chip ${f.s===s?'sel':''}" onclick="gF('s','${s}')">${s}</button>`).join('')}</div>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:2px;">KITNA time?</p>
+ <div class="chiprow">${[[30,'30 min'],[60,'1 hr'],[120,'2 hr'],[180,'3+ hr']].map(d=>`<button class="chip ${f.dur===d[0]?'sel':''}" onclick="gF('dur',${d[0]})">${d[1]}</button>`).join('')}</div>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:2px;">KAHAN?</p>
+ <div class="chiprow">${['Ghar','College','Library','Ground'].map(w=>`<button class="chip ${f.w===w?'sel':''}" onclick="gF('w','${w}')">${w}</button>`).join('')}</div>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:2px;">KAISA laga?</p>
+ <div class="chiprow">${[['fire','🔥 Flow'],['ok','🙂 Theek'],['hard','😩 Struggle']].map(m=>`<button class="chip ${f.mood===m[0]?'sel':''}" onclick="gF('mood','${m[0]}')">${m[1]}</button>`).join('')}</div>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:4px;">KYA exactly + KYUN (optional, likhne se coach zyada samajhta hai)</p>
+ <textarea class="ccin" id="g-note" placeholder="e.g. Chain rule ke 15 problems kiye kyunki kal test hai... / RBI article padha inflation pe..."></textarea>
+ <div style="margin-top:10px;text-align:right;"><button class="gsend" onclick="gLog()">Log karo →</button></div>`;
+}
+window.gF=(k,v)=>{f[k]=f[k]===v?null:v;rForm();};
+function coachReply(e){
+ const pi=phIdx(),P=PRI[pi],parts=[];
+ parts.push(pick(REACT[e.mood||'ok']));
+ // phase alignment
+ const week=slog().filter(x=>(today-new Date(x.d+'T12:00:00'))/DAY<7);
+ const priCount=week.filter(x=>x.s===P.s).length;
+ if(e.s===P.s)parts.push(pick([`Aur sabse badi baat — ye ${P.s} tha, is phase ka boss subject. Bilkul sahi jagah energy lagi.`,`${P.s} pe kaam = plan ke exact centre pe kaam. This is the way.`]));
+ else if(priCount===0&&week.length>=2)parts.push(`Ek professional observation: is hafte ${P.s} ek baar bhi nahi aaya, aur is phase ka core wahi hai — "${P.f}". Kal ka pehla slot uske naam kar do?`);
+ // mood pattern
+ const strug=week.filter(x=>x.s===e.s&&x.mood==='hard').length;
+ if(e.mood==='hard'&&strug>=2)parts.push(`${e.s} mein is hafte ${strug} baar struggle aaya hai. Resource change karne ka time ho sakta hai — Arsenal section mein iske liye options rakhe hain. Method badlo, mehnat nahi.`);
+ if(e.mood==='fire'&&e.dur>=120)parts.push('2+ ghante flow — ye data point sona hai. Same time, same jagah, repeat.');
+ // weekday rhythm
+ if(dow===6)parts.push('Aaj Saturday hai — deep work day. Agar 4 ghante nahi hue abhi tak, ek aur block ban sakta hai.');
+ if(dow===0)parts.push('Sunday — log karne ke baad hafte ka 15-min review, aur kal ka plan. Phir full rest, guilt-free.');
+ // note ack
+ if(e.note)parts.push(pick(['Note padh liya — likhne ki aadat hi tumhe 95% logon se alag karti hai.','Detail likhna = khud ko data dena. Great habit.']));
+ // question every ~2nd log
+ let q=null;
+ if(slog().length%2===1){
+  const asked=coachA();
+  if(!asked['t'+tIso]){q={k:'t'+tIso,text:'Kal ka main target kya rahega?',opts:P.t.slice(0,4)};}
+  else if(!asked['s'+tIso]){q={k:'s'+tIso,text:'Kal kis slot mein deep work karoge?',opts:['Subah 9–11','Dopahar 2–4','Shaam 4–6','Raat 7–9']};}
+ }
+ return {text:parts.join(' '),q};
+}
+window.gLog=()=>{
+ if(!f.s||!f.dur){alert('Kam se kam subject aur time chuno.');return;}
+ const note=($('g-note')&&$('g-note').value.trim())||'';
+ const e={d:tIso,h:hour,s:f.s,dur:f.dur,w:f.w,mood:f.mood||'ok',note};
+ const r=coachReply(e);e.reply=r.text;if(r.q)e.q=r.q;
+ const L=slog();L.push(e);S.set('slog',L);
+ f={s:null,dur:null,w:null,mood:null};
+ rForm();rChat();rPlan();rGStats();rBrief();
+};
+window.gAns=(k,v)=>{const a=coachA();a[k]=v;S.set('coachA',a);
+ const L=slog();L.push({d:tIso,h:hour,sys:1,me:v,reply:pick([`Likh liya: "${v}". Kal main yaad dilaunga — aur tum khud bhi yaad rakhoge, kyunki commitment ab record pe hai.`,`"${v}" — locked. Kal ka plan ab guess nahi, decision hai.`])});
+ S.set('slog',L);rChat();rPlan();};
+function rChat(){
+ const L=slog().slice(-14);
+ $('g-chat').innerHTML=L.length?L.map((e,i)=>{
+  const last=i===L.length-1;
+  let h='';
+  if(!e.sys)h+=`<div class="gmsg me">${e.s} · ${e.dur>=60?(e.dur/60)+' hr':e.dur+' min'}${e.w?' · '+e.w:''} · ${e.mood==='fire'?'🔥':e.mood==='hard'?'😩':'🙂'}${e.note?'<br>'+esc(e.note):''}<div class="gt">${fmt(new Date(e.d+'T12:00:00'))}</div></div>`;
+  else h+=`<div class="gmsg me">${esc(e.me)}</div>`;
+  h+=`<div class="gmsg coach">${e.reply}${last&&e.q&&!coachA()[e.q.k]?`<div style="margin-top:8px;font-weight:700;">${e.q.text}</div><div class="chiprow" style="margin-bottom:0;">${e.q.opts.map(o=>`<button class="chip" onclick="gAns('${e.q.k}','${o}')">${o}</button>`).join('')}</div>`:''}</div>`;
+  return h;}).join(''):'<p style="font-size:12.5px;color:var(--muted);">Pehla session log karo — wahi se rishta shuru hota hai. 🙂</p>';
+ const c=$('g-chat');c.scrollTop=c.scrollHeight;
+}
+function rPlan(){
+ const pi=phIdx(),P=PRI[pi];
+ const g=hour<12?pick(GREET.m):hour<16?pick(GREET.a):hour<21?pick(GREET.e):pick(GREET.n);
+ const a=coachA();const commit=a['t'+tIso]||a['t'+iso(new Date(today.getTime()-DAY))];
+ const dd=dTicks(tIso);
+ $('g-plan').innerHTML=`<p style="font-size:11px;color:var(--purple);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px;">Aaj ka plan · ${PHN[pi]}</p>
+ <p style="font-size:14px;color:#e0e7ff;font-weight:600;margin-bottom:8px;">${g}</p>
+ <p style="font-size:12.5px;color:#a5b4fc;line-height:1.6;">📌 Phase focus: <b>${P.f}</b>${commit?`<br>🤝 Tumhara commitment: <b>${commit}</b> — coach yaad rakhta hai.`:''}<br>✅ Daily ticks: <b>${dd}/5</b>${dd<5?' — pending hain':' — clean sweep!'}${dow===6?'<br>🛠️ Saturday = 4-hr deep work day.':dow===0?'<br>🌿 Sunday = review + rest day.':''}</p>`;
+}
+function rGStats(){
+ const L=slog();const wkL=L.filter(x=>!x.sys&&(today-new Date(x.d+'T12:00:00'))/DAY<7);
+ const mins=wkL.reduce((a,b)=>a+(b.dur||0),0);
+ const c={};wkL.forEach(x=>c[x.s]=(c[x.s]||0)+x.dur);
+ const top=Object.entries(c).sort((a,b)=>b[1]-a[1]);
+ const dm=daily();let miss=[0,0,0,0,0];let nd=0;
+ for(let i=1;i<=14;i++){const v=dm[iso(new Date(today.getTime()-i*DAY))];if(v){nd++;v.forEach((x,j)=>{if(!x)miss[j]++;});}}
+ const items=['Archery','2h study','Skill task','News','Sleep'];
+ const worst=nd>=4?items[miss.indexOf(Math.max(...miss))]:null;
+ $('g-stats').innerHTML=`<h3 style="margin-bottom:10px;">📊 Tumhara Pattern · Last 7 Days</h3>
+ <p style="font-size:12.5px;color:#94a3b8;line-height:1.7;">
+ Total logged: <b style="color:var(--gold)">${Math.round(mins/60*10)/10} hrs</b> across ${wkL.length} session${wkL.length===1?'':'s'}.<br>
+ ${top.length?`Sabse zyada: <b>${top[0][0]}</b> (${Math.round(top[0][1]/60*10)/10} hrs). ${top.length>1?`Phir ${top[1][0]}.`:''}`:'Abhi data nahi — log karna shuru karo.'}<br>
+ ${worst?`Sabse zyada miss hone wala non-negotiable (14 din): <b style="color:var(--orange)">${worst}</b> — isko system se fix karo, willpower se nahi.`:''}
+ </p>`;
+}
+
+/* ═══════════ MY SPACE ═══════════ */
+function rSpark(){
+ const h=S.get('snap',{});
+ const ds=[...Array(30)].map((_,i)=>{const d=iso(new Date(today.getTime()-(29-i)*DAY));return h[d]||null;});
+ $('ms-spark').innerHTML=`<h3 style="margin-bottom:4px;">📈 Trend · 30 Days</h3>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:6px;">Daily non-negotiables (bar height = ticks/5) — history apne aap banti jaati hai</p>
+ <div class="spark">${ds.map(x=>`<div style="height:${x?Math.max(4,x.dd/5*100):2}%;background:${!x?'var(--bg3)':x.dd>=4?'var(--gold)':x.dd>=2?'#78560f':'var(--bg3)'}"></div>`).join('')}</div>
+ <p style="font-size:11px;color:var(--muted);">Blueprint executed: <b style="color:var(--gold)">${Math.round(msCount()/MS_TOTAL*100)}%</b> · trend data ${Object.keys(h).length} din se store ho raha hai</p>`;
+}
+function rTrk(){
+ const T=trk();
+ $('ms-trackers').innerHTML=`<h3 style="margin-bottom:8px;">🎯 Mere Trackers</h3>
+ ${T.map((t,i)=>`<div class="trow"><button class="tbtn2" onclick="msT(${i},-1)">−</button><button class="tbtn2" onclick="msT(${i},1)">+</button>
+ <div style="flex:1;"><p style="font-size:13px;color:#e2e8f0;font-weight:600;">${esc(t.n)}</p>
+ <div class="bar-wrap"><div class="bar" style="width:${Math.min(100,t.c/t.g*100)}%;background:${t.c>=t.g?'var(--green)':'var(--teal)'};"></div></div></div>
+ <span style="font-size:12px;font-weight:800;color:${t.c>=t.g?'var(--green)':'var(--teal)'};min-width:64px;text-align:right;">${t.c}/${t.g}${t.c>=t.g?' ✓':''}</span>
+ <button class="brfx" onclick="msTDel(${i})">✕</button></div>`).join('')||'<p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Apna pehla tracker banao — jo bhi ginna chahte ho. "30 arrows daily", "50 NCERT problems", kuch bhi.</p>'}
+ <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+ <input class="ccin" id="tk-n" placeholder="Naam (e.g. Arrows this week)" style="flex:2;min-width:150px;">
+ <input class="ccin" id="tk-g" type="number" placeholder="Target" style="flex:1;min-width:70px;">
+ <button class="ccbtn gold" onclick="msTAdd()">Add</button></div>`;
+}
+window.msT=(i,v)=>{const T=trk();T[i].c=Math.max(0,T[i].c+v);S.set('trk',T);rTrk();};
+window.msTDel=i=>{const T=trk();T.splice(i,1);S.set('trk',T);rTrk();};
+window.msTAdd=()=>{const n=$('tk-n').value.trim(),g=parseInt($('tk-g').value);if(!n||!g)return;const T=trk();T.push({n,g,c:0});S.set('trk',T);rTrk();};
+function rRem(){
+ const R=rem().filter(r=>!r.done||r.date>=iso(new Date(today.getTime()-7*DAY)));
+ $('ms-reminders').innerHTML=`<h3 style="margin-bottom:8px;">⏰ Mere Reminders</h3>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">Date aane par ye briefing mein apne aap dikhega — bilkul milestone nudges ki tarah</p>
+ ${R.map((r)=>{const i=rem().indexOf(r);return `<div class="trow"><input type="checkbox" ${r.done?'checked':''} onchange="msR(${i},this.checked)" style="accent-color:var(--gold);width:15px;height:15px;">
+ <div style="flex:1;"><p style="font-size:13px;color:${r.done?'var(--muted)':'#e2e8f0'};${r.done?'text-decoration:line-through;':''}">${esc(r.text)}</p></div>
+ <span style="font-size:11px;color:${r.date<=tIso&&!r.done?'var(--red)':'var(--muted)'};font-weight:700;">${fmt(new Date(r.date+'T12:00:00'))}</span>
+ <button class="brfx" onclick="msRDel(${i})">✕</button></div>`;}).join('')||'<p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Koi reminder nahi. Kuch bhi jo bhoolna nahi chahte — yahan daal do.</p>'}
+ <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+ <input class="ccin" id="rm-t" placeholder="Kya yaad dilana hai?" style="flex:2;min-width:150px;">
+ <input class="ccin" id="rm-d" type="date" style="flex:1;min-width:120px;">
+ <button class="ccbtn gold" onclick="msRAdd()">Add</button></div>`;
+}
+window.msR=(i,v)=>{const R=rem();R[i].done=v;S.set('rem',R);rRem();rBrief();};
+window.msRDel=i=>{const R=rem();R.splice(i,1);S.set('rem',R);rRem();rBrief();};
+window.msRAdd=()=>{const t=$('rm-t').value.trim(),d=$('rm-d').value;if(!t||!d)return;const R=rem();R.push({text:t,date:d,done:false});S.set('rem',R);rRem();rBrief();};
+const WTYPES=[['win','🏆','Win'],['set','💔','Setback'],['sac','⚖️','Sacrifice'],['dec','🔀','Decision'],['les','🧠','Lesson']];
+let wType='win';
+function rWins(){
+ const W=wins();const ic=k=>{const t=WTYPES.find(x=>x[0]===k);return t?t[1]:'🏆';};
+ $('ms-wins').innerHTML=`<h3 style="margin-bottom:4px;">📔 Journey Log <span style="font-size:10px;color:var(--muted);font-weight:400;">· ${W.length} entries · poori kahaani — sirf jeet nahi. Year 3 mein SOP, interviews aur final report isi se banegi</span></h3>
+ <div class="chiprow" style="margin-top:10px;">${WTYPES.map(t=>`<button class="chip ${wType===t[0]?'sel':''}" onclick="msWT('${t[0]}')">${t[1]} ${t[2]}</button>`).join('')}</div>
+ <div style="display:flex;gap:6px;margin:4px 0 10px;flex-wrap:wrap;">
+ <input class="ccin" id="wn-t" placeholder="${wType==='win'?'Aaj ki jeet — chhoti ho ya badi':wType==='set'?'Kya toota / kya nahi hua — imandaari se':wType==='sac'?'Kya chhoda plan ke liye (party, game, neend...)':wType==='dec'?'Kya faisla liya aur KYUN — future tum thanks bolega':'Aaj kya seekha — life ya padhai, kuch bhi'}" style="flex:1;min-width:200px;">
+ <button class="ccbtn gold" onclick="msW()">Log</button></div>
+ ${W.slice().reverse().slice(0,12).map(w=>`<div class="winrow"><span style="font-size:10px;color:var(--gold);font-weight:700;min-width:56px;">${fmt(new Date(w.d+'T12:00:00'))}</span><span style="font-size:13px;color:#cbd5e1;">${ic(w.k||'win')} ${esc(w.t)}</span></div>`).join('')}
+ ${W.length>12?`<p style="font-size:11px;color:var(--muted);margin-top:6px;">+${W.length-12} aur — sab Export backup mein safe hain</p>`:''}`;
+}
+window.msWT=k=>{wType=k;rWins();};
+window.msW=()=>{const t=$('wn-t').value.trim();if(!t)return;const W=wins();W.push({d:tIso,t,k:wType});S.set('wins',W);rWins();};
+
+/* ─── export timestamp hook ─── */
+if(window.ccExport){const old=window.ccExport;window.ccExport=()=>{old();S.set('expAt',tIso);};}
+
+/* ─── INIT ─── */
+rPlan();rForm();rChat();rGStats();rSpark();rTrk();rRem();rWins();rBrief();
+})();
+
+</script>
+<script>
+/* ═══════════ GLASS/POINTER · CAPSULE · VAULT · REPORT · COACH v2 ═══════════ */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const K='eco.v2.';
+const S={get(k,d){try{const v=localStorage.getItem(K+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem(K+k,JSON.stringify(v));}catch(e){}}};
+const DAY=864e5,now=new Date();
+const today=new Date(now.getFullYear(),now.getMonth(),now.getDate(),12);
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const tIso=iso(today);
+const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+const esc=s=>String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+function vary(key,arr){let i=S.get('vx.'+key,-1);i=(i+1)%arr.length;S.set('vx.'+key,i);return arr[i];}
+
+/* ─── AMBIENT + POINTER ENGINE (tilt + glow) ─── */
+if(document.body&&!$('ambient')){const a=document.createElement('div');a.id='ambient';a.innerHTML='<div class="amb" id="amb1"></div><div class="amb" id="amb2"></div><div class="amb" id="amb3"></div><div class="amb" id="amb4"></div>';document.body.appendChild(a);}
+let curEl=null,raf=null;
+/* velocity model v2 — calm, heavily smoothed; light reads speed & direction gently */
+let lx=-1,ly=-1,lt=0,vx=0,vy=0,gr=124,gi=.11,settle=null;
+function applyGlow(el){el.style.setProperty('--gr',gr.toFixed(0)+'px');el.style.setProperty('--gi',gi.toFixed(3));}
+function updateAt(cx,cy,el,withV){
+ if(curEl&&curEl!==el){curEl.classList.remove('pt');curEl.style.transform='';}
+ curEl=el;if(!el)return;
+ const sp=withV?Math.min(1.6,Math.hypot(vx,vy)):0;
+ const tr=124+sp*55, ti=.105+Math.min(.028,sp*.019);        // small swing: 124→~212px, .105→~.133
+ gr+=(tr-gr)*.14; gi+=(ti-gi)*.14;                          // heavy easing = smooth
+ const r=el.getBoundingClientRect();
+ const lead=withV?Math.min(20,sp*16):0;                     // gentle intention lead
+ const px=(cx-r.left+vx*lead)/r.width, py=(cy-r.top+vy*lead)/r.height;
+ el.style.setProperty('--gx',(Math.max(0,Math.min(1,px))*100)+'%');
+ el.style.setProperty('--gy',(Math.max(0,Math.min(1,py))*100)+'%');
+ applyGlow(el);
+ const max=3.2;
+ el.style.transform=`perspective(900px) rotateX(${((0.5-(cy-r.top)/r.height)*max).toFixed(2)}deg) rotateY(${(((cx-r.left)/r.width-0.5)*max).toFixed(2)}deg)`;
+ el.classList.add('pt');
+ clearTimeout(settle);
+ settle=setTimeout(function calm(){
+  if(!curEl)return;gr+=(124-gr)*.18;gi+=(.105-gi)*.18;vx*=.7;vy*=.7;applyGlow(curEl);
+  if(Math.abs(gr-124)>1.5)settle=setTimeout(calm,50);
+ },160);
+}
+function onMove(ev){
+ if(raf)return;raf=requestAnimationFrame(()=>{raf=null;
+  const el=ev.target&&ev.target.closest?ev.target.closest('.card,.ccstat,.gplan'):null;
+  const t=performance.now(),dt=Math.max(8,t-lt);
+  if(lx>=0){const nvx=(ev.clientX-lx)/dt,nvy=(ev.clientY-ly)/dt;vx=vx*.75+nvx*.25;vy=vy*.75+nvy*.25;}
+  lx=ev.clientX;ly=ev.clientY;lt=t;
+  updateAt(ev.clientX,ev.clientY,el,true);
+ });}
+/* two-finger scroll fix: page moves under a still pointer → re-locate light every scroll frame */
+let sraf=null;
+function onScroll(){
+ if(sraf)return;sraf=requestAnimationFrame(()=>{sraf=null;
+  const a=$('ambient');if(a)a.style.transform='translateY('+(Math.sin((window.scrollY||0)/650)*44).toFixed(1)+'px)';
+  if(lx<0||!document.elementFromPoint)return;
+  const hit=document.elementFromPoint(lx,ly);
+  const el=hit&&hit.closest?hit.closest('.card,.ccstat,.gplan'):null;
+  vx*=.8;vy*=.8;
+  updateAt(lx,ly,el,false);
+ });}
+if(window.addEventListener)window.addEventListener('scroll',onScroll,{passive:true});
+if(document.addEventListener){document.addEventListener('pointermove',onMove,{passive:true});
+document.addEventListener('pointerleave',()=>{if(curEl){curEl.classList.remove('pt');curEl.style.transform='';curEl=null;}});}
+
+/* ─── shared readers ─── */
+const daily=()=>S.get('daily',{});
+const dT=d=>{const v=daily()[d];return v?v.filter(Boolean).length:0;};
+const slog=()=>S.get('slog',[]);
+
+/* ═══ TIME CAPSULE ═══ */
+const caps=()=>S.get('caps',[]);
+function lockDate(){const dob=S.get('dob',null);if(!dob)return null;const d=new Date(dob+'T12:00:00');return new Date(d.getFullYear()+19,d.getMonth()+6,d.getDate(),12);}
+function capLocked(){const ld=lockDate();if(!ld)return false;if(S.get('capOverride',false))return false;return today>=ld;}
+function rCaps(){
+ const el=$('ms-caps');if(!el)return;
+ const ld=lockDate(),locked=capLocked(),C=caps();
+ el.innerHTML=`<h3 style="margin-bottom:4px;">⏳ Time Capsule <span style="font-size:10px;color:var(--muted);font-weight:400;">· letters to your future self</span></h3>
+ <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0;">
+  <span class="lockpill ${locked?'locked':''}" onclick="cpLock()">${locked?'🔒 Locked — tap to consciously unlock':'🔓 Editing open'+(ld?' till '+fmt(ld):'')}</span>
+  ${!S.get('dob',null)?`<span style="font-size:11px;color:var(--muted);">DOB set karo (19.5-saal lock ke liye): <input class="ccin" type="date" style="width:auto;padding:4px 8px;" onchange="cpDob(this.value)"></span>`:''}
+ </div>
+ ${C.map((c,i)=>{const open=c.openAt<=tIso;return `<div class="capshell">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+   <p style="font-size:12px;font-weight:700;color:${open?'var(--green)':'var(--gold)'};">${open?'📬 Khul gaya':'📪 Sealed'} · "${esc(c.title)}" · opens ${fmt(new Date(c.openAt+'T12:00:00'))}</p>
+   <span>${!locked?`<button class="ccbtn" style="padding:4px 10px;font-size:10px;" onclick="cpEdit(${i})">Edit</button> <button class="brfx" onclick="cpDel(${i})">✕</button>`:''}</span>
+  </div>
+  ${open?`<p style="font-size:13px;color:#dbe3f0;line-height:1.7;margin-top:8px;white-space:pre-wrap;">${esc(c.body)}</p><p style="font-size:10px;color:var(--muted);margin-top:6px;">— likha tha ${fmt(new Date(c.d+'T12:00:00'))} ko, ${Math.round((today-new Date(c.d+'T12:00:00'))/DAY)} din pehle</p>`:`<p style="font-size:11px;color:var(--muted);margin-top:4px;">Band hai. ${Math.round((new Date(c.openAt+'T12:00:00')-today)/DAY)} din baaki. Sabr.</p>`}
+ </div>`;}).join('')}
+ ${!locked?`<div style="margin-top:12px;">
+  <input class="ccin" id="cp-t" placeholder="Kiske naam? (e.g. CAT result day wale main)" style="margin-bottom:6px;">
+  <input class="ccin" id="cp-d" type="date" style="margin-bottom:6px;">
+  <textarea class="ccin" id="cp-b" placeholder="Jo aaj ke tum, us din ke tum se kehna chahte ho..."></textarea>
+  <div style="text-align:right;margin-top:8px;"><button class="gsend" onclick="cpAdd()">Seal karo 📪</button></div>
+ </div>`:`<p style="font-size:11px;color:var(--muted);margin-top:8px;">Capsule lock ho chuka hai — 19.5 ke baad likhna band, sirf padhna. Unlock sirf conscious decision se.</p>`}`;
+}
+window.cpDob=v=>{if(v){S.set('dob',v);rCaps();}};
+window.cpLock=()=>{if(!capLocked())return;if(confirm('Ye lock 19.5 saal ke tum ne set kiya tha, 18 saal ke tum ke kehne par. Sach mein kholna hai? Ek baar socho.')){S.set('capOverride',true);rCaps();}};
+window.cpAdd=()=>{const t=$('cp-t').value.trim(),d=$('cp-d').value,b=$('cp-b').value.trim();if(!t||!d||!b){alert('Title, date aur letter — teeno chahiye.');return;}const C=caps();C.push({title:t,openAt:d,body:b,d:tIso});S.set('caps',C);rCaps();};
+window.cpEdit=i=>{const C=caps();const c=C[i];const b=prompt('Letter edit karo:',c.body);if(b===null)return;c.body=b;S.set('caps',C);rCaps();};
+window.cpDel=i=>{if(!confirm('Ye letter delete? Wapas nahi aayega.'))return;const C=caps();C.splice(i,1);S.set('caps',C);rCaps();};
+
+/* ═══ WHY I STARTED VAULT ═══ */
+const whys=()=>S.get('whys',[]);
+function rWhy(){
+ const el=$('ms-why');if(!el)return;const W=whys();
+ el.innerHTML=`<h3 style="margin-bottom:4px;">🫀 Why I Started <span style="font-size:10px;color:var(--muted);font-weight:400;">· strongest self talks to weakest self — app deploys these automatically on your worst days</span></h3>
+ <div style="display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;">
+  <input class="ccin" id="wy-t" placeholder="Ek reason — kyun shuru kiya, kiske liye, kya prove karna hai" style="flex:1;min-width:200px;">
+  <button class="ccbtn gold" onclick="wyAdd()">Add</button>
+  ${W.length?`<button class="ccbtn" onclick="wyShow()">Show me why</button>`:''}
+ </div>
+ <p style="font-size:11px;color:var(--muted);">${W.length} reason${W.length===1?'':'s'} stored. ${W.length?'Ye tab dikhenge jab streak toote ya tum gayab ho jao — exactly jab zaroorat hogi.':'Motivation abhi high hai — isi waqt likho. Kamzor din ka intezaam strong din pe hota hai.'}</p>
+ <div id="wy-flash"></div>`;
+}
+window.wyAdd=()=>{const t=$('wy-t').value.trim();if(!t)return;const W=whys();W.push({t,d:tIso});S.set('whys',W);rWhy();};
+window.wyShow=()=>{const W=whys();if(!W.length)return;const w=vary('why',W);$('wy-flash').innerHTML=`<div class="gplan" style="margin-top:10px;"><p style="font-size:14px;color:#e0e7ff;line-height:1.7;">"${esc(w.t)}"</p><p style="font-size:10px;color:var(--muted);margin-top:6px;">— tumne khud likha tha, ${fmt(new Date(w.d+'T12:00:00'))}</p></div>`;};
+
+/* ═══ WEEKLY REPORT CARD ═══ */
+function weekKey(d){const x=new Date(d);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return iso(x);}
+function buildReport(wkStart){
+ const s=new Date(wkStart+'T12:00:00');let ticks=0,days=0,best=['',0];
+ for(let i=0;i<7;i++){const d=iso(new Date(s.getTime()+i*DAY));const n=dT(d);ticks+=n;if(n>0)days++;if(n>best[1])best=[d,n];}
+ const L=slog().filter(e=>!e.sys&&e.d>=wkStart&&e.d<iso(new Date(s.getTime()+7*DAY)));
+ const mins=L.reduce((a,b)=>a+(b.dur||0),0);
+ const moods={fire:0,ok:0,hard:0};L.forEach(e=>moods[e.mood||'ok']++);
+ const score=Math.min(50,ticks/35*50)+Math.min(30,mins/840*30)+Math.min(20,L.length/5*20);
+ const g=score>=85?'A':score>=70?'B':score>=55?'C':score>=40?'D':'F';
+ return {wk:wkStart,g,score:Math.round(score),ticks,days,mins,logs:L.length,best,moods};
+}
+function rReport(){
+ const el=$('g-report');if(!el)return;
+ const lastWk=weekKey(new Date(today.getTime()-7*DAY));
+ const R=S.get('wrc',{});
+ if(!R[lastWk]&&slog().length+Object.keys(daily()).length>0){R[lastWk]=buildReport(lastWk);S.set('wrc',R);}
+ const r=R[lastWk];
+ const plans=S.get('plans',[]).filter(p=>!p.done);
+ const gcol={A:'var(--green)',B:'var(--gold)',C:'var(--orange)',D:'var(--red)',F:'var(--red)'};
+ const verdict={A:vary('vA',['Iss hafte tumne khud ko proud kiya. Sach mein. Ye pace 3 saal chala toh 2033 chhota lagega.','Elite week. Bas ek cheez yaad rakhna — peak ke baad log relax karte hain. Tum maintain karna.']),
+ B:vary('vB',['Solid week — B ka matlab hai system chal raha hai. A ka gap sirf ek-do din ki tightness hai, talent ki kami nahi.','Achha hafta. Ek observation: jo din gire, wo mostly plan ki kami se gire, energy ki kami se nahi. Sunday planning pakki karo.']),
+ C:vary('vC',['Theek raha, par tum C-grade insaan nahi ho — ye hafta C-grade systems ka result tha. Ek non-negotiable pakdo, usse anchor banao.','Average week. Koi drama nahi, koi disaster nahi — bas drift. Drift ka ilaaj: kal subah ka pehla ghanta pehle se decide karke sona.']),
+ D:vary('vD',['Mushkil hafta tha — data se dikh raha hai. Ek baat: analysis karo, guilt nahi. Kya toota? Neend? Schedule? Mood? Usko naam do, phir fix karo.','Haan, kamzor hafta. Par tum abhi bhi yahan ho, report padh rahe ho — quitters report nahi padhte. Aaj sirf 2 ticks ka target. Bas.']),
+ F:vary('vF',['Hafta blank gaya. Main lecture nahi dunga — bas itna: tumhare Why I Started vault mein tumhare apne shabd rakhe hain. Ek baar padh lo, phir ek chhota task. Wapas aana hi jeet hai.','Rough patch. Zindagi mein aate hain. Plan wahi hai, doors wahi hain, tum wahi ho. Kal Day 1 nahi — Day continue hai.'])}[r?r.g:'C'];
+ el.innerHTML=`<h3 style="margin-bottom:10px;">🗒️ Weekly Report Card <span style="font-size:10px;color:var(--muted);font-weight:400;">· week of ${fmt(new Date(lastWk+'T12:00:00'))}</span></h3>
+ ${r?`<div style="display:flex;gap:18px;align-items:center;margin-bottom:10px;">
+  <div class="grade" style="color:${gcol[r.g]}">${r.g}</div>
+  <div style="flex:1;">
+   <div class="wrcrow"><span>Non-negotiable ticks</span><b>${r.ticks}/35 · ${r.days}/7 active days</b></div>
+   <div class="wrcrow"><span>Study logged</span><b>${Math.round(r.mins/60*10)/10} hrs · ${r.logs} sessions</b></div>
+   <div class="wrcrow"><span>Mood mix</span><b>🔥${r.moods.fire} 🙂${r.moods.ok} 😩${r.moods.hard}</b></div>
+   <div class="wrcrow"><span>Best day</span><b>${r.best[1]?fmt(new Date(r.best[0]+'T12:00:00'))+' ('+r.best[1]+'/5)':'—'}</b></div>
+  </div></div>
+ <div style="background:var(--bg);border-radius:10px;padding:12px;margin-bottom:10px;"><p style="font-size:13px;color:#cbd5e1;line-height:1.65;">${verdict}</p></div>
+ <p style="font-size:11px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Reflect — 2 minute, imandaari se</p>
+ <p style="font-size:12.5px;color:#94a3b8;line-height:1.7;">${vary('refl',['1. Is hafte ka sabse achha decision kya tha? 2. Agla hafta sirf EK cheez badle toh kya?','1. Kis cheez ne sabse zyada time khaya jo plan mein nahi thi? 2. Kal ka pehla ghanta kiska hai?','1. Koi moment jab quit karne ka mann kiya? Kya rokke rakha? 2. Is hafte kisko Journey Log mein likhna bhool gaye?'])}</p>
+ <p style="font-size:10px;color:var(--muted);margin-top:8px;">History: ${Object.keys(R).sort().slice(-8).map(k=>`<b style="color:${gcol[R[k].g]}">${R[k].g}</b>`).join(' ')}</p>`
+ :'<p style="font-size:12px;color:var(--muted);">Pehla report agle Monday ko banega — data is hafte se collect ho raha hai.</p>'}
+ ${plans.length?`<div style="margin-top:12px;"><p style="font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">📅 Active Plans (coach yaad rakhta hai)</p>${plans.map(p=>{const i=S.get('plans',[]).indexOf(p);return `<div class="planrow"><span>${esc(p.t)}</span><span style="display:flex;gap:8px;align-items:center;"><b style="color:${p.d<=tIso?'var(--red)':'var(--muted)'};font-size:11px;">${fmt(new Date(p.d+'T12:00:00'))}</b><input type="checkbox" onchange="plDone(${i})" style="accent-color:var(--gold);"></span></div>`;}).join('')}</div>`:''}`;
+}
+window.plDone=i=>{const P=S.get('plans',[]);P[i].done=true;S.set('plans',P);rReport();};
+
+/* ═══ COACH v2 — free text, memory, cross-questions ═══ */
+const facts=()=>S.get('facts',[]);
+function coachSay(reply,q){const L=slog();L.push({d:tIso,h:now.getHours(),sys:1,me:S.get('lastMe',''),reply,q:q||null});S.set('slog',L);if(window.__rChat)window.__rChat();}
+function think(txt){
+ const t=txt.toLowerCase();
+ const has=(...w)=>w.some(x=>t.includes(x));
+ // burnout / emotion first — heart before brain
+ if(has('thak','tired','burnout','bore','quit','chhod','give up','demotiv','sad','anxious','dar ','scared','pressure','stress','ro ')){
+  const W=whys();
+  return {r:vary('emo',['Ruk. Pehle ek baat — ye feeling data point hai, verdict nahi. Har serious player ke graph mein ye dip aata hai; tumhara bhi aana tha. Aaj ka scale chhota karo: ek 10-minute task, phir guilt-free rest. Kal hum phir milte hain.','Sun, seriously — thakna weakness nahi hai, feedback hai. Pichhle logs dekhe maine; tum push kar rahe the. Ek din ka honest rest lo, phone door, neend poori. Comeback usi se banta hai.','Main samajh raha hoon. 9-saal ka plan kandhe pe leke chalna kabhi kabhi bhaari lagta hai. Par yaad rakh — plan tumhe carry karne ke liye bana hai, tumhe crush karne ke liye nahi. Aaj sirf zinda raho, kal phir ladenge.'])+(W.length?`<br><br>Aur ye — tumhare apne shabd, jo tumne strong din pe likhe the:<br><i>"${esc(vary('whyq',W).t)}"</i>`:''),
+  q:{text:'Abhi kya chahiye?',opts:['Bas sunna tha','Ek chhota task do','Kal ka plan banao','Rest lunga']}};
+ }
+ // plan intent
+ if(has('plan','karna hai','karunga','tak ','deadline','by ','complete','khatam','finish','target')){
+  S.set('pendPlan',txt);
+  return {r:'Noted — isse pakka plan bana dete hain, jo main track karunga aur deadline pe yaad dilaunga. Kab tak?',q:{text:'Deadline chuno:',opts:['Kal','3 din','Is hafte','Custom date'],plan:1}};
+ }
+ // report request
+ if(has('report','kaisa chal','progress','review')){
+  const L7=slog().filter(e=>!e.sys&&(today-new Date(e.d+'T12:00:00'))/DAY<7);
+  const mins=L7.reduce((a,b)=>a+(b.dur||0),0);
+  return {r:`Seedha data: last 7 din mein ${Math.round(mins/60*10)/10} hrs logged, ${L7.length} sessions. Aaj ke ticks: ${dT(tIso)}/5. Full breakdown Weekly Report Card mein hai — Monday ko fresh banta hai. Ek line mein: ${mins>600?'pace strong hai, maintain karo.':mins>250?'chal raha hai, par ek gear aur hai tumme.':'numbers halke hain — aaj se hi wapas chadhte hain, ek session at a time.'}`,
+  q:{text:'Kuch aur?',opts:['Kal ka plan banao','Advice do','Bas itna hi']}};
+ }
+ // question about subjects/exams
+ if(has('cfa'))return {r:'CFA short version: prep Sem 3 (Year 2) se, August Year 3 mein L1, 350 hrs, Ethics ko 60+ hrs. Abhi tumhara phase kuch aur maangta hai — Cert Map section mein poora naksha hai.',q:{text:'Le jaun wahan?',opts:['Haan, dikhao','Nahi, theek hai']}};
+ if(has('cat ','mba','iim'))return {r:'CAT abhi door hai par uska seed daily hai: 20-min editorial reading. Year 2 mein DILR sets, Year 3 mein mocks — Exam Plan section mein pura sequence likha hai. Abhi ke phase mein CAT ki taraf sabse bada kadam CGPA hai, ironic but true.',q:null};
+ if(has('math','ncert','calculus','differenti'))return {r:vary('mth',['Math is month ka boss hai. Ek technique jo genuinely kaam karti hai: problem dekho → khud try karo 10 min → phir solution padho. Ulta karoge (pehle solution) toh samajh ka illusion milega, skill nahi.','NCERT math ke liye: har topic ke baad 5 problems bina dekhe. Atakna acha hai — atakne se hi neuron banta hai. Khan Academy pe wahi topic ka ek video, phir wapas problems.']),q:null};
+ // info sharing → memory
+ if(has('mera','my ','main ','i am','i have','mujhe')&&txt.length>15){
+  const F=facts();F.push({t:txt.slice(0,140),d:tIso});S.set('facts',F);
+  return {r:vary('fact',['Yaad rakh liya — ab ye meri memory ka hissa hai ('+F.length+' baatein ab tak). Jitna batate ho, utna sharp main hota hoon.','Noted aur stored. Tum jo share karte ho wo waste nahi hota — pattern usi se banta hai.']),q:{text:'Iske baare mein:',opts:['Advice do','Plan banao','Bas bata raha tha']}};
+ }
+ // fallback — honest + cross-question
+ return {r:vary('fb',['Ye wala mere rules ke bahar gaya — main offline coach hoon, LLM nahi. Par tere paas asli wala bhi hai: ye Claude ko le jaana. Yahan main in cheezon mein kaam ka hoon:','Isko main theek se pakad nahi paya — imandaari se bata raha hoon, guess nahi karunga. Ye batao kis type ki baat hai:']),
+ q:{text:'Kya karna chahte ho?',opts:['Plan banana hai','Advice chahiye','Kuch share karna hai','Report do']}};
+}
+window.gAsk=()=>{
+ const inp=$('g-free');const txt=inp?inp.value.trim():'';if(!txt)return;
+ S.set('lastMe',txt);if(inp)inp.value='';
+ const out=think(txt);coachSay(out.r,out.q);
+};
+window.gQR=(k,v)=>{
+ S.set('lastMe',v);
+ if(k&&k.plan){ // deadline selection for pending plan
+  let d=null;
+  if(v==='Kal')d=iso(new Date(today.getTime()+DAY));
+  else if(v==='3 din')d=iso(new Date(today.getTime()+3*DAY));
+  else if(v==='Is hafte')d=iso(new Date(today.getTime()+(7-((today.getDay()+6)%7)-1)*DAY));
+  else{const c=prompt('Date likho (YYYY-MM-DD):');if(c&&/^\d{4}-\d{2}-\d{2}$/.test(c))d=c;}
+  if(d){const P=S.get('plans',[]);P.push({t:S.get('pendPlan','plan'),d,done:false,made:tIso});S.set('plans',P);
+   coachSay(`Locked: "${esc(S.get('pendPlan',''))}" — deadline ${fmt(new Date(d+'T12:00:00'))}. Main us din aur ek din pehle yaad dilaunga, briefing mein. Ab ye commitment record pe hai — aur record jhooth nahi bolta.`);rReport();}
+  else coachSay('Date samajh nahi aayi — dobara try karo, YYYY-MM-DD format.');
+  return;
+ }
+ const map={'Bas sunna tha':'Samajh gaya. Kabhi kabhi bas kehna hi kaafi hota hai. Main yahan hoon — kal milte hain, fresh.','Ek chhota task do':'Ek hi: 10 minute, aaj ke phase ka priority subject, sirf ek page ya ek problem. Timer lagao, phir band. Chhota kadam bhi kadam hai.','Rest lunga':'Sahi decision. Rest bhi plan ka hissa hai — guilt mat rakhna. Kal ka pehla ghanta phase priority ka, deal?','Haan, dikhao':'Scroll karo Cert Map tak — sab wahan hai. 📈','Nahi, theek hai':'Theek. Kaam pe wapas. 🎯','Advice do':'Context ke hisaab se: is phase ka focus pakdo, usme ek measurable target banao is hafte ka, aur usse Plans mein daal do taaki main track karun. Vague effort ka koi report card nahi banta.','Plan banana hai':'Bolo kya karna hai aur kab tak — type karo neeche, main pakad lunga.','Kuch share karna hai':'Bolo — jo bhi hai. Main store karta hoon, judge nahi.','Report do':'REPORT','Kal ka plan banao':'Kal: (1) phase priority ka 1 ghanta subah, (2) daily 5 ticks, (3) ek session log. Bas teen cheezein — zyada plans tootne ke liye bante hain.','Bas itna hi':'👍 Kaam pe. Main yahin hoon.'};
+ if(map[v]==='REPORT'){const out=think('report');coachSay(out.r,out.q);return;}
+ coachSay(map[v]||'👍');
+};
+/* free-text composer + report container injection */
+(function(){
+ const chat=$('g-chat');
+ if(chat&&chat.parentNode&&!$('g-free')){
+  chat.insertAdjacentHTML('afterend',`<div class="gcompose"><input class="ccin" id="g-free" placeholder="Coach se kuch bhi poochho ya batao — plan, sawaal, mann ki baat..." onkeydown="if(event.key==='Enter')gAsk()"><button class="gsend" onclick="gAsk()">→</button></div><p style="font-size:10px;color:var(--muted);margin-top:5px;">Rule-based coach — plans track karta hai, patterns padhta hai, emotions samajhta hai. Bade strategic sawaal Claude ke liye.</p>`);
+ }
+ const gs=$('g-stats');
+ if(gs&&!$('g-report'))gs.insertAdjacentHTML('afterend','<div class="card" id="g-report"></div>');
+ const mw=$('ms-wins');
+ if(mw&&!$('ms-caps'))mw.insertAdjacentHTML('afterend','<div class="card" id="ms-caps"></div><div class="card" id="ms-why"></div>');
+})();
+/* re-render chat hook: reuse v2 renderer if present by re-dispatch */
+window.__rChat=function(){
+ const L=slog().slice(-14);const c=$('g-chat');if(!c)return;
+ c.innerHTML=L.map((e,i)=>{const last=i===L.length-1;let h='';
+  if(!e.sys)h+=`<div class="gmsg me">${e.s?e.s+' · '+(e.dur>=60?(e.dur/60)+' hr':e.dur+' min'):''}${e.w?' · '+e.w:''}${e.mood?' · '+(e.mood==='fire'?'🔥':e.mood==='hard'?'😩':'🙂'):''}${e.note?'<br>'+esc(e.note):''}<div class="gt">${fmt(new Date(e.d+'T12:00:00'))}</div></div>`;
+  else if(e.me)h+=`<div class="gmsg me">${esc(e.me)}</div>`;
+  h+=`<div class="gmsg coach">${e.reply}${last&&e.q?`<div style="margin-top:8px;font-weight:700;">${e.q.text}</div><div class="chiprow" style="margin-bottom:0;">${e.q.opts.map(o=>`<button class="chip" onclick='gQR(${JSON.stringify(e.q.plan?{plan:1}:null)},${JSON.stringify(o)})'>${o}</button>`).join('')}</div>`:''}</div>`;
+  return h;}).join('')||'';
+ c.scrollTop=c.scrollHeight;
+};
+
+/* ═══ extra briefing rules: capsule open · report ready · plan deadlines · burnout ═══ */
+function extraNudges(){
+ const L=[];
+ caps().forEach((c,i)=>{if(c.openAt<=tIso&&!c.read)L.push({id:'cap'+i,m:`⏳ Ek Time Capsule khul gaya: "${esc(c.title)}". Purane tum ne kuch chhoda tha tumhare liye.`,t:'ms-caps',u:1});});
+ const lastWk=weekKey(new Date(today.getTime()-7*DAY));const R=S.get('wrc',{});
+ if(R[lastWk]&&S.get('wrcSeen','')!==lastWk&&today.getDay()<=2)L.push({id:'wr'+lastWk,m:`🗒️ Naya Weekly Report Card ready hai — grade: ${R[lastWk].g}. 2 minute ka reflection, warna data bekar jaata hai.`,t:'g-report',u:0});
+ S.get('plans',[]).forEach((p,i)=>{if(!p.done){const dd=Math.round((new Date(p.d+'T12:00:00')-today)/DAY);
+  if(dd===1)L.push({id:'pl'+i+'a',m:`📅 Kal deadline hai: "${esc(p.t)}". Aaj ka thoda time isko de do — kal panic se behtar.`,t:'g-report',u:1});
+  if(dd<=0)L.push({id:'pl'+i+'b',m:`📅 Deadline aa gaya: "${esc(p.t)}". Done? Tick karo. Nahi hua? Coach ko batao, naya plan banate hain — bina drama.`,t:'g-report',u:1});}});
+ const wk1=slog().filter(e=>!e.sys&&(today-new Date(e.d+'T12:00:00'))/DAY<7).reduce((a,b)=>a+(b.dur||0),0);
+ const wk2=slog().filter(e=>!e.sys&&(today-new Date(e.d+'T12:00:00'))/DAY>=7&&(today-new Date(e.d+'T12:00:00'))/DAY<14).reduce((a,b)=>a+(b.dur||0),0);
+ if(wk2>240&&wk1<wk2*0.45)L.push({id:'bo'+weekKey(today),m:'🫀 Pattern alert: study hours pichhle hafte se aadhe se bhi neeche. Ye laziness nahi lagti — drain lagti hai. Coach se baat karo, ya bas ek chhota session karke wapsi maaro.',t:'guru',u:1});
+ return L;
+}
+(function(){
+ const dis=S.get('dis',{});
+ const L=extraNudges().filter(n=>dis[n.id]!==tIso);
+ if(!L.length)return;
+ let el=$('briefing');
+ if(!el){el=document.createElement('div');el.id='briefing';document.body.appendChild(el);}
+ el.innerHTML=L.slice(0,2).map(n=>`<div class="brf ${n.u?'urgent':''}"><div class="bm">${n.m}</div><button class="brfgo" onclick="ccGo('${n.t}','${n.id}');if('${n.t}'==='g-report')localStorage.setItem('${K}wrcSeen',JSON.stringify('${weekKey(new Date(today.getTime()-7*DAY))}'));">Le chalo →</button><button class="brfx" onclick="ccDis('${n.id}')">✕</button></div>`).join('')+el.innerHTML;
+})();
+
+/* mark opened capsules as alerted (one-time nudge) */
+(function(){const C=caps();let ch=false;C.forEach(c=>{if(c.openAt<=tIso&&!c.read){c.read=true;ch=true;}});if(ch)S.set('caps',C);})();
+/* bridge old chip handler to new engine when key is missing */
+(function(){const oldAns=window.gAns;window.gAns=(k,v)=>{if(!k||k==='undefined'){window.gQR(null,v);return;}if(oldAns)oldAns(k,v);};})();
+
+/* ─── INIT ─── */
+rCaps();rWhy();rReport();
+})();
+
+</script>
+<script>
+/* ═══════════ FRO — the voice companion ═══════════ */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const K='eco.v2.';
+const S={get(k,d){try{const v=localStorage.getItem(K+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem(K+k,JSON.stringify(v));}catch(e){}}};
+const slog=()=>S.get('slog',[]);
+const strip=h=>String(h).replace(/<br\s*\/?\s*>/gi,'. ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+
+/* ─── styles (self-injected) ─── */
+const css=`
+#froOrb{position:fixed;right:16px;bottom:88px;width:56px;height:56px;border-radius:50%;z-index:999;cursor:pointer;border:1px solid rgba(255,255,255,.25);background:radial-gradient(circle at 32% 28%,rgba(232,121,249,.85),rgba(99,102,241,.85) 60%,rgba(45,30,90,.9));backdrop-filter:blur(10px);box-shadow:0 6px 24px rgba(99,102,241,.45),inset 0 1px 0 rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:22px;transition:transform .2s;user-select:none;}
+#froOrb:hover{transform:scale(1.08);}
+#froOrb.on{animation:froPulse 1.8s ease-in-out infinite;}
+@keyframes froPulse{0%,100%{box-shadow:0 6px 24px rgba(232,121,249,.5),inset 0 1px 0 rgba(255,255,255,.3);}50%{box-shadow:0 6px 40px rgba(232,121,249,.9),inset 0 1px 0 rgba(255,255,255,.3);}}
+#froPanel{position:fixed;right:16px;bottom:152px;width:min(320px,88vw);z-index:999;border-radius:18px;padding:14px;background:rgba(46,58,92,.55);backdrop-filter:blur(30px) saturate(1.9);-webkit-backdrop-filter:blur(30px) saturate(1.9);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 14px 44px rgba(0,0,0,.5);animation:fadeInUp .3s ease;}
+#froPanel h4{font-size:14px;color:#f3e8ff;display:flex;align-items:center;gap:8px;}
+#froStatus{font-size:11px;color:#c4b5fd;margin:4px 0 10px;line-height:1.5;min-height:16px;}
+.froBtn{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:#e9d5ff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);}
+.froBtn:active{transform:scale(.96);}
+.froBtn.rec{background:rgba(248,113,113,.35);animation:froPulse 1.2s infinite;}
+#froHeard{font-size:11px;color:#94a3b8;font-style:italic;margin-top:8px;min-height:14px;}`;
+const st=document.createElement('style');st.textContent=css;document.head?document.head.appendChild(st):document.body.appendChild(st);
+
+/* ─── voice engine ─── */
+const hasTTS=!!(window.speechSynthesis&&window.SpeechSynthesisUtterance);
+let VOICE=null;
+function pickVoice(){
+ if(!hasTTS)return;
+ const vs=speechSynthesis.getVoices()||[];
+ const fem=['kiyara','isha','veena','lekha','heera','geeta','neerja','female','samantha','karen','tessa','moira','martha'];
+ const score=v=>{const n=(v.name||'').toLowerCase(),l=(v.lang||'').toLowerCase();let s=0;
+  if(l.startsWith('hi'))s+=4;if(l==='en-in')s+=5;if(l.startsWith('en'))s+=2;
+  if(fem.some(f=>n.includes(f)))s+=6;return s;};
+ VOICE=vs.slice().sort((a,b)=>score(b)-score(a))[0]||null;
+}
+if(hasTTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+let muted=S.get('froMute',false);
+function say(txt){
+ if(!hasTTS||muted||!txt)return;
+ try{
+  speechSynthesis.cancel();
+  let t=strip(txt);if(t.length>420)t=t.slice(0,400)+'... baaki screen par likha hai.';
+  const u=new SpeechSynthesisUtterance(t);
+  if(VOICE)u.voice=VOICE;
+  u.pitch=1.12;u.rate=1.0;u.volume=1;
+  speechSynthesis.speak(u);
+ }catch(e){}
+}
+
+/* ─── speech recognition (mic + wake word) ─── */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+let wakeRec=null,wakeOn=false,wakeErr=0;
+function startWake(){
+ if(!SR||wakeOn)return;
+ try{
+  wakeRec=new SR();wakeRec.lang='en-IN';wakeRec.continuous=true;wakeRec.interimResults=true;
+  wakeRec.onresult=ev=>{for(let i=ev.resultIndex;i<ev.results.length;i++){const t=ev.results[i][0].transcript.toLowerCase();
+   if(/\b(hey\s+)?fro+\b/.test(t)){if(!froOn)summon();else if(/(chhutti|leave|bye|band|jao|so ja)/.test(t))dismiss();}}};
+  wakeRec.onerror=()=>{wakeErr++;};
+  wakeRec.onend=()=>{if(wakeOn&&wakeErr<5){try{wakeRec.start();}catch(e){}}else{wakeOn=false;rPanel();}};
+  wakeRec.start();wakeOn=true;wakeErr=0;
+ }catch(e){wakeOn=false;}
+ rPanel();
+}
+function stopWake(){wakeOn=false;try{if(wakeRec)wakeRec.stop();}catch(e){}rPanel();}
+let micRec=null,micBusy=false;
+function listenOnce(){
+ if(!SR||micBusy)return;
+ try{
+  micRec=new SR();micRec.lang='en-IN';micRec.interimResults=false;micBusy=true;rPanel();
+  micRec.onresult=ev=>{
+   const t=ev.results[0][0].transcript;
+   const h=$('froHeard');if(h)h.textContent='Suna: "'+t+'"';
+   if(/(chhutti|leave|bye fro|band ho|jao fro)/i.test(t)){dismiss();return;}
+   const inp=$('g-free');if(inp){inp.value=t;if(window.gAsk)window.gAsk();speakLast();}
+  };
+  micRec.onend=()=>{micBusy=false;rPanel();};
+  micRec.onerror=()=>{micBusy=false;const h=$('froHeard');if(h)h.textContent='Mic ne saath nahi diya — type kar do, main bol dungi.';rPanel();};
+  micRec.start();
+ }catch(e){micBusy=false;}
+}
+function speakLast(){
+ setTimeout(()=>{const L=slog();const last=L[L.length-1];if(last&&last.reply)say(last.reply);},250);
+}
+
+/* ─── presence ─── */
+let froOn=false;
+const orb=document.createElement('div');orb.id='froOrb';orb.textContent='🧚';orb.onclick=()=>{froOn?dismiss():summon();};
+document.body.appendChild(orb);
+const panel=document.createElement('div');panel.id='froPanel';panel.style.display='none';document.body.appendChild(panel);
+function rPanel(){
+ if(!froOn){panel.style.display='none';orb.classList.remove('on');return;}
+ panel.style.display='block';orb.classList.add('on');
+ panel.innerHTML=`<h4>🧚 Fro <span style="font-size:9px;color:#c4b5fd;font-weight:400;">· saath hoon, jab tak bolo</span></h4>
+ <div id="froStatus">${hasTTS?(muted?'Awaaz band hai — 🔊 dabao':'Bol rahi hoon — har coach reply awaaz mein'):'Is device par awaaz support nahi — likh ke saath dungi'}${SR?'':'<br>Mic/"Hey Fro" is device par supported nahi — orb se bulao, ye Apple ki limit hai.'}</div>
+ <div style="display:flex;gap:6px;flex-wrap:wrap;">
+  ${SR?`<button class="froBtn ${micBusy?'rec':''}" onclick="froMic()">${micBusy?'🎙️ Sun rahi hoon...':'🎙️ Bolo'}</button>`:''}
+  ${SR?`<button class="froBtn" onclick="froWake()">${wakeOn?'👂 "Hey Fro" ON':'👂 "Hey Fro" OFF'}</button>`:''}
+  ${hasTTS?`<button class="froBtn" onclick="froMute()">${muted?'🔊 Unmute':'🔇 Mute'}</button>`:''}
+  <button class="froBtn" onclick="froBye()">👋 Chhutti</button>
+ </div>
+ <div id="froHeard"></div>`;
+}
+function summon(){
+ froOn=true;rPanel();
+ const g=[`Haan ${'ji'}, main hoon. Bolo — plan, sawaal, ya bas mann ki baat?`,'Aa gayi. Aaj ka kya scene hai — padhai, plan, ya pep talk?','Present! Coach ka dimaag, meri awaaz. Kya karna hai?'];
+ const msg=g[Math.floor(Math.random()*g.length)];
+ const h=$('froStatus');if(h)h.textContent='';
+ say(msg);
+ const heard=$('froHeard');if(heard)heard.textContent='Fro: "'+msg+'"';
+}
+function dismiss(){
+ const b=['Theek hai, chalti hoon. Awaaz do toh aa jaungi — orb wahin hai. Padhai pakki rakhna!','Chhutti manzoor. Kal milte hain — aur haan, neend poori lena.'];
+ say(b[Math.floor(Math.random()*b.length)]);
+ froOn=false;stopWake();rPanel();
+}
+window.froMic=listenOnce;
+window.froWake=()=>{wakeOn?stopWake():startWake();};
+window.froMute=()=>{muted=!muted;S.set('froMute',muted);if(muted&&hasTTS)speechSynthesis.cancel();rPanel();};
+window.froBye=dismiss;
+
+/* ─── voice-wrap coach actions: whenever Fro is active, she speaks the reply ─── */
+['gAsk','gQR','gAns','gLog'].forEach(fn=>{
+ const old=window[fn];
+ if(old)window[fn]=function(){old.apply(this,arguments);if(froOn)speakLast();};
+});
 })();
 
 </script>
