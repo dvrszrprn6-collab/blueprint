@@ -1811,8 +1811,12 @@ function onScroll(){
   updateAt(lx,ly,el,false);
  });}
 if(window.addEventListener)window.addEventListener('scroll',onScroll,{passive:true});
-if(document.addEventListener){document.addEventListener('pointermove',onMove,{passive:true});
-document.addEventListener('pointerleave',()=>{if(curEl){curEl.classList.remove('pt');curEl.style.transform='';curEl=null;}});}
+if(document.addEventListener){
+ /* redundant channels: Apple Pencil hover may arrive as pointermove, pointerover, or pointerenter (capture) */
+ ['pointermove','pointerover'].forEach(t=>document.addEventListener(t,onMove,{passive:true}));
+ document.addEventListener('pointerenter',onMove,{passive:true,capture:true});
+ document.addEventListener('pointerleave',()=>{if(curEl){curEl.classList.remove('pt');curEl.style.transform='';curEl=null;}});
+ document.addEventListener('pointercancel',()=>{if(curEl){curEl.classList.remove('pt');curEl.style.transform='';curEl=null;}});}
 
 /* ─── shared readers ─── */
 const daily=()=>S.get('daily',{});
