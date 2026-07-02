@@ -1,0 +1,1405 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blueprint">
+<meta name="theme-color" content="#080d1a">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+
+<title>ECO HONOURS · Live Command Blueprint · 50 LPA by 27</title>
+<style>
+:root {
+  --bg:#080d1a; --bg2:#0d1526; --bg3:#111827;
+  --border:#1e293b; --text:#e2e8f0; --muted:#64748b;
+  --gold:#fbbf24; --blue:#3b82f6; --green:#34d399;
+  --purple:#a78bfa; --orange:#fb923c; --red:#f87171;
+  --teal:#2dd4bf; --pink:#e879f9;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;overflow-x:hidden;}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(251,191,36,.1);}50%{box-shadow:0 0 40px rgba(251,191,36,.3);}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes countUp{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+
+.anim{opacity:0;}
+.anim.visible{animation:fadeInUp .65s ease forwards;}
+
+#scrollBar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold));z-index:999;transition:width .1s;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(8,13,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+nav::-webkit-scrollbar{height:2px;}
+nav::-webkit-scrollbar-thumb{background:var(--border);}
+nav button{background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;padding:7px 11px;cursor:pointer;border-radius:20px;white-space:nowrap;transition:all .2s;font-family:inherit;}
+nav button:hover,nav button.active{background:var(--bg3);color:var(--gold);}
+
+section{padding:60px 20px;max-width:800px;margin:0 auto;}
+
+.label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;font-weight:700;}
+h1{font-size:28px;font-weight:800;line-height:1.2;}
+h2{font-size:21px;font-weight:700;line-height:1.3;}
+h3{font-size:15px;font-weight:700;}
+
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:10px;}
+.card-l{border-left:4px solid;}
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--muted);margin:3px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.bar-wrap{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin:5px 0;}
+.bar{height:100%;border-radius:3px;width:0;transition:width 1.4s ease;}
+
+.hero{background:linear-gradient(135deg,#0c1120 0%,#1a1040 50%,#0c1120 100%);padding:80px 20px 60px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(99,102,241,.12) 0%,transparent 70%);animation:pulse 5s ease-in-out infinite;}
+.hero-inner{position:relative;z-index:1;max-width:600px;margin:0 auto;}
+
+.stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center;}
+.stat-num{font-size:26px;font-weight:900;line-height:1;}
+
+.timeline-item{position:relative;padding-left:28px;margin-bottom:28px;}
+.timeline-item::before{content:'';position:absolute;left:9px;top:22px;bottom:-28px;width:2px;background:var(--border);}
+.timeline-item:last-child::before{display:none;}
+.t-dot{position:absolute;left:3px;top:5px;width:14px;height:14px;border-radius:50%;border:2px solid;}
+
+.backup{background:var(--bg2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;margin-bottom:10px;}
+
+.daily-hero{background:linear-gradient(135deg,#1a1040,#0c1526);border:1px solid #3730a3;border-radius:16px;padding:28px;text-align:center;animation:glow 3s ease-in-out infinite;}
+
+@media(max-width:520px){.grid2{grid-template-columns:1fr;}h1{font-size:22px;}section{padding:44px 16px;}}
+@media print{nav,#scrollBar{display:none;}.anim{opacity:1;}body{background:#fff;color:#000;}}
+</style>
+<style>
+/* ═══ COMMAND LAYER STYLES ═══ */
+.ccgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+@media(max-width:560px){.ccgrid{grid-template-columns:repeat(2,1fr);}}
+.ccstat{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;}
+.ccstat .v{font-size:20px;font-weight:900;line-height:1.15;}
+.ccstat .l{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+.ring{width:64px;height:64px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;position:relative;}
+.ring .in{width:50px;height:50px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.cdrow{display:flex;justify-content:space-between;align-items:center;padding:9px 4px;border-bottom:1px solid rgba(30,41,59,.5);}
+.cdrow:last-child{border-bottom:none;}
+.cdd{font-size:15px;font-weight:900;min-width:86px;text-align:right;}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-radius:8px;cursor:pointer;transition:background .15s;}
+.chk:hover{background:var(--bg3);}
+.chk input{margin-top:3px;accent-color:var(--gold);width:15px;height:15px;cursor:pointer;flex-shrink:0;}
+.chk .tx{font-size:13px;color:#cbd5e1;line-height:1.45;}
+.chk input:checked ~ .tx{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(251,191,36,.5);}
+.msbar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;flex:1;margin:0 10px;}
+.msbar div{height:100%;border-radius:3px;transition:width .6s ease;}
+.cchead{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:4px 0;}
+.ccin{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 10px;font-size:13px;font-family:inherit;width:100%;}
+.ccin:focus{outline:1px solid var(--gold);}
+.ccbtn{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+.ccbtn:hover{border-color:var(--gold);color:var(--gold);}
+.ccbtn.gold{background:var(--gold);color:#111;border-color:var(--gold);}
+.tdigits{font-size:44px;font-weight:900;letter-spacing:2px;font-variant-numeric:tabular-nums;text-align:center;color:var(--gold);}
+.dotrow{display:flex;gap:5px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);}
+.dot.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(251,191,36,.5);}
+.dot.part{background:#78560f;border-color:#78560f;}
+.tier{font-size:9px;font-weight:800;letter-spacing:1px;padding:2px 7px;border-radius:10px;text-transform:uppercase;}
+.tier.B{background:#0d2d1a;color:var(--green);}
+.tier.I{background:#2a1f00;color:var(--gold);}
+.tier.P{background:#1a1040;color:var(--purple);}
+.fchip{background:var(--bg3);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+.fchip.on{background:var(--gold);color:#111;border-color:var(--gold);}
+.mkbadge{font-size:10px;color:var(--teal);background:#0c2a28;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:5px;}
+.insight{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:8px;border-left:3px solid var(--purple);}
+.insight p{font-size:12.5px;color:#94a3b8;line-height:1.55;}
+.insight b{color:#e2e8f0;}
+.oddrow{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:var(--muted);border-bottom:1px dashed rgba(30,41,59,.6);}
+.pulse-now{animation:pulse 2.5s ease-in-out infinite;}
+
+</style>
+</head>
+<body>
+
+<div id="scrollBar"></div>
+
+<nav id="topnav">
+  <button class="active" onclick="goTo('hero',this)">🏠 Start</button>
+  <button onclick="goTo('command',this)">🚀 Command</button>
+  <button onclick="goTo('profile',this)">👤 Profile</button>
+  <button onclick="goTo('gapmonth',this)">⚡ This Month</button>
+  <button onclick="goTo('year1',this)">Y1</button>
+  <button onclick="goTo('year2',this)">Y2</button>
+  <button onclick="goTo('year3',this)">Y3</button>
+  <button onclick="goTo('examplan',this)">🎯 Exam Plan</button>
+  <button onclick="goTo('masters',this)">🎓 Masters</button>
+  <button onclick="goTo('exams',this)">📝 Exams</button>
+  <button onclick="goTo('certs',this)">🏆 Certs</button>
+  <button onclick="goTo('certroadmap',this)">🗺️ Cert Map</button>
+  <button onclick="goTo('nism',this)">📜 NISM</button>
+  <button onclick="goTo('arsenal',this)">🧰 Arsenal</button>
+  <button onclick="goTo('backups',this)">🔄 Backups</button>
+  <button onclick="goTo('daily',this)">🌅 Daily</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="label" style="color:var(--gold)">Your Personal Blueprint · SD College Chandigarh</div>
+    <h1 style="font-size:30px;margin-bottom:10px;">BA Economics Honours<br><span style="color:var(--gold)">→ ₹50 LPA by Age 27</span></h1>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:32px;">Class of 2028 · Built for your exact profile, goals, and reality</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:500px;margin:0 auto;">
+      <div class="stat-box"><div class="stat-num" style="color:var(--purple)">3</div><div style="font-size:10px;color:var(--muted);margin-top:4px;">Years to first big exam</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--green)">27%</div><div style="font-size:10px;color:var(--muted);margin-top:4px;">Odds of 50L by 27</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--teal)">76%</div><div style="font-size:10px;color:var(--muted);margin-top:4px;">Good job after grad</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:var(--gold)">100%</div><div style="font-size:10px;color:var(--muted);margin-top:4px;">Depends on you</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMAND CENTER -->
+<section id="command" style="border-top:1px solid var(--border);">
+  <div class="label" style="color:var(--gold)">Live · Recomputes Every Day You Open It</div>
+  <h2 style="margin-bottom:6px;">🚀 Command Center</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">This is no longer a poster — it is an instrument. It knows today's date, tracks what you have actually done, and recalculates your position, your pace, and your odds. Everything you tick is saved on this device. Use <strong style="color:var(--gold)">Export</strong> in Settings once a month to back your progress up.</p>
+  <div id="cc-stats"></div>
+  <div class="card" id="cc-countdowns"></div>
+  <div class="card" id="cc-cgpa"></div>
+  <div class="card" id="cc-daily"></div>
+  <div class="card" id="cc-timer"></div>
+  <div id="cc-milestones"></div>
+  <div class="card" id="cc-odds"></div>
+  <div class="card" id="cc-insights"></div>
+  <div class="card" id="cc-settings"></div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="label">Who You Are</div>
+  <h2 style="margin-bottom:20px;">Your Starting Profile</h2>
+
+  <div class="card card-l anim" style="border-color:var(--gold);">
+    <div class="grid2">
+      <div><p style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Degree</p><p style="font-weight:700;">BA Economics Honours</p><p style="color:var(--muted);font-size:13px;">Econ + Math + Statistics</p></div>
+      <div><p style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">College</p><p style="font-weight:700;">SD College, Chandigarh</p><p style="color:var(--muted);font-size:13px;">Panjab University</p></div>
+    </div>
+  </div>
+
+  <div class="card anim" style="animation-delay:.1s">
+    <h3 style="margin-bottom:12px;">⚡ What Works in Your Favour</h3>
+    <div>
+      <span class="tag" style="background:#0d2d1a;color:var(--green);">🥉 Bronze · State 400m</span>
+      <span class="tag" style="background:#0d2d1a;color:var(--green);">🏏 Zonal Cricket UTCA (2×)</span>
+      <span class="tag" style="background:#0d2d1a;color:var(--green);">🏹 Starting Archery</span>
+      <span class="tag" style="background:#1a1040;color:var(--purple);">💻 Laptop + Internet</span>
+      <span class="tag" style="background:#1a1040;color:var(--purple);">🧠 Planning at 18 (rare)</span>
+      <span class="tag" style="background:#1a0020;color:var(--pink);">📊 Econ+Math+Stats Combo</span>
+      <span class="tag" style="background:#1a0020;color:var(--pink);">📱 NEP Data Analytics</span>
+    </div>
+  </div>
+
+  <div class="card card-l anim" style="border-color:var(--red);animation-delay:.15s">
+    <h3 style="margin-bottom:8px;color:var(--red);">⚠️ The Gap — Acknowledge It, Fix It This Month</h3>
+    <p style="color:var(--muted);font-size:13px;line-height:1.6;">No Math or Economics in Class 11–12. 72% Arts stream. Semester 1 will be harder than classmates who had PCM. This is a gap — not a wall. 4 weeks of focused NCERT work closes it enough to survive Year 1.</p>
+  </div>
+
+  <div class="card anim" style="animation-delay:.2s">
+    <h3 style="margin-bottom:14px;">🧠 The Philosophy That Drives Everything</h3>
+    <div class="grid2">
+      <div style="background:var(--bg3);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:6px;">🏆</div>
+        <p style="font-size:12px;color:var(--gold);font-weight:700;margin-bottom:4px;">GLAMOUR = CEILING</p>
+        <p style="font-size:12px;color:var(--muted);">IIM A/B/C, IAS, DSE — swing for these. Never stop trying.</p>
+      </div>
+      <div style="background:var(--bg3);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:6px;">🛡️</div>
+        <p style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px;">SKILLS = FLOOR</p>
+        <p style="font-size:12px;color:var(--muted);">Python, SQL, CFA, data certs — safety net at every level.</p>
+      </div>
+    </div>
+    <div style="margin-top:12px;background:var(--bg3);border-radius:8px;padding:12px;text-align:center;">
+      <p style="font-size:13px;color:var(--text);">These are not opposites. <span style="color:var(--gold);font-weight:700;">Building skills makes you a better competitive exam candidate.</span> Same road.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GAP MONTH -->
+<section id="gapmonth" style="border-top:1px solid var(--border);">
+  <div class="label">Right Now — 30 Days</div>
+  <h2 style="margin-bottom:6px;">The Gap Month</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:24px;">4 topics. They cover 80% of what you need in Semester 1. Don't try to do all of 11th and 12th. Do these 4.</p>
+
+  <div id="weeks-container"></div>
+
+  <div class="card anim" style="margin-top:8px;">
+    <h3 style="margin-bottom:14px;">📅 Gap Month Daily Schedule</h3>
+    <div id="daily-sched"></div>
+  </div>
+
+  <div class="card anim" style="margin-top:8px;border-left:4px solid var(--teal);">
+    <h3 style="margin-bottom:6px;color:var(--teal);">🎓 Once College Starts — Choose Your Archery Slot</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Archery does not stop when college starts. You pick which slot fits your college timetable. Both work. Pick one and stick to it.</p>
+    <div class="grid2" style="gap:10px;">
+      <div style="background:var(--bg);border-radius:10px;padding:14px;">
+        <p style="font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Option A — Morning Archery</p>
+        <div style="display:grid;gap:6px;">
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--green);font-weight:700;min-width:90px;">5:30–7:30 AM</span><span style="font-size:12px;color:var(--muted);">Archery practice. Done before the day begins. Non-negotiable.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--muted);font-weight:700;min-width:90px;">8:00 AM</span><span style="font-size:12px;color:var(--muted);">Get ready, commute, college.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--blue);font-weight:700;min-width:90px;">College hrs</span><span style="font-size:12px;color:var(--muted);">Attend every lecture. No bunking — ever.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--purple);font-weight:700;min-width:90px;">6:00–8:00 PM</span><span style="font-size:12px;color:var(--muted);">2 focused study hours. CFA prep / Python / NISM depending on year.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--muted);font-weight:700;min-width:90px;">After 8 PM</span><span style="font-size:12px;color:var(--muted);">Read one news item (Hindu Business Line). Then rest. Sleep by 10:30 PM.</span></div>
+        </div>
+        <div style="margin-top:10px;background:var(--bg2);border-radius:6px;padding:8px 10px;">
+          <p style="font-size:11px;color:var(--green);">✓ Best for people who are sharper in the morning and find evening studying easy.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;padding:14px;">
+        <p style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Option B — Evening Archery</p>
+        <div style="display:grid;gap:6px;">
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--gold);font-weight:700;min-width:90px;">6:00–7:00 AM</span><span style="font-size:12px;color:var(--muted);">Wake up, freshen up, light revision or news reading. No pressure.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--blue);font-weight:700;min-width:90px;">College hrs</span><span style="font-size:12px;color:var(--muted);">Attend every lecture. Active participation — ask one question per class.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--gold);font-weight:700;min-width:90px;">4:30–6:30 PM</span><span style="font-size:12px;color:var(--muted);">🏹 Archery practice. Evening slot. Consistent timing matters more than which slot.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--purple);font-weight:700;min-width:90px;">7:30–9:30 PM</span><span style="font-size:12px;color:var(--muted);">2 focused study hours. CFA prep / Python / NISM depending on year.</span></div>
+          <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--muted);font-weight:700;min-width:90px;">After 9:30 PM</span><span style="font-size:12px;color:var(--muted);">Wind down. Sleep by 11 PM maximum. Do not extend study past this.</span></div>
+        </div>
+        <div style="margin-top:10px;background:var(--bg2);border-radius:6px;padding:8px 10px;">
+          <p style="font-size:11px;color:var(--gold);">✓ Best if college timings are early and morning feels rushed. Evening archery = natural decompression.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px;background:var(--bg3);border-radius:8px;padding:10px 12px;">
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;">Both options deliver the same outcome — archery stays, CGPA stays, skill-building stays. The only question is which one you can maintain for 3 years without breaking. <strong style="color:var(--text);">Pick once. Don't switch back and forth.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR 1 -->
+<section id="year1" style="border-top:1px solid var(--border);">
+  <div class="label">Age 18–19 · Semester 1 & 2</div>
+  <h2 style="color:var(--blue);margin-bottom:6px;">Year 1 — Foundation</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">"Survive and thrive. Protect the CGPA at all costs. Everything else is secondary."</p>
+  <div style="background:#0c1e3a;border:1px solid var(--blue);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--blue);font-weight:700;">🎯 CGPA TARGET: 8.0+</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:12px;">This unlocks every single path listed in this blueprint</span>
+  </div>
+  <div id="y1-container"></div>
+</section>
+
+<!-- YEAR 2 -->
+<section id="year2" style="border-top:1px solid var(--border);">
+  <div class="label">Age 19–20 · Semester 3 & 4</div>
+  <h2 style="color:var(--teal);margin-bottom:6px;">Year 2 — Build & Differentiate</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">"Add tools. Get your first internship. Begin CFA prep. Push archery to state level."</p>
+  <div style="background:#0c2a28;border:1px solid var(--teal);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--teal);font-weight:700;">🎯 CGPA TARGET: 8.0+</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:12px;">Plus: 1 internship. 1 cert started.</span>
+  </div>
+  <div id="y2-container"></div>
+</section>
+
+<!-- YEAR 3 -->
+<section id="year3" style="border-top:1px solid var(--border);">
+  <div class="label">Age 20–21 · Semester 5 & 6</div>
+  <h2 style="color:var(--orange);margin-bottom:6px;">Year 3 — Decision Year</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">"Lock your path. No more changing. Give your first major exam."</p>
+  <div style="background:#2a1800;border:1px solid var(--orange);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--orange);font-weight:700;">⚡ COMMIT TO ONE:</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:8px;">CAT route OR CUET PG route OR GRE route. Pick by Month 2 of Year 3.</span>
+  </div>
+  <div id="y3-container"></div>
+</section>
+
+<!-- EXAM PLAN -->
+<section id="examplan" style="border-top:1px solid var(--border);">
+  <div class="label">CAT + CUET PG — One Strategy, Two Doors</div>
+  <h2 style="margin-bottom:6px;">Your Exam Season Plan</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">CAT and CUET PG are not competing paths — they are the ceiling and the floor of the same academic year. CAT is November. CUET PG is March. Sequential, not simultaneous. One integrated strategy covers both.</p>
+  <div style="background:#1a1040;border:1px solid var(--purple);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--purple);font-weight:700;">Key principle:</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:8px;">Your degree does ~85% of CUET PG prep for free. CAT needs extra work only on Verbal and DILR — starting Year 1, not Year 3.</span>
+  </div>
+  <div id="examplan-container"></div>
+</section>
+
+<!-- MASTERS -->
+<section id="masters" style="border-top:1px solid var(--border);">
+  <div class="label">Age 21–24</div>
+  <h2 style="color:var(--green);margin-bottom:6px;">Masters & Launch</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">"The degree that multiplies your starting salary. Three paths. All with ranked colleges inside — tap to expand."</p>
+  <div id="masters-container"></div>
+
+  <div style="margin-top:16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;">
+    <h3 style="margin-bottom:12px;color:var(--muted);">💼 If No Masters (Direct Job Path)</h3>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px;">With Python + SQL + degree + internship: 5–8 LPA data analyst role. This is not failure. Strategic switches every 2 years:</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <div style="background:var(--bg3);border-radius:8px;padding:8px 12px;text-align:center;min-width:80px;"><div style="font-size:13px;font-weight:700;color:var(--blue);">5–8 LPA</div><div style="font-size:10px;color:var(--muted);">Age 22</div></div>
+      <div style="color:var(--muted);font-size:18px;display:flex;align-items:center;">→</div>
+      <div style="background:var(--bg3);border-radius:8px;padding:8px 12px;text-align:center;min-width:80px;"><div style="font-size:13px;font-weight:700;color:var(--teal);">12–18 LPA</div><div style="font-size:10px;color:var(--muted);">Age 24</div></div>
+      <div style="color:var(--muted);font-size:18px;display:flex;align-items:center;">→</div>
+      <div style="background:var(--bg3);border-radius:8px;padding:8px 12px;text-align:center;min-width:80px;"><div style="font-size:13px;font-weight:700;color:var(--orange);">20–28 LPA</div><div style="font-size:10px;color:var(--muted);">Age 26</div></div>
+      <div style="color:var(--muted);font-size:18px;display:flex;align-items:center;">→</div>
+      <div style="background:var(--bg3);border-radius:8px;padding:8px 12px;text-align:center;min-width:80px;"><div style="font-size:13px;font-weight:700;color:var(--gold);">40–50 LPA</div><div style="font-size:10px;color:var(--muted);">Age 29–30</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMS -->
+<section id="exams" style="border-top:1px solid var(--border);">
+  <div class="label">Full Exam Timeline</div>
+  <h2 style="margin-bottom:6px;">Every Exam & Your Honest Odds</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">Two bars per exam: average person vs. your realistic odds given your specific profile.</p>
+  <div id="exam-container"></div>
+</section>
+
+<!-- CERTS -->
+<section id="certs" style="border-top:1px solid var(--border);">
+  <div class="label">Certifications</div>
+  <h2 style="margin-bottom:6px;">What to Do & When</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">High-level overview. For the complete exam-by-exam breakdown with topics and strategy, see the <strong style="color:var(--gold);">Cert Map</strong> section above.</p>
+  <div id="cert-container"></div>
+</section>
+
+<!-- CERT ROADMAP -->
+<section id="certroadmap" style="border-top:1px solid var(--border);">
+  <div class="label">Complete Certification Pathway</div>
+  <h2 style="margin-bottom:6px;">CFA & Actuarial — Full Exam Maps</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;"><strong style="color:var(--gold);">CFA Level 1 is your primary certification target.</strong> Actuarial is a deliberate post-job addition at age 23+ — not a college plan. Both are mapped below so you understand the full journey ahead.</p>
+  <div style="background:#1a1040;border:1px solid var(--purple);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--purple);font-weight:700;">⚡ THE SEQUENCE:</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:8px;">CFA Level 1 during college → CFA L2 in first job → Actuarial CS1+CB1 optionally at age 23+ → never both simultaneously.</span>
+  </div>
+  <div id="certroadmap-container"></div>
+</section>
+
+<!-- NISM -->
+<section id="nism" style="border-top:1px solid var(--border);">
+  <div class="label">Securities Market Certifications</div>
+  <h2 style="margin-bottom:6px;">NISM — Your Finance Entry Ticket</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:8px;">NISM (National Institute of Securities Markets) certifications are mandatory for working in Indian capital markets — mutual funds, stock broking, research, derivatives. Low cost, high signal in finance internships and jobs.</p>
+  <div style="background:#0c2a28;border:1px solid var(--teal);border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+    <span style="font-size:12px;color:var(--teal);font-weight:700;">✅ DO NISM SERIES V-A FIRST:</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:8px;">It's the entry door to every finance internship. ₹1,500 exam fee. 100 MCQs. Pass rate ~65%. Do it in Year 1 Sem 2 alongside your Google Data Analytics cert.</span>
+  </div>
+  <div id="nism-container"></div>
+</section>
+
+<!-- ARSENAL -->
+<section id="arsenal" style="border-top:1px solid var(--border);">
+  <div class="label">Weapons, Not Decorations</div>
+  <h2 style="margin-bottom:6px;">🧰 The Tools Arsenal</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Every tool below maps to a specific phase of this blueprint. Almost all are free. The ones marked with a badge <span class="mkbadge">🛠️ produces proof</span> generate a visible artifact — a certificate, a published dashboard, a GitHub repo — that goes directly on your CV. Filter by level. No decorative apps made the cut.</p>
+  <div id="arsenal-filter" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"></div>
+  <div id="arsenal-container"></div>
+</section>
+
+<!-- BACKUPS -->
+<section id="backups" style="border-top:1px solid var(--border);">
+  <div class="label">If Things Don't Go to Plan</div>
+  <h2 style="margin-bottom:6px;">Backup at Every Phase</h2>
+  <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">Failure at one door does not end the journey. Every phase has a floor.</p>
+  <div id="backup-container"></div>
+</section>
+
+<!-- DAILY -->
+<section id="daily" style="border-top:1px solid var(--border);padding-bottom:80px;">
+  <div class="label">Read This Every Morning</div>
+  <h2 style="margin-bottom:20px;">Your Daily Anchor</h2>
+
+  <div class="daily-hero anim">
+    <div style="font-size:40px;margin-bottom:12px;">🏹</div>
+    <h3 style="font-size:19px;color:#e0e7ff;margin-bottom:16px;line-height:1.5;">
+      You started with 72% in Arts.<br>No math. No economics.<br>
+      <span style="color:var(--gold);">And you built a plan anyway.</span>
+    </h3>
+    <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:22px;max-width:500px;margin-left:auto;margin-right:auto;">
+      That awareness — making a detailed plan at 18 before college even starts — is rarer than you know. Most people figure this out at 25. You're figuring it out now. The gap between who you are and who you want to become is not talent. It is <strong style="color:var(--text);">time × consistency.</strong>
+    </p>
+
+    <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:16px;text-align:left;margin-bottom:14px;max-width:460px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:11px;color:#6366f1;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-weight:700;">Non-Negotiables — Every Single Day</p>
+      <div style="display:grid;gap:8px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--green);font-size:14px;margin-top:1px;">✓</span><div><p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:1px;">Archery — morning or evening, you decide once and don't change</p><p style="font-size:11px;color:var(--muted);">See the two schedule options in the Gap Month section. Pick your slot before college starts and protect it for 3 years.</p></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--green);font-size:14px;margin-top:1px;">✓</span><div><p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:1px;">2 focused study hours — phone in another room, not silent</p><p style="font-size:11px;color:var(--muted);">Quality beats quantity every time. 2 real hours = 4 distracted hours. This is how CGPA and CFA prep happen simultaneously.</p></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--green);font-size:14px;margin-top:1px;">✓</span><div><p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:1px;">One small Python / NISM / CFA task — not a session, one thing</p><p style="font-size:11px;color:var(--muted);">One function. One chapter. One practice question. Compounding is invisible until it suddenly isn't.</p></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);font-size:14px;margin-top:1px;">✓</span><div><p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:1px;">Read one financial news item — 5 minutes only</p><p style="font-size:11px;color:var(--muted);">The Hindu Business Line or RBI website. Builds GK for CAT, RBI Grade B, and interviews. Start Year 1, not Year 3. This is passive CAT verbal prep running silently in the background.</p></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--green);font-size:14px;margin-top:1px;">✓</span><div><p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:1px;">7 hours sleep — not a reward, a requirement</p><p style="font-size:11px;color:var(--muted);">Sleep deprivation drops cognitive performance by 20–30%. You cannot absorb Economics or CFA material on 5 hours. Rest is preparation.</p></div></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:14px;text-align:left;margin-bottom:18px;max-width:460px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:11px;color:#f59e0b;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-weight:700;">Weekly Rhythm (College Years)</p>
+      <div style="display:grid;gap:6px;">
+        <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--purple);font-weight:700;min-width:90px;">Mon–Fri</span><span style="font-size:12px;color:var(--muted);">College + archery + 2 study hours. Attend every lecture. Non-negotiable.</span></div>
+        <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--teal);font-weight:700;min-width:90px;">Saturday</span><span style="font-size:12px;color:var(--muted);">Deep work day — 4 hours on cert prep (CFA/NISM/Python). No social plans before 4 PM.</span></div>
+        <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--green);font-weight:700;min-width:90px;">Sunday</span><span style="font-size:12px;color:var(--muted);">Review week + 1 Kaggle/data task + full rest. Plan the next week on Sunday night — 15 minutes only.</span></div>
+        <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--orange);font-weight:700;min-width:90px;">Monthly</span><span style="font-size:12px;color:var(--muted);">Check your CGPA trajectory. Check your cert progress. Check archery level. Adjust one thing only — not everything.</span></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:14px;text-align:left;margin-bottom:18px;max-width:460px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:11px;color:#ef4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-weight:700;">Things That Will Tempt You — Stay Alert</p>
+      <div style="display:grid;gap:6px;">
+        <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#ef4444;">✗</span><span style="font-size:12px;color:var(--muted);">"I'll start seriously next semester" — the plan that never starts. Sem 1 CGPA is the hardest to recover.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#ef4444;">✗</span><span style="font-size:12px;color:var(--muted);">Doing CFA + Actuarial + Python + 2 internships simultaneously in Year 2 — this is how people burn out and fail everything.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#ef4444;">✗</span><span style="font-size:12px;color:var(--muted);">Dropping archery "just for this exam season" — it never comes back once you stop. Three months off = two years to rebuild.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#ef4444;">✗</span><span style="font-size:12px;color:var(--muted);">Changing the plan every 6 months based on what someone else is doing. Their path is not your path. Trust this blueprint.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><span style="color:#ef4444;">✗</span><span style="font-size:12px;color:var(--muted);">Measuring yourself against friends going to private MBA colleges or doing CA. Different race, different track. Comparison is noise.</span></div>
+      </div>
+    </div>
+
+    <p style="color:#374151;font-size:12px;font-style:italic;">"You are not behind. You are exactly where someone should be who started planning at 18."</p>
+  </div>
+
+  <div style="margin-top:28px;text-align:center;">
+    <p style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">Target Year</p>
+    <div style="font-size:64px;font-weight:900;color:var(--gold);line-height:1;text-shadow:0 0 40px rgba(251,191,36,.4);">2033</div>
+    <p style="color:var(--muted);font-size:13px;margin-top:8px;">Age 27–28 · ₹50 LPA+ · You have time. Use it.</p>
+  </div>
+
+  <div style="margin-top:28px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">The complete salary journey (realistic, not fantasy)</p>
+    <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;">
+      <div style="text-align:center;padding:8px;"><div style="font-size:14px;font-weight:700;color:var(--blue);">6 LPA</div><div style="font-size:10px;color:var(--muted);">Age 22<br>First job</div></div>
+      <span style="color:var(--border);font-size:18px;">→</span>
+      <div style="text-align:center;padding:8px;"><div style="font-size:14px;font-weight:700;color:var(--teal);">18 LPA</div><div style="font-size:10px;color:var(--muted);">Age 24<br>Masters out</div></div>
+      <span style="color:var(--border);font-size:18px;">→</span>
+      <div style="text-align:center;padding:8px;"><div style="font-size:14px;font-weight:700;color:var(--orange);">35 LPA</div><div style="font-size:10px;color:var(--muted);">Age 26<br>Senior role</div></div>
+      <span style="color:var(--border);font-size:18px;">→</span>
+      <div style="text-align:center;padding:8px;"><div style="font-size:16px;font-weight:900;color:var(--gold);">50+ LPA</div><div style="font-size:10px;color:var(--muted);">Age 27–28<br>Target hit</div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const weeks = [
+  {w:"Week 1",f:"Functions & Limits",c:"#a78bfa",topics:["Types of functions","Domain & Range","Concept of Limits","Continuity basics"],why:"Everything in economics uses functions. Demand = f(price). Without this, derivatives make no sense.",res:"NCERT Math 11 — Ch 2, 3, 13"},
+  {w:"Week 2",f:"Differentiation",c:"#3b82f6",topics:["Differentiation rules","Chain rule","Product & Quotient rule","Maxima & Minima"],why:"THE most used tool in economics. Marginal cost, optimization — all need this. Most important week.",res:"NCERT Math 12 — Ch 5, 6"},
+  {w:"Week 3",f:"Integration + Matrices",c:"#2dd4bf",topics:["Basic integration","Definite integrals","Matrix operations","Determinants"],why:"Integration for economic modeling. Matrices for econometrics in Year 2–3. Both appear in Sem 1.",res:"NCERT Math 12 — Ch 7, 3, 4"},
+  {w:"Week 4",f:"Probability + Linear Programming",c:"#34d399",topics:["Probability basics","Conditional probability","Bayes theorem concept","Linear inequalities"],why:"Direct overlap with your Semester 1 Statistics course. Starting Stats with this knowledge = big advantage.",res:"NCERT Math 12 — Ch 13, 12"}
+];
+
+const dailySched = [
+  {t:"6:00 – 8:00 AM",a:"🏹 Archery practice — morning slot is sacred during gap month. Build the habit now before college structure arrives.",c:"#34d399"},
+  {t:"9:00 – 11:00 AM",a:"📐 Math bridging — 2 focused hours. Phone in another room. This is the gap month priority above everything.",c:"#6366f1"},
+  {t:"2:00 – 3:00 PM",a:"📝 Revise morning topic + solve 5 NCERT problems. Don't skip this — revision cements what study only introduces.",c:"#6366f1"},
+  {t:"4:00 – 5:00 PM",a:"💻 Python: 1 video on freeCodeCamp.org. Install Python now, not later. The habit of opening a code editor daily is the skill.",c:"#3b82f6"},
+  {t:"Evening",a:"🛋️ Free time, rest, social. Protect this deliberately — burnout kills plans faster than laziness ever will.",c:"#374151"}
+];
+
+const yearCards = {
+  y1:[
+    {icon:"📚",label:"Academics",text:"Attend every class in Sem 1 — every single one. Do not fall behind. If you slip in Sem 1 it takes 2 full semesters to recover your CGPA. Target 8.5+ in Sem 1. The math gap you're closing this month is what makes this possible."},
+    {icon:"💻",label:"Tech Skills",text:"Complete Python basics by end of Year 1. Use Codecademy or freeCodeCamp — both free. Learn Excel properly alongside. By December you should be able to write a simple Python script to analyse data."},
+    {icon:"🏆",label:"Certifications",text:"Google Data Analytics Certificate on Coursera — start in Sem 2. Takes 120–150 hours. Do it on weekends. Also: NISM Series XII (Securities Markets Foundation) in Sem 1 — ₹1,000 fee, easy with your Econ background, good first CV win. NISM Series V-A (Mutual Fund Distributor) in Sem 2 — ₹1,500, opens every finance internship door. These three done in Year 1 = strong foundation."},
+    {icon:"🏹",label:"Sports",text:"Archery: target District level by year end. Maintain consistency over ambition. Do not drop this for studies — it becomes a differentiator in every application you ever write in your life."},
+    {icon:"💼",label:"Career",text:"No internship yet — CGPA is the only priority right now. Join SD College Economics or Finance society. Find 2–3 seniors from SD College on LinkedIn who did Economics Honours. Their path = your map."}
+  ],
+  y2:[
+    {icon:"📚",label:"Academics",text:"Mathematical economics begins this year. This directly overlaps with CFA Level 1 Quant section. Treat your econometrics course as CFA prep. They are the same material at different depths. CGPA: maintain 8+."},
+    {icon:"💻",label:"Tech Skills",text:"SQL + Tableau + one data project on GitHub. Even a small analysis of any dataset counts. Upload it to GitHub. Employers look for proof, not just certificates. One real project beats ten badges."},
+    {icon:"🏆",label:"Certifications",text:"CFA Level 1 is your ONE certification focus this year. Begin prep in Sem 3 — 300+ hours total, target the August or December sitting in Year 3. Your degree does 60% of the work for free. NISM Series VIII (Equity Derivatives) in Sem 3 alongside CFA prep — directly overlaps with derivatives content, minimal extra effort. Actuarial is NOT on your plate right now — that door opens after your first job is stable, age 23+."},
+    {icon:"🏹",label:"Sports",text:"Archery: push for State level. This is where the achievement starts to look genuinely impressive. State-level archery in India is rare. University selection events also open international doors."},
+    {icon:"💼",label:"Career",text:"Get ONE internship in summer. Data analyst role, research firm, finance startup, CA firm — small is fine. Internship = proof of skills in the real world. No internship = everything is just theory."}
+  ],
+  y3:[
+    {icon:"📚",label:"Academics",text:"Pick your dissertation at the intersection of data + economics. Strong dissertation = strong SOP for masters applications. This one piece of work follows you for the next 5 years of applications."},
+    {icon:"💻",label:"Tech Skills",text:"Basic ML if going data route. Financial modelling in Python/Excel if going finance/IIM route. Pick based on the path you've chosen. Stop exploring everything — specialise."},
+    {icon:"🏆",label:"Certifications",text:"Give CFA Level 1 in August of Year 3 (before final semester chaos). This timing avoids the collision with dissertation + CAT + CUET PG all hitting December together. Start L2 prep the moment results arrive — momentum matters. NISM Series X-A or XV in Sem 6 if targeting SEBI roles. Actuarial (CS1 + CB1) starts age 23+ once your first job is stable — it is a deliberate post-job addition, not a college plan."},
+    {icon:"🏹",label:"Sports",text:"Maintain archery. Start actively writing it into applications. Mention it in interviews. State/national archery in India at 20–21 is genuinely rare and human-interest material in every interview panel."},
+    {icon:"💼",label:"Career",text:"Second internship or part-time analytical role. By end of Year 3, you must commit to ONE path: CAT vs CUET PG vs GRE. Keeping all options open past this point hurts your preparation for all of them."}
+  ]
+};
+
+const mastersPaths = [
+  {
+    icon:"🏛️",label:"Path A: CAT → MBA",color:"#fbbf24",
+    text:"Fastest single jump to ₹50 LPA. Day 1 placements at old IIMs: 20–45 LPA. Your Economics + CFA L1 + multi-sport profile creates a differentiated WAT-PI candidate. Apply to every tier your score unlocks — go as high as possible.",
+    colleges:[
+      {tier:"99.5%+ · The Holy Trinity",c:"#fbbf24",schools:"IIM Ahmedabad · IIM Bangalore · IIM Calcutta",note:"₹35–55 LPA Day 1 median. The only Indian MBAs that compete globally. Attempt every year — never stop swinging at these."},
+      {tier:"97–99% · Excellent ROI",c:"#f59e0b",schools:"IIM Lucknow · IIM Kozhikode · IIM Indore",note:"₹22–32 LPA Day 1. Strong brand, strong alumni network. Fully worth the MBA investment."},
+      {tier:"95–97% · Very Good",c:"#f59e0b",schools:"IIM Shillong · MDI Gurgaon · SPJIMR Mumbai · FMS Delhi",note:"MDI and SPJIMR are non-IIM but genuinely prestigious — some recruiters prefer them over new IIMs. FMS Delhi = low fees, government-funded. ₹18–28 LPA."},
+      {tier:"90–95% · Good",c:"#fb923c",schools:"IIM Raipur · IIM Ranchi · IIM Trichy · IMT Ghaziabad · NMIMS Mumbai",note:"New IIMs growing fast. IMT and NMIMS strong in Finance. ₹14–22 LPA. Worth joining with Finance/Analytics specialisation."},
+      {tier:"85–90% · Acceptable — Research Before Joining",c:"#fb923c",schools:"Great Lakes Chennai · BIMTECH · FORE Delhi · IIM Kashipur · IIM Sirmaur",note:"ROI thins here. Only worth joining if Finance/Analytics track is available and median placement is ₹10+ LPA. Check placement report before accepting any offer."},
+      {tier:"Below 80% · Do Not Join Any MBA",c:"#ef4444",schools:"Any MBA with median placement under ₹8 LPA",note:"The MBA costs 2 years + ₹15–25L in fees. Below this percentile the output salary is what you'd earn with skills alone. Work and retake CAT with experience — this is strictly the better move."}
+    ]
+  },
+  {
+    icon:"📖",label:"Path B: CUET PG → MA Economics",color:"#3b82f6",
+    text:"Your BA Economics Honours degree covers ~85% of the CUET PG Economics syllabus. Virtually zero extra prep needed — 2 months of revision before the March exam in Year 3 is sufficient. Opens RBI Grade B, UPSC, research, and a second shot at abroad. Ranked universities by competitiveness below.",
+    colleges:[
+      {tier:"Elite · ~13% realistic odds",c:"#3b82f6",schools:"Delhi School of Economics (DSE)",note:"Asia's best Economics program. Direct pipeline to RBI Grade B, World Bank, and academia. DU Economics students dominate competition — your non-DU background needs a very high CUET PG score to overcome this. Swing for it, don't plan for it."},
+      {tier:"Excellent · ~52% realistic odds — Primary Target",c:"#3b82f6",schools:"JNU — School of Social Sciences",note:"Exceptional faculty, strong research culture, direct RBI Grade B pipeline. JNU MA Economics graduates are highly respected across civil services, research, and policy. This is your main CUET PG target."},
+      {tier:"Very Good · ~65% realistic odds",c:"#60a5fa",schools:"Jamia Millia Islamia · University of Hyderabad · BHU Varanasi",note:"Solid MA Economics programs, UGC recognised. RBI Grade B and UPSC doors fully open from all three. University of Hyderabad is especially strong for research-oriented careers."},
+      {tier:"Good · ~75% realistic odds",c:"#60a5fa",schools:"Central University of Punjab · Pondicherry University · Central University of Rajasthan",note:"Valid central universities. Complete the MA here and focus entirely on competitive exams during the 2 years. The degree subject matters more than the college name for RBI Grade B and UPSC."},
+      {tier:"Floor · Any UGC-Recognised University",c:"#94a3b8",schools:"Any state or central university MA Economics",note:"UGC recognition is all that matters for exam eligibility. A recognised MA Economics from any university keeps every competitive exam door open — RBI Grade B, UPSC, CAT retake. This is not failure, it is a working base."}
+    ]
+  },
+  {
+    icon:"✈️",label:"Path C: GRE → MS Abroad",color:"#2dd4bf",
+    text:"MS Economics or Data Science abroad puts you in global hiring pools at age 23–24. Return to India at 18–25 LPA or stay abroad at 35–70 LPA equivalent. Germany is often free via DAAD. Canada has high visa approval rates and no GRE. Apply to minimum 8 universities — never fewer. Ranked by score needed below.",
+    colleges:[
+      {tier:"GRE 320+ · CGPA 8.5+ · Dream Schools",c:"#2dd4bf",schools:"Columbia · Cornell · Georgetown (US) · LSE London · Univ. of Edinburgh (UK — no GRE needed)",note:"LSE Economics MS: 1 year, IELTS only. Columbia/Cornell place into Wall Street and top consulting. Apply to 1–2 dream schools knowing the odds are low. Your sports + CFA profile genuinely helps here."},
+      {tier:"GRE 313–320 · CGPA 8.0+ · Strong Targets",c:"#2dd4bf",schools:"UT Austin · Univ. of Washington · Purdue · Boston University · UC San Diego",note:"TA/RA funding commonly available — effectively free if you get it. Excellent US job placement in data science and economics. Apply to 2–3 from this tier."},
+      {tier:"GRE 308–313 · CGPA 7.5+ · Primary Realistic Targets",c:"#34d399",schools:"UMass Amherst · Univ. of Arizona · Indiana University · Iowa State · Univ. of Kansas",note:"Strong MS programs with TA funding available. These are your realistic sweet-spot targets. Apply to 3 from this tier — highest effort, highest probability of admission."},
+      {tier:"Canada · No GRE · 65% Visa Approval Rate",c:"#34d399",schools:"York University · Univ. of Calgary · Univ. of Alberta · McMaster · Univ. of Ottawa",note:"No GRE required at most Canadian schools. 3-year Post-Graduation Work Permit. Strong immigration pathway. Visa approval rate ~65% for Indian Economics students vs ~30% for US. Apply to 2 Canadian schools in every round."},
+      {tier:"Germany · Often Free · DAAD Scholarships",c:"#34d399",schools:"LMU Munich · Univ. of Bonn · Humboldt Berlin · Heidelberg · Univ. of Cologne",note:"DAAD scholarships cover tuition and partial living costs. Many programs in English. Extremely accessible for Indian Economics students. Highest value-per-rupee of any abroad option. Apply to 2 German schools minimum."},
+      {tier:"UK · IELTS Only · 1-Year MS",c:"#60a5fa",schools:"Univ. of Manchester · Univ. of Bristol · Univ. of Leeds · Univ. of Exeter",note:"No GRE needed. IELTS 6.5+. UK MS is 1 year — faster and cheaper than US. Solid employment in UK finance. Apply to 1–2 UK schools as part of the broader portfolio."},
+      {tier:"Not Worth The Journey — Avoid",c:"#ef4444",schools:"Private US universities with no TA/RA funding · UK post-92 universities · unranked programs",note:"If you are paying ₹60L+ per year with no funding at a school outside QS top-200, the ROI does not work. A well-executed India path (CFA + strategic switches) beats this outcome financially. Never take a loan for an unranked abroad MS."}
+    ]
+  }
+];
+
+const exams = [
+  {n:"CAT → Any IIM",when:"Year 3 · Age 21",raw:2,yours:14,c:"#f59e0b",v:"POSSIBLE",note:"Econ+Math+Stats builds Quant naturally. Sports = WAT-PI asset. Verbal needs separate work. Start prep in Year 2."},
+  {n:"CAT → IIM A / B / C",when:"Year 3 · Age 21",raw:0.8,yours:5,c:"#ef4444",v:"LONG SHOT",note:"Requires 99+ percentile + exceptional profile. Swing for it — but do not bet everything on it."},
+  {n:"CUET PG → DSE",when:"Year 3 · Age 21",raw:3,yours:13,c:"#f59e0b",v:"POSSIBLE",note:"Your degree IS this preparation. 8+ CGPA is the real entry requirement. Competition from DU colleges is stiff."},
+  {n:"CUET PG → JNU / Jamia",when:"Year 3 · Age 21",raw:15,yours:52,c:"#34d399",v:"ACHIEVABLE",note:"Excellent economics programs. Less competition than DSE. Realistic primary target for the MA Economics route."},
+  {n:"RBI Grade B — Phase 1 (Prelims)",when:"After Graduation · Age 22",raw:8,yours:22,c:"#f59e0b",v:"POSSIBLE",note:"Phase 1: 200 MCQs covering General Awareness, English, Quant, Reasoning. Prelims shortlist ratio ~10:1. Your Econ degree is strong for GA + Quant sections. Needs 3–4 months dedicated prep."},
+  {n:"RBI Grade B — Phase 2 (Mains)",when:"After Graduation · Age 22",raw:2,yours:9,c:"#f59e0b",v:"POSSIBLE",note:"Phase 2: Paper I (Economic & Social Issues), Paper II (English), Paper III (Finance & Management). Your Economics Honours degree overlaps ~75% with Paper I and ~60% with Paper II. This is where your degree gives maximum advantage. 1 year dedicated post-prelims prep needed."},
+  {n:"RBI Grade B — Phase 3 (Interview)",when:"After Graduation · Age 22",raw:0.5,yours:7,c:"#ef4444",v:"LONG SHOT",note:"Final interview + document verification. ~400 posts per year across India. Starting salary ~₹35 LPA equivalent (CTC + perks + housing). Extremely prestigious. Your sports profile and analytical background are genuine assets in the interview panel."},
+  {n:"UPSC Civil Services",when:"After Graduation · Age 22+",raw:0.1,yours:3,c:"#ef4444",v:"LONG SHOT",note:"Hardest exam in India. 3+ years full-time prep. Economics optional is high-scoring. Only if this is your truest ambition."},
+  {n:"GRE Quant 160+",when:"Year 3 · Age 21",raw:35,yours:51,c:"#34d399",v:"ACHIEVABLE",note:"Math + Stats degree gives real foundation. 2–3 months focused prep is sufficient. Verbal needs separate work."},
+  {n:"MS Abroad · Top 100 University",when:"After Graduation",raw:25,yours:38,c:"#f59e0b",v:"POSSIBLE",note:"8+ CGPA + GRE 310+ + strong SOP + sports profile. Canada and Germany are significantly more accessible than US."}
+];
+
+const certs = [
+  {n:"Google Data Analytics",when:"Year 1 Sem 2",raw:88,yours:91,c:"#34d399",v:"DO THIS FIRST",note:"Effort-based, not competitive. 120–150 hours. Free on Coursera. Stats background makes it click faster. Low effort, high CV signal."},
+  {n:"Python + SQL (self-directed)",when:"Year 1–2",raw:75,yours:85,c:"#34d399",v:"ESSENTIAL",note:"Used in every path you're considering. Non-negotiable. GitHub project proof matters more than any certificate."},
+  {n:"NISM Series V-A (Mutual Fund Distributor)",when:"Year 1 Sem 2",raw:65,yours:78,c:"#34d399",v:"DO EARLY",note:"₹1,500 fee. 100 MCQs. Gateway to every finance internship. Renew every 3 years. Full NISM pathway in the NISM section."},
+  {n:"CFA Level 1 ← PRIMARY GOAL",when:"August of Year 3 · Age 20–21",raw:40,yours:58,c:"#fbbf24",v:"YOUR MAIN TARGET",note:"Prep begins Sem 3 Year 2. 300–400 hours. Your degree covers ~60% already. Ethics is the trap — give it 60+ hours alone. Sit in August Year 3, before dissertation and CAT season collide in December. This is your certification priority above everything else."},
+  {n:"CFA Level 2",when:"After Graduation · Age 22 · While Working",raw:44,yours:38,c:"#f59e0b",v:"NEXT STEP (post-job)",note:"Sit this during your first job year. Don't pause after L1 — momentum carries. Vignette-based, harder logic. Financial Reporting dominates. Can be done alongside work with weekend prep."},
+  {n:"CFA Level 3 + Charterholder",when:"Age 23–24 · Masters or early work years",raw:11,yours:19,c:"#f59e0b",v:"LONG RUN",note:"Only 11% of starters finish. Charter requires 4,000 hrs qualifying work experience. Each level passed already improves salary regardless of whether you finish the charter."},
+  {n:"Actuarial CS1 + CB1 ← POST-JOB OPTIONAL",when:"Age 23+ · After first job is stable",raw:38,yours:62,c:"#2dd4bf",v:"DELIBERATE LATER ADD",note:"NOT during college. Start CS1 and CB1 at age 23 once you are financially stable and working. Your degree overlap stays valid — Stats knowledge doesn't expire. Adding actuarial papers on top of CFA L1+L2 at age 23–25 creates a genuinely rare combined profile worth ₹25–35 LPA without a masters."},
+  {n:"Actuarial Full Fellowship (IFoA)",when:"Age 25–30 if you continue",raw:15,yours:22,c:"#a78bfa",v:"DECADE COMMITMENT",note:"13–15 exams total. Only pursue this if after sitting CS1 and CB1 you genuinely love the work. ~600 qualified actuaries in India. ₹1.5–3Cr ceiling. Full map in Cert Map section."}
+];
+
+const backups = [
+  {
+    phase:"Year 1: CGPA Falls Below 8",
+    tag:"Age 18–19",c:"#ef4444",
+    scenario:"You struggled in Sem 1 — the math gap hit harder than expected, or college life disrupted your schedule. Your CGPA after Sem 1 is 6.5–7.5.",
+    primary:"Most masters programs screen at 8.0+ CGPA. DSE, JNU, most IIM shortlists, and abroad applications all use it as a filter. A sub-8 CGPA at this stage makes the top paths significantly harder but NOT impossible.",
+    backup:"The direct job route stays 100% open — Python + SQL + internship + NISM certs will get you a 5–8 LPA data analyst or finance role regardless of CGPA. Some IIMs (newer ones, IIM Udaipur, Ranchi, Trichy) do not hard-filter at 8. CAT score can override CGPA at many schools.",
+    action:"Immediate: figure out which paper you dropped and why — math gap, attendance, or preparation. If attendance is the issue, fix it this week, not next semester. Retake internal assessments aggressively. Sem 2 must be 8.5+ to begin recovery. One bad semester does not end this — two bad semesters might.",
+    floor:"₹5–8 LPA data role at 22. Skills-based path to 20–25 LPA by 26 through switches. Exams like RBI Grade B have no CGPA filter — your degree subject matters, not your percentage."
+  },
+  {
+    phase:"Year 2: No Internship Secured",
+    tag:"Age 19–20 · Summer",c:"#f59e0b",
+    scenario:"You applied to internships in Summer of Year 2 but got no responses, or got rejected. You have no work experience entering Year 3.",
+    primary:"Without an internship, your CV has zero proof of real-world application. Every application for Year 3 internships, masters, and jobs will be weaker. This is a meaningful gap, not a fatal one.",
+    backup:"Two alternatives: (1) Create your own proof — pick a dataset from Kaggle, RBI data portal, or NSE, do a real analysis in Python/Excel, write it up, publish on LinkedIn and GitHub. This is a self-made project that counts. (2) Reach out directly to CA firms, small finance startups, or college professors who do research — offer free help. Many will say yes.",
+    action:"Do not wait for Summer Year 3. Start in December of Year 2. One cold email a day to 10 firms = 300 contacts in a month. Accept any unpaid opportunity that gives you real work. A certificate from a 2-week unpaid role at a real firm beats no experience.",
+    floor:"A GitHub project with real analysis + NISM V-A + Google Data Analytics cert can substitute for an internship at many entry-level hiring stages. It's not ideal, but it works."
+  },
+  {
+    phase:"Year 3: CAT Score is Below 90 Percentile",
+    tag:"Age 21 · After CAT Result",c:"#ef4444",
+    scenario:"You sat CAT in Year 3. Result: 75–89 percentile. IIM calls are unlikely at this score. You feel the plan has failed.",
+    primary:"Here is the exact percentile-to-college map: 95–99%: MDI Gurgaon, SPJIMR Mumbai, FMS Delhi, IIM Shillong — genuinely strong, worth joining. 90–95%: New IIMs (Raipur, Ranchi, Trichy), IMT Ghaziabad, NMIMS Mumbai — worth joining with Finance specialisation. 85–90%: Great Lakes, BIMTECH, FORE — check placement data first, thin ROI. Below 80%: do not join any MBA at this score — work and retake.",
+    backup:"Three options based on your exact score: (1) 85–94 percentile: apply to new IIMs + MDI/SPJIMR/IMT — your sports + CFA progress + internship can offset score at WAT-PI stage. These schools actively seek diverse profiles. (2) 75–84 percentile: do not join an MBA now. Work 1–2 years in a data/finance role and retake CAT — experienced candidates convert the same percentile into better college calls. Your profile grows while you wait. (3) Any score: CUET PG runs in March of the same academic year — JNU/Jamia (52% odds) is live regardless of your CAT score.",
+    action:"Do not retake CAT immediately out of emotion unless your score was below 70. At 75–89, working 1 year then retaking is strictly better — IIM panels visibly favour experienced candidates in WAT-PI. See Masters section → Path A for the full ranked college table to know exactly which schools are open at your score.",
+    floor:"CUET PG → JNU MA Economics (52% odds, March exam, zero conflict with CAT). Work → retake CAT with experience. GRE → abroad (38% odds). All three doors stay fully open."
+  },
+  {
+    phase:"Year 3: CUET PG Gives Mid-Tier College",
+    tag:"Age 21 · After CUET PG Result",c:"#f59e0b",
+    scenario:"CUET PG result puts you into a UGC-recognised university MA Economics program — not DSE, not JNU, but a valid MA from a real university.",
+    primary:"The brand value of the masters college matters less than you think for competitive exams. RBI Grade B, UPSC, and state PSCs do not screen by masters college name — they screen by subject (Economics) and exam performance.",
+    backup:"Complete the MA with 8+ CGPA. Use the 2 years to appear for RBI Grade B (your Econ degree + MA = strongest possible prep). Simultaneously sit CFA Level 1 and Level 2. By the time you graduate at 23, you can have: MA Economics + CFA L1/L2 + 1 internship + Python skills. That is a genuinely strong profile for 12–18 LPA roles.",
+    action:"Do not drop out or feel defeated. The MA years are prep years for the exam that matters most after graduation. Treat the MA syllabus as RBI Grade B preparation — they overlap ~80%. Every semester exam you take is a free mock test.",
+    floor:"MA Economics (any UGC university) + RBI Grade B attempt = ₹35 LPA equivalent package with housing + perks if cleared. Even if not cleared, MA + CFA L1 + Python = 10–15 LPA private sector role."
+  },
+  {
+    phase:"GRE / MS Abroad Route: All Rejections",
+    tag:"Age 21–22 · After Applications",c:"#f59e0b",
+    scenario:"You applied to 6–8 MS programs abroad. Every school rejected you, or visa was denied after admission.",
+    primary:"If you applied fewer than 8 schools or only to US universities — this is a strategy failure, not a profile failure. If 8+ schools across countries rejected you, the weak link is one of: CGPA below 7.5, GRE below 308, or a generic SOP with no specific research angle.",
+    backup:"Fix the gap, then reapply with a smarter portfolio: Germany first (LMU Munich, Univ. of Bonn, Humboldt Berlin — DAAD scholarships often cover tuition, many programs in English, extremely accessible for Indian Economics students), Canada second (York, Calgary, Alberta, Ottawa — no GRE at most, 65% visa approval rate, 3-year post-graduation work permit), UK as supplement (Manchester, Bristol, Leeds — 1-year MS, IELTS only, no GRE). A second attempt: 3 German + 2 Canadian + 2 UK + 1 US realistic = 8 applications with far better distribution than a US-only first attempt.",
+    action:"Do not reapply to the same schools with identical materials. Fix one specific thing: retake GRE and target 312+ (or skip GRE entirely for Canada/Germany route), or add one year of work experience which noticeably strengthens the SOP. See Masters section → Path C for the full ranked university list with exact GRE and CGPA cutoffs per tier.",
+    floor:"GRE abroad is Path C. CAT (14% IIM odds, November) and CUET PG (52% JNU odds, March) remain fully open. A rejection abroad closes nothing in India."
+  },
+  {
+    phase:"CFA Level 1 Fails (First Attempt)",
+    tag:"Age 20–21 · After Result",c:"#f59e0b",
+    scenario:"You sat CFA L1 in December of Year 3. Result: fail. You're disappointed and questioning the plan.",
+    primary:"The global CFA L1 pass rate is ~40%. Failing once is statistically normal — not exceptional. Most Charterholders failed at least one level on their first attempt. The certification is not lost — it is delayed by 4–6 months.",
+    backup:"CFA allows 3 sittings per year (Feb, May, Aug, Nov). You can retake in February or May of the year after. The exam content is identical — you already know 70% of it. The gap is almost always Ethics (not read carefully enough) and Financial Reporting & Analysis (not practised enough with mock exams).",
+    action:"Within one week of results: download the topic-wise performance report CFA Institute sends. It shows exactly which sections you underperformed. Those 2–3 sections are your entire retake prep focus. Do not reread the full curriculum — target the gaps only. Book the next available sitting date immediately.",
+    floor:"Failing L1 once does not affect your degree, your internships, your CGPA, or any competitive exam eligibility. It delays the CFA timeline by one sitting. Nothing else changes."
+  },
+  {
+    phase:"Actuarial: CS1 or CS2 Fails",
+    tag:"Age 23–25 · Post-Job Actuarial Path",c:"#2dd4bf",
+    scenario:"You started actuarial papers at age 23+ as planned (after CFA L1, after first job is stable). You failed CS1 or CS2 on first attempt.",
+    primary:"Actuarial exams have multiple sittings per year (April and September for IFoA). A fail is statistically normal — CS1 global pass rate is ~38%, CS2 is ~35%. You are doing this from a financially stable working position which removes the pressure that derails most candidates who attempt these during college.",
+    backup:"IFoA has no limit on retakes. Reregister for the next sitting immediately. Your CFA L1 quant foundation makes CS1 more intuitive than it would have been at 19 — trust that. If CS1 feels repeatedly impossible after 3 full attempts, that is a real signal worth taking seriously — actuarial Fellowship is a 7–10 year commitment and early signals are informative.",
+    action:"Post-fail: buy IFoA ActEd materials if you haven't already — the single best prep resource available. Study group via ActuarialOutpost forums. The actuarial community is small and genuinely supportive. Target the next sitting 4–5 months out. Your CFA L1 derivatives and stats work overlaps directly with CS1 content — revisit that material.",
+    floor:"Even CS1 + CB1 passed (2 papers) is meaningful on a CV in insurance/consulting analytics at age 24. Your CFA L1 + 2 actuarial papers is a rare combined profile. You are not starting from zero — partial progress has real standalone market value."
+  },
+  {
+    phase:"No Masters + No Big Exam + Graduation at 22",
+    tag:"Age 22 · Worst Combined Scenario",c:"#ef4444",
+    scenario:"CAT didn't work. CUET PG didn't give a good school. GRE abroad rejected. You have a BA Economics Honours degree, Python + SQL skills, NISM V-A, and 1 internship. What now?",
+    primary:"This feels like failure. It is not. You have a UGC-recognised degree in one of the most quantitative, in-demand subjects. You have tech skills most arts graduates don't. You have real financial market certifications.",
+    backup:"The 76% probability data analyst / research analyst / financial analyst job route is now your primary path. Target: Bombay, Gurgaon, Pune, Bengaluru — all four cities have active hiring for Economics + Python profiles. Starting 5–8 LPA. This is not a dead end — it is a launch pad. Every exam door stays open from employment: RBI Grade B has no age bar until 33. UPSC until 32. CAT retake until 30. You can work and prep simultaneously.",
+    action:"Do not take 6 months off to 'figure it out'. Get the first job as fast as possible — any analytical role. Then in year 2 of working, pick ONE exam and give it 100%. Working candidates who crack RBI Grade B or CAT often do so with more focus than fresh graduates because the stakes feel real.",
+    floor:"₹5–8 LPA at 22 → ₹14–18 LPA at 24 → ₹25–35 LPA at 26 with strategic switches. ₹50 LPA by 30–32 without any masters. Delay not failure."
+  },
+  {
+    phase:"₹50 LPA Not Reached by Age 27–28",
+    tag:"Age 27–28 · Target Deadline",c:"#a78bfa",
+    scenario:"You have executed the plan seriously. You are 27. Your current salary is ₹30–38 LPA. The 50 LPA target feels close but not there yet.",
+    primary:"The target year was 2033. You are close but not at the number. This is the most common outcome — not failure, not total success, but serious progress that compounds.",
+    backup:"Salary growth is non-linear. The jump from 35 to 50 LPA typically requires one of: a senior role with P&L ownership, a move from mid-size to large firm or MNC, a shift to a higher-paying city/function, or a job change with 40–50% hike (standard at the 5–7 year experience mark in analytics/finance). The jump from 35 to 55 LPA often happens in a single job switch at this stage.",
+    action:"Do not change the strategy at 27. Evaluate: which lever is closest — promotion at current firm, lateral move to better firm, or function change (eg. moving from analysis to strategy or product). One targeted job application campaign (3 months, 20+ applications) at senior level typically closes this gap. Do not accept a counter-offer from current employer — it delays the switch without solving the ceiling.",
+    floor:"35 LPA at 27 → 50+ LPA at 29–30 through one strategic move. This is not a failed plan. This is a plan running 18 months behind. Stay the course."
+  }
+];
+
+// ─── RENDER FUNCTIONS ───────────────────────────────────────────────────────
+
+function card(content, extra="") {
+  return `<div class="card anim" ${extra}>${content}</div>`;
+}
+
+// Weeks
+const wc = document.getElementById('weeks-container');
+weeks.forEach((w,i)=>{
+  wc.innerHTML += card(`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div><span style="font-size:10px;color:${w.c};font-weight:700;letter-spacing:2px;text-transform:uppercase;">${w.w}</span><h3 style="margin-top:3px;">${w.f}</h3></div>
+      <span style="font-size:11px;background:var(--bg3);color:var(--muted);padding:4px 10px;border-radius:20px;">7 days</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;">${w.topics.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div style="background:var(--bg);border-radius:8px;padding:10px 12px;margin-bottom:8px;">
+      <p style="font-size:11px;color:#f59e0b;font-weight:700;margin-bottom:3px;">WHY THIS MATTERS</p>
+      <p style="font-size:13px;color:var(--muted);">${w.why}</p>
+    </div>
+    <p style="font-size:12px;color:#374151;">📖 ${w.res}</p>
+  `,`style="border-left:4px solid ${w.c};animation-delay:${i*.1}s"`);
+});
+
+// Daily sched
+const ds = document.getElementById('daily-sched');
+dailySched.forEach(s=>{
+  ds.innerHTML += `<div style="display:flex;gap:12px;margin-bottom:9px;align-items:flex-start;">
+    <span style="font-size:11px;color:${s.c};font-weight:700;min-width:120px;">${s.t}</span>
+    <span style="font-size:13px;color:var(--muted);line-height:1.5;">${s.a}</span>
+  </div>`;
+});
+
+// Year cards
+function renderYearCards(id, data) {
+  const c = document.getElementById(id);
+  data.forEach((item,i)=>{
+    c.innerHTML += card(`
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;min-width:26px;">${item.icon}</span>
+        <div>
+          <p style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;font-weight:700;">${item.label}</p>
+          <p style="font-size:13px;color:#94a3b8;line-height:1.6;">${item.text}</p>
+        </div>
+      </div>
+    `,`style="animation-delay:${i*.1}s"`);
+  });
+}
+renderYearCards('y1-container',yearCards.y1);
+renderYearCards('y2-container',yearCards.y2);
+renderYearCards('y3-container',yearCards.y3);
+
+// ─── EXAM PLAN ───────────────────────────────────────────────────────────────
+
+const examPlanRows=[
+  {f:"What it tests",cat:"Quant · Verbal/RC · DILR",cuet:"Economics theory · Maths · Stats · GK"},
+  {f:"Degree covers",cat:"~55% (Quant section only)",cuet:"~85% (almost the full syllabus)"},
+  {f:"What you need extra",cat:"Daily reading from Y1 · DILR sets from Y2 · Mocks in Y3",cuet:"2 months revision + past papers in Y3 only"},
+  {f:"When to start",cat:"Passive habit from Year 1. Structured from Year 2. Intensive in Year 3.",cuet:"Start preparation in January of Year 3 (after CAT results arrive)"},
+  {f:"Exam date",cat:"November · Year 3",cuet:"March · Year 3 — after CAT, not during"},
+  {f:"Opens door to",cat:"MBA → IIM / top B-school ranked above",cuet:"MA Economics → DSE / JNU / central universities ranked above"}
+];
+
+const examYearPlan=[
+  {year:"Year 1 — Passive CAT Prep · No extra effort, just one habit",c:"#3b82f6",items:[
+    "Read The Hindu editorial or Business Line daily — 20 minutes. This IS your CAT Verbal prep. It feels like news reading; it is RC training, GK building, and CAT prep simultaneously.",
+    "No CAT books, no coaching, no formal schedule yet. Zero CUET PG prep needed. Your degree is handling it.",
+    "By end of Year 1 your reading speed and comprehension should be measurably better. That improvement is real exam-day advantage accumulating silently."
+  ]},
+  {year:"Year 2 — Add Light Structure · 1–2 hours per week only",c:"#2dd4bf",items:[
+    "Buy one DILR book — Arun Sharma LRDI or TIME material. Solve 1–2 sets per weekend. 45 minutes. Do not overdo this — DILR is a pattern-recognition skill that builds slowly.",
+    "Verbal: start timing yourself on RC passages actively — 3–4 passages per week. Note weak areas (inference questions, tone, vocabulary). These are CAT-specific skills your degree doesn't build.",
+    "Quant: your Mathematical Economics and Statistics courses are doing CAT Quant prep passively right now. No separate Quant book or coaching needed — trust the degree.",
+    "CUET PG: still zero extra prep required. The syllabus overlap with your BA Economics is so high that Year 3 revision handles it completely."
+  ]},
+  {year:"Year 3 — Full Exam Mode · Both exams, sequential not simultaneous",c:"#fbbf24",items:[
+    "Join a CAT mock test series from June (Career Launcher / TIME / IMS online — ₹2,000–4,000). Give 1 full mock every 2 weeks. Analyse every mock — where did time go? which question type hurt most?",
+    "Target 25–30 full mocks before November. Accuracy and time management matter more than content at this stage. Mocks are your actual prep.",
+    "CAT is November. Results arrive January. Use the percentile-to-college table in the Masters section to apply at the right tier immediately.",
+    "CUET PG: from January (after CAT results), spend exactly 2 months on Economics revision + 5 years of CUET PG past papers. The exam is in March. This preparation is light because your 3 years of degree work has already done the heavy lifting.",
+    "These two exams do not collide. CAT ends before CUET PG serious prep begins. One calendar year, two application doors open."
+  ]}
+];
+
+const epc=document.getElementById('examplan-container');
+if(epc){
+  epc.innerHTML+=`<div class="card anim">
+    <h3 style="margin-bottom:12px;">CAT vs CUET PG — Exactly What's Different</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:380px;">
+        <thead><tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left;padding:8px 6px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;width:28%;">Factor</th>
+          <th style="text-align:left;padding:8px 6px;color:var(--gold);font-size:11px;font-weight:700;">CAT</th>
+          <th style="text-align:left;padding:8px 6px;color:var(--blue);font-size:11px;font-weight:700;">CUET PG</th>
+        </tr></thead>
+        <tbody>${examPlanRows.map(r=>`<tr style="border-bottom:1px solid rgba(30,41,59,0.5);">
+          <td style="padding:8px 6px;color:var(--muted);font-size:11px;font-weight:600;vertical-align:top;">${r.f}</td>
+          <td style="padding:8px 10px 8px 6px;color:#e2e8f0;font-size:12px;line-height:1.5;vertical-align:top;">${r.cat}</td>
+          <td style="padding:8px 6px;color:#e2e8f0;font-size:12px;line-height:1.5;vertical-align:top;">${r.cuet}</td>
+        </tr>`).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+
+  examYearPlan.forEach((y,i)=>{
+    epc.innerHTML+=`<div class="card anim" style="border-left:4px solid ${y.c};animation-delay:${(i+1)*.1}s">
+      <h3 style="color:${y.c};margin-bottom:10px;">${y.year}</h3>
+      ${y.items.map(it=>`<div style="display:flex;gap:10px;margin-bottom:9px;align-items:flex-start;">
+        <span style="color:${y.c};min-width:14px;font-weight:700;margin-top:2px;">→</span>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.55;">${it}</p>
+      </div>`).join('')}
+    </div>`;
+  });
+}
+
+// Masters
+const mc = document.getElementById('masters-container');
+mastersPaths.forEach((p,i)=>{
+  const uid='mp_'+i;
+  mc.innerHTML+=`<div class="card anim" style="border-left:4px solid ${p.color};animation-delay:${i*.1}s;margin-bottom:10px;">
+    <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;">
+      <span style="font-size:22px;">${p.icon}</span>
+      <div><h3 style="color:${p.color};margin-bottom:5px;">${p.label}</h3><p style="font-size:13px;color:#94a3b8;line-height:1.6;">${p.text}</p></div>
+    </div>
+    <div onclick="toggleExp('${uid}')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:8px 12px;">
+      <span style="font-size:11px;color:${p.color};font-weight:700;">📊 Ranked Colleges by Score Needed</span>
+      <span style="font-size:11px;color:var(--muted);" id="arr_${uid}">▼ tap to expand</span>
+    </div>
+    <div id="${uid}" style="display:none;margin-top:8px;">
+      ${p.colleges.map(col=>`<div style="border-left:3px solid ${col.c};padding:10px 12px;margin-bottom:6px;background:var(--bg);border-radius:0 8px 8px 0;">
+        <p style="font-size:10px;color:${col.c};font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">${col.tier}</p>
+        ${col.schools?`<p style="font-size:13px;color:#e2e8f0;font-weight:600;margin-bottom:4px;">${col.schools}</p>`:''}
+        <p style="font-size:12px;color:var(--muted);line-height:1.5;">${col.note}</p>
+      </div>`).join('')}
+    </div>
+  </div>`;
+});
+
+// Exams
+const ec = document.getElementById('exam-container');
+exams.forEach((e,i)=>{
+  ec.innerHTML += card(`
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div><h3 style="margin-bottom:2px;">${e.n}</h3><span style="font-size:11px;color:var(--muted);">${e.when}</span></div>
+      <span style="font-size:11px;font-weight:700;color:${e.c};white-space:nowrap;margin-left:8px;">${e.v}</span>
+    </div>
+    <div class="grid2" style="margin-bottom:10px;">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:#374151;">Average</span><span style="font-size:11px;font-weight:700;color:#4b5563;">${e.raw}%</span></div><div class="bar-wrap"><div class="bar" data-w="${e.raw}" style="background:#374151;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:${e.c};">Yours</span><span style="font-size:13px;font-weight:800;color:${e.c};">${e.yours}%</span></div><div class="bar-wrap"><div class="bar" data-w="${e.yours}" style="background:${e.c};"></div></div></div>
+    </div>
+    <p style="font-size:12px;color:#4b5563;line-height:1.5;">${e.note}</p>
+  `,`style="animation-delay:${i*.06}s"`);
+});
+
+// Certs
+const certc = document.getElementById('cert-container');
+certs.forEach((ct,i)=>{
+  certc.innerHTML += card(`
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div><h3 style="margin-bottom:2px;">${ct.n}</h3><span style="font-size:11px;color:var(--muted);">${ct.when}</span></div>
+      <span style="font-size:11px;font-weight:700;color:${ct.c};white-space:nowrap;margin-left:8px;">${ct.v}</span>
+    </div>
+    <div class="grid2" style="margin-bottom:10px;">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:#374151;">Average</span><span style="font-size:11px;font-weight:700;color:#4b5563;">${ct.raw}%</span></div><div class="bar-wrap"><div class="bar" data-w="${ct.raw}" style="background:#374151;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:${ct.c};">Yours</span><span style="font-size:13px;font-weight:800;color:${ct.c};">${ct.yours}%</span></div><div class="bar-wrap"><div class="bar" data-w="${ct.yours}" style="background:${ct.c};"></div></div></div>
+    </div>
+    <p style="font-size:12px;color:#4b5563;line-height:1.5;">${ct.note}</p>
+  `,`style="animation-delay:${i*.08}s"`);
+});
+
+// ─── CERT ROADMAP DATA ──────────────────────────────────────────────────────
+
+const cfaRoadmap = [
+  {level:"CFA Level 1",tag:"3 exams/year · Feb, May, Aug, Nov",when:"Sit: August of Year 3 · Age 20–21",hours:"300–400 hrs prep",raw:40,yours:58,c:"#fbbf24",v:"YOUR PRIMARY TARGET",topics:["Ethics & Professional Standards (hardest trap)","Quant Methods (your strength — stats overlap)","Economics (your core degree)","Financial Reporting & Analysis","Corporate Finance","Equity Investments","Fixed Income","Derivatives","Alternative Investments","Portfolio Management"],note:"August sitting is deliberate — avoids the December collision with dissertation, CAT, and CUET PG all hitting at once. Start prep Sem 3 of Year 2. Ethics gets 60+ hours alone — it is the most common failure point. Use CFA Institute's official prep or Kaplan Schweser. Your degree covers ~60% already."},
+  {level:"CFA Level 2",tag:"3 exams/year · Feb, May, Aug",when:"Sit: Feb or May · First Job Year · Age 22",hours:"350–450 hrs prep",raw:44,yours:38,c:"#f59e0b",v:"NEXT — WHILE WORKING",topics:["Same 10 topics but vignette-based (case studies)","Financial Reporting goes very deep","Equity and Fixed Income dominate","Ethics reappears with more weight"],note:"Sit this during your first job year — not during masters. Vignette format means analytical reading under time pressure. Do not take a gap after L1. Weekend prep (10–12 hrs/week) over 6–7 months is the working professional approach."},
+  {level:"CFA Level 3",tag:"2 exams/year · Feb, Aug",when:"Sit: Age 23–24 · Masters or Year 2 of work",hours:"350–400 hrs prep",raw:52,yours:44,c:"#34d399",v:"ACHIEVABLE (conditional)",topics:["Portfolio Management (dominates this level)","Wealth Planning","Risk Management","Asset Allocation","Ethics (constructed response — essay format)"],note:"Highest pass rate of all 3 levels but essay format trips many. Conditional on passing L1 and L2. After passing L3, you need 4,000 hours qualifying work experience to claim the Charterholder designation — your job years count from day 1."},
+  {level:"CFA Charterholder",tag:"Experience requirement",when:"Age 25–26 · After experience hours",hours:"4,000 hrs work experience",raw:11,yours:19,c:"#a78bfa",v:"LONG RUN TARGET",topics:["4,000 hrs qualifying work experience","2 professional references","CFA Institute member application"],note:"Only ~11% of people who start L1 ever hold this charter. But every level passed improves your salary and interview positioning significantly. The charter is the bonus — L1 alone is already career-changing for you at this stage."}
+];
+
+const actuarialRoadmap = [
+  {level:"CS1 — Actuarial Statistics",tag:"IFoA · 2 sittings/year · Apr & Sep",when:"Sit: Age 23 · 1 year into first job",hours:"150–200 hrs prep",raw:38,yours:62,c:"#2dd4bf",v:"START HERE (age 23+)",topics:["Probability distributions","Statistical inference","Regression & time series","Bayesian statistics","Generalized linear models"],note:"Your Stats degree covers ~70% of this even at age 23 — the knowledge doesn't expire. Start with this paper. The exam has paper-based and computer-based components. Doing CFA L1 first actually helps — the quant foundation transfers directly."},
+  {level:"CB1 — Business Finance",tag:"IFoA · 2 sittings/year",when:"Sit: Age 23 alongside CS1",hours:"100–130 hrs prep",raw:55,yours:72,c:"#34d399",v:"EASIEST PAPER — DO WITH CS1",topics:["Financial accounting","Corporate finance","Investment and financing decisions","Business strategy"],note:"Your Economics degree overlaps ~60% with this. Sit it at the same sitting as CS1 — they complement each other and neither is very heavy. By this point your work experience in finance makes this even easier."},
+  {level:"CS2 — Risk Modelling & Survival",tag:"IFoA · 2 sittings/year",when:"Sit: Age 24 · 2nd year of work",hours:"180–220 hrs prep",raw:35,yours:48,c:"#2dd4bf",v:"POSSIBLE",topics:["Survival models","Markov chains","Machine learning basics","Run-off triangles","Time series"],note:"Harder than CS1. Markov chains and survival analysis are new concepts. By age 24 you'll have Python experience which helps with the computational elements. Budget 3–4 months focused prep."},
+  {level:"CM1 — Actuarial Mathematics (Life)",tag:"IFoA · 2 sittings/year",when:"Sit: Age 24–25",hours:"200–250 hrs prep",raw:35,yours:42,c:"#f59e0b",v:"CHALLENGING",topics:["Life contingencies","Annuities and assurances","Pension mathematics","Emerging costs techniques"],note:"Requires calculus and financial math comfort. Your CFA derivatives and fixed income knowledge from L1/L2 gives partial overlap here. This is where many people slow down — budget extra time."},
+  {level:"CM2 — Financial Engineering",tag:"IFoA · 2 sittings/year",when:"Sit: Age 25",hours:"200–250 hrs prep",raw:33,yours:40,c:"#f59e0b",v:"CHALLENGING",topics:["Derivatives pricing","Stochastic calculus","Risk-neutral pricing","Loss reserving"],note:"Most mathematically demanding Core Principles paper. Your CFA L2 derivatives knowledge creates meaningful overlap here — this is one area where doing CFA first genuinely helps actuarial progress."},
+  {level:"CP1 — Actuarial Practice",tag:"IFoA · 2 sittings/year",when:"Age 25–26",hours:"200–250 hrs prep",raw:40,yours:45,c:"#fb923c",v:"POSSIBLE",topics:["Risk framework","Actuarial control cycle","Capital management","Professional practice","Communication of results"],note:"Where technical knowledge meets real-world application. Heavy essay writing. By this point you have 3+ years work experience which makes this paper significantly more intuitive."},
+  {level:"CP2 — Modelling Practice",tag:"IFoA · 2 sittings/year",when:"Age 26",hours:"120–150 hrs prep",raw:60,yours:67,c:"#34d399",v:"ACHIEVABLE",topics:["Spreadsheet/model building","Documentation of models","Audit and peer review","Communication of assumptions"],note:"Practical exam — you build and document a model. Your Python and Excel skills at this stage make this one of the more manageable papers."},
+  {level:"CP3 — Communications",tag:"IFoA · 2 sittings/year",when:"Age 26",hours:"80–100 hrs prep",raw:70,yours:75,c:"#34d399",v:"ACHIEVABLE",topics:["Written communication for non-technical audiences","Report writing","Stakeholder communication"],note:"Lightest exam. Mostly a writing skills test. Years of professional communication by this age make this straightforward."},
+  {level:"Specialist Principles + Advanced (SP/SA)",tag:"4+ exams · choose your specialism",when:"Age 27–30",hours:"200–250 hrs each",raw:45,yours:45,c:"#a78bfa",v:"FELLOWSHIP STAGE",topics:["Finance & Investment (SP5/SP6+SA7) — best fit given CFA background","OR Life Insurance (SP1+SA1)","OR General Insurance (SP7+SA3)","OR Pensions (SP4+SA4)"],note:"Finance & Investment specialism (SP5/SP6) is the most natural given your CFA background — significant topic overlap. Full Fellowship (FIA) requires completing this stage. At this point you're 27–30, likely earning ₹40–60 LPA already from the CFA+experience track."}
+];
+
+const nismExams = [
+  {n:"Series V-A: Mutual Fund Distributor",when:"Year 1 Sem 2 · Age 18–19 — DO THIS FIRST",raw:65,yours:78,c:"#34d399",v:"START HERE",fee:"₹1,500",validity:"3 years",note:"100 MCQs. 2 hours. Passing mark 50%. The gateway to every mutual fund internship and finance role at entry level. Directly relevant to your Financial Literacy NEP course. Do this in Sem 2 — minimum prep needed."},
+  {n:"Series VIII: Equity Derivatives",when:"Year 2 Sem 3 · Age 19",raw:55,yours:68,c:"#34d399",v:"RECOMMENDED",fee:"₹1,500",validity:"3 years",note:"Covers F&O markets, hedging, options pricing basics. Excellent complement to CFA Level 1 Derivatives section. Do this in Year 2 when you're already studying financial instruments."},
+  {n:"Series VII: Securities Operations & Risk",when:"Year 2 Sem 4 · Age 19–20",raw:60,yours:72,c:"#34d399",v:"GOOD ADD-ON",fee:"₹1,500",validity:"3 years",note:"Covers clearing, settlement, risk management in markets. Useful if you're targeting stock exchange, depository, or custodian roles. Pairs well with your Stats background."},
+  {n:"Series X-A: Investment Adviser (Level 1)",when:"Year 3 or Post-Grad · Age 20–22",raw:45,yours:58,c:"#f59e0b",v:"POSSIBLE",fee:"₹3,000",validity:"3 years",note:"Harder than Series V-A. Covers financial planning, portfolio advisory, regulation. Required if you want to become a SEBI-registered Investment Adviser. Very relevant if you go into wealth management."},
+  {n:"Series XV: Research Analyst",when:"Post-Graduation · Age 22",raw:42,yours:56,c:"#f59e0b",v:"POSSIBLE",fee:"₹3,000",validity:"3 years",note:"Mandatory for SEBI-registered Research Analysts. Covers fundamental and technical analysis, research report writing, compliance. Highly relevant if you target equity research roles after graduation."},
+  {n:"Series XII: Securities Markets Foundation",when:"Year 1 Sem 1 · Age 18 — OPTIONAL FIRST STEP",raw:75,yours:88,c:"#34d399",v:"EASY WIN",fee:"₹1,000",validity:"3 years",note:"The most basic NISM exam. Covers market fundamentals, securities types, regulation basics. Very easy with your Econ degree background. Optional — but a confidence builder and good for your CV in Sem 1."}
+];
+
+// ─── RENDER CERT ROADMAP ────────────────────────────────────────────────────
+
+function renderCertRoadmap(id, data, title, color, icon) {
+  const container = document.getElementById(id);
+
+  // Header
+  container.innerHTML += `<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:14px;background:var(--bg2);border:1px solid ${color};border-radius:12px;">
+    <span style="font-size:24px;">${icon}</span>
+    <div><h3 style="color:${color};">${title}</h3><p style="font-size:12px;color:var(--muted);margin-top:2px;">Click any exam to expand details</p></div>
+  </div>`;
+
+  data.forEach((item, i) => {
+    const uid = id + '_' + i;
+    container.innerHTML += `<div class="card anim" style="border-left:4px solid ${item.c};animation-delay:${i*.1}s;margin-bottom:8px;">
+      <div onclick="toggleExp('${uid}')" style="cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+          <div>
+            <h3 style="margin-bottom:2px;">${item.level}</h3>
+            <span style="font-size:11px;color:var(--muted);">${item.when}</span>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:11px;font-weight:700;color:${item.c};display:block;">${item.v}</span>
+            <span style="font-size:10px;color:var(--muted);">${item.tag}</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;margin-bottom:4px;">
+          <div style="flex:1;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:10px;color:#374151;">Avg pass rate</span><span style="font-size:11px;font-weight:700;color:#4b5563;">${item.raw}%</span></div><div class="bar-wrap"><div class="bar" data-w="${item.raw}" style="background:#374151;"></div></div></div>
+          <div style="flex:1;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:10px;color:${item.c};">Your odds</span><span style="font-size:12px;font-weight:800;color:${item.c};">${item.yours}%</span></div><div class="bar-wrap"><div class="bar" data-w="${item.yours}" style="background:${item.c};"></div></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+          <span style="font-size:11px;background:var(--bg3);color:var(--muted);padding:3px 9px;border-radius:20px;">⏱ ${item.hours}</span>
+          <span style="font-size:11px;color:var(--muted);" id="arr_${uid}">▼ tap to expand</span>
+        </div>
+      </div>
+      <div id="${uid}" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <p style="font-size:11px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Topics Covered</p>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">${item.topics.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div style="background:var(--bg);border-radius:8px;padding:10px 12px;">
+          <p style="font-size:11px;color:#f59e0b;font-weight:700;margin-bottom:4px;">STRATEGY NOTE</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">${item.note}</p>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+document.getElementById('certroadmap-container').innerHTML = `
+  <div style="margin-bottom:20px;">
+    <div class="label" style="color:var(--gold);">Phase 1 — CFA (Your Active Plan · College Years)</div>
+    <div id="cfa-roadmap"></div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;margin:16px 0;">
+    <p style="font-size:12px;color:var(--gold);text-align:center;font-weight:700;margin-bottom:4px;">↓ Age 23+ · After First Job Is Stable ↓</p>
+    <p style="font-size:11px;color:var(--muted);text-align:center;">Actuarial begins here — only if you still want it after CFA L1 is done and your career is settled. Your degree overlap doesn't expire.</p>
+  </div>
+  <div>
+    <div class="label" style="color:var(--teal);">Phase 2 — Actuarial IFoA (Optional · Post-Job Addition · Age 23+)</div>
+    <div id="actuarial-roadmap"></div>
+  </div>
+`;
+
+renderCertRoadmap('cfa-roadmap', cfaRoadmap, 'CFA — 3 Levels to Charterholder', '#fbbf24', '📈');
+renderCertRoadmap('actuarial-roadmap', actuarialRoadmap, 'Actuarial (IFoA) — Full Fellowship Path', '#2dd4bf', '📐');
+
+// ─── RENDER NISM ────────────────────────────────────────────────────────────
+
+const nc = document.getElementById('nism-container');
+nismExams.forEach((n, i) => {
+  nc.innerHTML += `<div class="card anim" style="border-left:4px solid ${n.c};animation-delay:${i*.08}s">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+      <div><h3 style="margin-bottom:2px;">${n.n}</h3><span style="font-size:11px;color:var(--muted);">${n.when}</span></div>
+      <span style="font-size:11px;font-weight:700;color:${n.c};white-space:nowrap;margin-left:8px;">${n.v}</span>
+    </div>
+    <div class="grid2" style="margin-bottom:8px;">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:#374151;">Avg pass rate</span><span style="font-size:11px;font-weight:700;color:#4b5563;">${n.raw}%</span></div><div class="bar-wrap"><div class="bar" data-w="${n.raw}" style="background:#374151;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:11px;color:${n.c};">Your odds</span><span style="font-size:13px;font-weight:800;color:${n.c};">${n.yours}%</span></div><div class="bar-wrap"><div class="bar" data-w="${n.yours}" style="background:${n.c};"></div></div></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <span style="font-size:11px;background:var(--bg3);color:var(--muted);padding:3px 9px;border-radius:20px;">Fee: ${n.fee}</span>
+      <span style="font-size:11px;background:var(--bg3);color:var(--muted);padding:3px 9px;border-radius:20px;">Valid: ${n.validity}</span>
+    </div>
+    <p style="font-size:12px;color:#4b5563;line-height:1.5;">${n.note}</p>
+  </div>`;
+});
+
+// ─── TOGGLE EXPAND ──────────────────────────────────────────────────────────
+
+function toggleExp(id) {
+  const el = document.getElementById(id);
+  const arr = document.getElementById('arr_' + id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    if(arr) arr.textContent = '▲ collapse';
+  } else {
+    el.style.display = 'none';
+    if(arr) arr.textContent = '▼ tap to expand';
+  }
+}
+
+// Backups
+const bc = document.getElementById('backup-container');
+backups.forEach((b,i)=>{
+  const uid = 'bk_'+i;
+  bc.innerHTML += `<div class="backup anim" style="animation-delay:${i*.1}s;border-left-color:${b.c};">
+    <div onclick="toggleExp('${uid}')" style="cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <h3 style="color:${b.c};">⚠️ ${b.phase}</h3>
+        <span style="font-size:10px;background:var(--bg3);color:var(--muted);padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:8px;">${b.tag}</span>
+      </div>
+      <p style="font-size:12px;color:#4b5563;font-style:italic;line-height:1.5;margin-bottom:6px;">"${b.scenario}"</p>
+      <span style="font-size:11px;color:var(--muted);" id="arr_${uid}">▼ see full scenario & action plan</span>
+    </div>
+    <div id="${uid}" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+      <div style="margin-bottom:10px;background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <p style="font-size:10px;color:#ef4444;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">What Actually Happens</p>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.6;">${b.primary}</p>
+      </div>
+      <div style="margin-bottom:10px;background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <p style="font-size:10px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Your Backup Options</p>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.6;">${b.backup}</p>
+      </div>
+      <div style="margin-bottom:10px;background:var(--bg);border-radius:8px;padding:10px 12px;">
+        <p style="font-size:10px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Exact Action Steps</p>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.6;">${b.action}</p>
+      </div>
+      <div style="background:#0d2d1a;border-radius:8px;padding:10px 12px;">
+        <p style="font-size:10px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">🛡️ Your Floor — Worst Case</p>
+        <p style="font-size:13px;color:var(--green);line-height:1.6;">${b.floor}</p>
+      </div>
+    </div>
+  </div>`;
+});
+
+// ─── ANIMATIONS ─────────────────────────────────────────────────────────────
+
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('.bar').forEach(bar=>{
+        const w = bar.dataset.w;
+        setTimeout(()=>{ bar.style.width = w+'%'; }, 200);
+      });
+    }
+  });
+},{threshold:0.08});
+
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+
+// Scroll bar
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop;
+  const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('scrollBar').style.width=(s/h*100)+'%';
+});
+
+// Nav
+function goTo(id,btn){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+</script>
+<script>
+/* ═══════════ ECO HONOURS · LIVE COMMAND LAYER v2 ═══════════
+   Adds a stateful engine on top of the original blueprint.
+   All original data untouched. Progress persists in localStorage. */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const K='eco.v2.';
+const store={
+  get(k,d){try{const v=localStorage.getItem(K+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+  set(k,v){try{localStorage.setItem(K+k,JSON.stringify(v));}catch(e){}}
+};
+const DAY=864e5;
+const now=new Date();
+const today=new Date(now.getFullYear(),now.getMonth(),now.getDate(),12);
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+const dTo=d=>Math.round((d-today)/DAY);
+const addM=(d,n)=>new Date(d.getFullYear(),d.getMonth()+n,d.getDate(),12);
+
+/* ─── SETTINGS ─── */
+let anchorStr=store.get('anchor','2026-08-01');
+const anchor=()=>new Date(anchorStr+'T12:00:00');
+
+/* ─── MILESTONES (the executable skeleton of the blueprint) ─── */
+const MS=[
+ {ph:'⚡ Gap Month',c:'#a78bfa',items:[
+  ['g1','Week 1 — Functions & Limits (NCERT 11: Ch 2, 3, 13) finished'],
+  ['g2','Week 2 — Differentiation (NCERT 12: Ch 5, 6) finished'],
+  ['g3','Week 3 — Integration + Matrices (NCERT 12: Ch 7, 3, 4) finished'],
+  ['g4','Week 4 — Probability + Linear Programming (NCERT 12: Ch 13, 12) finished'],
+  ['g5','Python installed + first script runs'],
+  ['g6','Archery slot chosen (morning OR evening) — locked for 3 years']]},
+ {ph:'📘 Year 1 — Foundation',c:'#3b82f6',items:[
+  ['y1a','Sem 1: attended every lecture (self-honesty check)'],
+  ['y1b','Sem 1 SGPA 8.5+ (enter it in Settings below)'],
+  ['y1c','Python basics complete — can write a data script'],
+  ['y1d','Excel learned properly'],
+  ['y1e','NISM Series XII passed (Sem 1 · ₹1,000 easy win)'],
+  ['y1f','NISM Series V-A passed (Sem 2 · finance internship gateway)'],
+  ['y1g','Google Data Analytics cert started (Sem 2)'],
+  ['y1h','Joined SD College Economics/Finance society'],
+  ['y1i','LinkedIn live + connected 3 Econ Honours seniors'],
+  ['y1j','Archery: District level reached']]},
+ {ph:'📗 Year 2 — Build & Differentiate',c:'#2dd4bf',items:[
+  ['y2a','Google Data Analytics cert COMPLETED'],
+  ['y2b','SQL learned'],
+  ['y2c','Tableau learned'],
+  ['y2d','One real data project published on GitHub'],
+  ['y2e','CFA Level 1 prep started (Sem 3)'],
+  ['y2f','NISM Series VIII passed (Sem 3)'],
+  ['y2g','FIRST INTERNSHIP secured (summer)'],
+  ['y2h','Archery: State level push'],
+  ['y2i','DILR habit running — 1–2 sets every weekend']]},
+ {ph:'📙 Year 3 — Decision Year',c:'#fb923c',items:[
+  ['y3a','Dissertation topic locked (data × economics)'],
+  ['y3b','CFA LEVEL 1 PASSED (August sitting)'],
+  ['y3c','CAT mock series joined (June)'],
+  ['y3d','25+ full CAT mocks completed'],
+  ['y3e','CAT taken (November)'],
+  ['y3f','PATH COMMITTED — CAT / CUET PG / GRE (Month 2 deadline)'],
+  ['y3g','CUET PG taken (March)'],
+  ['y3h','Second internship / part-time analytical role']]},
+ {ph:'🚀 Launch — Age 21+',c:'#fbbf24',items:[
+  ['p1','First job / masters admit secured'],
+  ['p2','CFA Level 2 passed (first job year)'],
+  ['p3','RBI Grade B attempted (if MA path)'],
+  ['p4','₹20 LPA crossed'],
+  ['p5','₹35 LPA crossed'],
+  ['p6','₹50 LPA — TARGET HIT']]}
+];
+const MSFLAT={};MS.forEach(g=>g.items.forEach(i=>MSFLAT[i[0]]=i[1]));
+
+/* ─── DAILY NON-NEGOTIABLES ─── */
+const DAILY=[
+ ['d1','🏹 Archery — your slot, no excuses'],
+ ['d2','📚 2 focused study hours — phone in another room'],
+ ['d3','⚙️ One small Python / NISM / CFA task'],
+ ['d4','📰 One financial news item — 5 minutes'],
+ ['d5','😴 Slept 7+ hours last night']];
+
+/* ─── TOOLS ARSENAL ─── */
+const TOOLS=[
+ {c:'📐 Math Bridge',ph:'Gap Month → Year 1',col:'#a78bfa',items:[
+  {n:'Khan Academy',t:'B',cost:'Free',u:'NCERT-aligned calculus & probability with instant-feedback practice. Your gap-month workhorse.'},
+  {n:'3Blue1Brown — Essence of Calculus',t:'B',cost:'Free',u:'Visual intuition for limits and derivatives BEFORE mechanics. Watch Week 1–2 alongside NCERT.'},
+  {n:'Desmos',t:'B',cost:'Free',u:'Graph every function you study. Demand = f(price) becomes something you can see and drag.',mk:'a saved graph library of every concept'},
+  {n:'Wolfram Alpha',t:'I',cost:'Free',u:'Step-by-step checking of your derivatives and integrals. Verify, don’t guess.'},
+  {n:'Professor Leonard (YouTube)',t:'I',cost:'Free',u:'Full-length university lectures for when NCERT depth isn’t enough in Sem 1–2.'}]},
+ {c:'🐍 Python & Code',ph:'Year 1 → Year 2',col:'#3b82f6',items:[
+  {n:'freeCodeCamp — Python',t:'B',cost:'Free',u:'The blueprint’s named starting point. Video + practice, zero cost.'},
+  {n:'Kaggle Learn',t:'B',cost:'Free',u:'4-hour micro-courses: Python, pandas, data viz, intro ML.',mk:'completion certificates + a Kaggle profile'},
+  {n:'Google Colab',t:'B',cost:'Free',u:'Run Python in the browser, nothing to install. Every analysis becomes a shareable link.',mk:'shareable notebooks'},
+  {n:'GitHub',t:'I',cost:'Free',u:'Where proof lives. Employers read repos, not badges. Push every project from Year 2.',mk:'the portfolio itself'},
+  {n:'CS50x (Harvard, edX)',t:'P',cost:'Free',u:'If you find you love code in Year 2, this is the rigorous foundation. Optional, heavy, world-class.',mk:'Harvard certificate'}]},
+ {c:'🗄️ SQL & Data Tools',ph:'Year 2',col:'#2dd4bf',items:[
+  {n:'SQLBolt',t:'B',cost:'Free',u:'Interactive SQL basics in an afternoon-a-week for a month.'},
+  {n:'Mode SQL Tutorial',t:'I',cost:'Free',u:'Analyst-grade SQL on real datasets — the level internships actually test.'},
+  {n:'Tableau Public',t:'I',cost:'Free',u:'The blueprint names Tableau in Year 2. Public version publishes to a URL.',mk:'live dashboards with a public link on your CV'},
+  {n:'StrataScratch',t:'P',cost:'Freemium',u:'Real SQL interview questions from real companies. Use before internship interviews.'},
+  {n:'ExcelJet / Chandoo',t:'B',cost:'Free',u:'Excel done properly (Year 1 target). Chandoo is India-focused finance Excel.'}]},
+ {c:'📊 Economics & Indian Datasets',ph:'Year 1 → Year 3',col:'#e879f9',items:[
+  {n:'CORE Econ — “The Economy”',t:'B',cost:'Free',u:'The modern economics textbook used at LSE/UCL, free online. Reads like your degree taught with real-world data.'},
+  {n:'Marginal Revolution University',t:'B',cost:'Free',u:'Short, sharp micro/macro videos. Perfect lecture supplements.'},
+  {n:'RBI DBIE (database.rbi.org.in)',t:'I',cost:'Free',u:'Official RBI data portal. The backups section literally tells you to build a project from this.',mk:'original Indian macro analyses no classmate has'},
+  {n:'FRED (St. Louis Fed)',t:'I',cost:'Free',u:'The world’s cleanest macro data + chart builder. SOP-grade project material.',mk:'embeddable charts for GitHub/LinkedIn posts'},
+  {n:'MoSPI / data.gov.in',t:'I',cost:'Free',u:'Indian CPI, GDP, employment microdata — dissertation raw material.'}]},
+ {c:'📈 CFA Level 1',ph:'Year 2 Sem 3 → Year 3 Aug',col:'#fbbf24',items:[
+  {n:'CFA Institute Learning Ecosystem',t:'B',cost:'Included in registration',u:'Official curriculum, question bank and mocks. Use this as the spine before anything third-party.'},
+  {n:'Kaplan Schweser Notes',t:'I',cost:'Paid',u:'The standard condensation — 5 books instead of 3,000 pages. What most passers actually read.'},
+  {n:'300Hours.com',t:'B',cost:'Free',u:'Study planners, pass-rate data, strategy. Read before you spend a rupee on prep.'},
+  {n:'UWorld CFA QBank',t:'P',cost:'Paid',u:'The hardest, best-explained practice questions. For the final 3 months. Ethics + FRA drilling.'},
+  {n:'AnalystForum',t:'I',cost:'Free',u:'Where candidates compare notes on every topic. Search any concept that confuses you.'}]},
+ {c:'🎯 CAT Prep',ph:'Year 1 habit → Year 3 intensive',col:'#fb923c',items:[
+  {n:'The Hindu / Business Line editorials',t:'B',cost:'~Free',u:'The blueprint’s Year-1 passive weapon: 20 min/day IS your RC engine and GK bank.'},
+  {n:'Arun Sharma — LRDI',t:'B',cost:'~₹700',u:'The Year 2 book the exam plan names. 1–2 sets per weekend, no more.'},
+  {n:'Cracku / 2IIM',t:'I',cost:'Paid',u:'Structured online prep with daily targets — if you want guided structure in Year 3.'},
+  {n:'TIME / IMS / CL mock series',t:'P',cost:'₹2,000–4,000',u:'The actual Year 3 prep: 25–30 full mocks, each one analysed. Mocks ARE the syllabus at this stage.'},
+  {n:'iQuanta',t:'I',cost:'Free tier',u:'Free daily CAT practice community — good between mock cycles.'}]},
+ {c:'🧠 Focus & Systems',ph:'Every phase',col:'#34d399',items:[
+  {n:'Anki',t:'I',cost:'Free (desktop)',u:'Spaced repetition — the single highest-ROI study technique known. Build decks for CFA Ethics, Econ definitions, GK.',mk:'a permanent memory system'},
+  {n:'Notion',t:'B',cost:'Free',u:'One page per semester: courses, cert progress, internship pipeline. Mirror of this blueprint you can edit.'},
+  {n:'Forest / Cold Turkey',t:'B',cost:'Free',u:'Phone discipline enforced, not hoped for. The 2 focused hours depend on this.'},
+  {n:'Toggl Track',t:'I',cost:'Free',u:'Audit where your 2 study hours actually go for one week each semester. The data will surprise you.'},
+  {n:'Google Calendar time-blocking',t:'B',cost:'Free',u:'Your chosen archery slot + study hours as recurring blocks. If it isn’t scheduled, it isn’t real.'}]},
+ {c:'💼 Career & Proof',ph:'Year 2 →',col:'#60a5fa',items:[
+  {n:'LinkedIn',t:'B',cost:'Free',u:'Post every project, cert, and archery result. The blueprint’s Year-1 senior-network step starts here.',mk:'a public track record recruiters find'},
+  {n:'Internshala',t:'B',cost:'Free',u:'Where the Year 2 first internship actually gets found. Apply in December, not April.'},
+  {n:'Unstop',t:'I',cost:'Free',u:'Case competitions and corporate challenges for undergrads.',mk:'podium finishes — CV lines most students never have'},
+  {n:'Kaggle Competitions',t:'P',cost:'Free',u:'Ranked data science competitions. Even one respectable finish is elite proof for the data route.',mk:'a ranked public profile'},
+  {n:'Overleaf',t:'P',cost:'Free',u:'Write the Year 3 dissertation in LaTeX. Instantly distinguishes your masters applications.',mk:'a professional-grade dissertation PDF'}]}
+];
+
+/* ─── DATE ENGINE ─── */
+function engine(){
+ const A=anchor(),Y=A.getFullYear();
+ const ph=[
+  {n:'Gap Month — Math Bridge',s:new Date(A.getTime()-35*DAY)},
+  {n:'Year 1 · Sem 1 — Foundation',s:A},
+  {n:'Year 1 · Sem 2 — First Certs',s:addM(A,6)},
+  {n:'Year 2 · Sem 3 — CFA Prep Begins',s:addM(A,12)},
+  {n:'Year 2 · Sem 4 — Internship Hunt',s:addM(A,18)},
+  {n:'Year 3 · Sem 5 — Exam Season',s:addM(A,24)},
+  {n:'Year 3 · Sem 6 — Decision + CUET PG',s:addM(A,30)},
+  {n:'Launch — First Job / Masters',s:addM(A,34)},
+  {n:'Compounding Years → 2033',s:addM(A,58)}];
+ let cur=ph[0],nxt=ph[1]||null;
+ if(today<ph[0].s){cur={n:'Pre-Blueprint',s:today};nxt=ph[0];}
+ else{for(let i=0;i<ph.length;i++){if(today>=ph[i].s){cur=ph[i];nxt=ph[i+1]||null;}}}
+ const ev=[
+  {n:'🎓 College begins',d:A},
+  {n:'📜 NISM V-A window (Sem 2)',d:addM(A,7)},
+  {n:'📈 CFA prep starts (Sem 3)',d:addM(A,12)},
+  {n:'💼 Internship summer',d:addM(A,21)},
+  {n:'🎯 Join CAT mocks',d:new Date(Y+2,5,1,12)},
+  {n:'📈 CFA Level 1 sitting',d:new Date(Y+2,7,20,12)},
+  {n:'🎯 CAT exam',d:new Date(Y+2,10,24,12)},
+  {n:'📖 CUET PG exam',d:new Date(Y+3,2,15,12)},
+  {n:'🎓 Graduation',d:new Date(Y+3,4,31,12)},
+  {n:'🏆 ₹50 LPA target year',d:new Date(2033,0,1,12)}];
+ return {cur,nxt,ev,cfa:new Date(Y+2,7,20,12),cat:new Date(Y+2,10,24,12),grad:new Date(Y+3,4,31,12)};
+}
+
+/* ─── STATE HELPERS ─── */
+const done=id=>!!store.get('ms.'+id,false);
+const allIds=Object.keys(MSFLAT);
+const execScore=()=>Math.round(allIds.filter(done).length/allIds.length*100);
+function cgpa(){
+ const s=store.get('sgpa',[]);const f=s.filter(x=>x>0);
+ return f.length?Math.round(f.reduce((a,b)=>a+b,0)/f.length*100)/100:null;
+}
+function dailyMap(){return store.get('daily',{});}
+function streak(){
+ const m=dailyMap();let s=0;let d=new Date(today);
+ const ok=k=>{const v=m[k];return v&&v.filter(Boolean).length>=4;};
+ if(!ok(iso(d)))d=new Date(d.getTime()-DAY); // today incomplete? count from yesterday
+ while(ok(iso(d))){s++;d=new Date(d.getTime()-DAY);}
+ return s;
+}
+
+/* ─── ODDS ENGINE ─── */
+function odds(){
+ const c=[];const g=cgpa();
+ if(g!==null){ if(g>=8.5)c.push(['CGPA 8.5+ — every door open',9]);
+  else if(g>=8)c.push(['CGPA 8.0+ — filters cleared',6]);
+  else if(g<7.5)c.push(['CGPA below 7.5 — top filters at risk',-8]);
+  else c.push(['CGPA 7.5–8 — recoverable, push now',-3]); }
+ if(done('y1c'))c.push(['Python done',2]);
+ if(done('y2b'))c.push(['SQL done',2]);
+ if(done('y2a'))c.push(['Google DA cert',2]);
+ if(done('y1f'))c.push(['NISM V-A',1]);
+ if(done('y2d'))c.push(['GitHub project live',3]);
+ if(done('y2g'))c.push(['First internship',4]);
+ if(done('y3h'))c.push(['Second internship',2]);
+ if(done('y3b'))c.push(['CFA L1 PASSED',5]);
+ if(done('y3d'))c.push(['25+ CAT mocks',3]);
+ const st=streak();if(st>=21)c.push(['21+ day streak — consistency proven',3]);
+ let total=27+c.reduce((a,b)=>a+b[1],0);
+ total=Math.max(8,Math.min(62,total));
+ return {c,total};
+}
+
+/* ─── RENDERERS ─── */
+function ringHTML(pct,color){
+ return `<div class="ring" style="background:conic-gradient(${color} ${pct*3.6}deg, var(--bg3) 0deg)"><div class="in" style="color:${color}">${pct}%</div></div>`;
+}
+function rStats(){
+ const e=engine();const dayIn=Math.max(1,days(e.cur.s,today)+1);
+ const st=streak();const ex=execScore();
+ $('cc-stats').innerHTML=`<div class="ccgrid">
+  <div class="ccstat"><div class="v pulse-now" style="color:var(--purple);font-size:13px;line-height:1.3;padding-top:8px;">${e.cur.n}</div><div class="l">You are here</div></div>
+  <div class="ccstat"><div class="v" style="color:var(--blue)">Day ${dayIn}</div><div class="l">of this phase${e.nxt?` · next: ${fmt(e.nxt.s)}`:''}</div></div>
+  <div class="ccstat">${ringHTML(ex,'var(--gold)')}<div class="l">Blueprint executed</div></div>
+  <div class="ccstat"><div class="v" style="color:${st>0?'var(--gold)':'var(--muted)'}">${st>0?'🔥 '+st:'—'}</div><div class="l">Day streak (4/5+ daily)</div></div>
+ </div>`;
+}
+const days=(a,b)=>Math.round((b-a)/DAY);
+function rCountdowns(){
+ const e=engine();
+ $('cc-countdowns').innerHTML=`<h3 style="margin-bottom:8px;">⏳ The Clocks That Matter</h3>`+
+  e.ev.map(x=>{const d=dTo(x.d);
+   const col=d<0?'var(--muted)':d<60?'var(--red)':d<365?'var(--gold)':'var(--teal)';
+   return `<div class="cdrow"><span style="font-size:13px;color:#cbd5e1;">${x.n}<span style="color:var(--muted);font-size:11px;"> · ${fmt(x.d)}</span></span><span class="cdd" style="color:${col}">${d<0?'✓ passed':d+' days'}</span></div>`;}).join('');
+}
+function rCGPA(){
+ const g=cgpa();let inner;
+ if(g===null)inner=`<p style="font-size:13px;color:var(--muted);">Enter your semester SGPAs in <b style="color:var(--gold)">Settings</b> below as results arrive. The whole plan pivots on 8.0 — this card will watch it for you.</p>`;
+ else{
+  const pct=Math.min(100,g*10);
+  const col=g>=8.5?'var(--green)':g>=8?'var(--gold)':g>=7.5?'var(--orange)':'var(--red)';
+  const msg=g>=8.5?'Excellent. Every path in this blueprint is open, including DSE and abroad funding tiers.':
+   g>=8?'On track. 8.0+ clears the filters at masters and abroad stage. Protect it.':
+   g>=7.5?'Warning zone. One strong semester recovers this. Read "Year 1: CGPA Falls Below 8" in Backups — act this week, not next semester.':
+   'Below 7.5. The skills floor is still fully intact — open the Backups section now and execute the recovery plan.';
+  inner=`<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;"><span style="font-size:26px;font-weight:900;color:${col}">${g.toFixed(2)}</span><span style="font-size:11px;color:var(--muted);">target ≥ 8.00</span></div>
+  <div class="bar-wrap" style="height:8px;position:relative;"><div class="bar" style="width:${pct}%;background:${col};"></div><div style="position:absolute;left:80%;top:-2px;bottom:-2px;width:2px;background:#fff3;"></div></div>
+  <p style="font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.55;">${msg}</p>
+  ${g<8?`<button class="ccbtn" style="margin-top:8px;" onclick="goTo('backups')">Open Backup Plan →</button>`:''}`;
+ }
+ $('cc-cgpa').innerHTML=`<h3 style="margin-bottom:10px;">🎓 Live CGPA Monitor</h3>`+inner;
+}
+function rDaily(){
+ const k=iso(today);const m=dailyMap();const t=m[k]||DAILY.map(()=>false);
+ const dow=today.getDay();
+ const rhythm=dow===6?'Saturday — deep work day. 4 hours on cert prep before any social plan.':dow===0?'Sunday — review week + 1 data task + rest. Plan next week tonight (15 min).':'Weekday — college + archery + 2 study hours. Every lecture.';
+ const last14=[...Array(14)].map((_,i)=>{const d=iso(new Date(today.getTime()-(13-i)*DAY));const v=m[d];const n=v?v.filter(Boolean).length:0;return `<div class="dot ${n>=4?'on':n>=2?'part':''}" title="${d}: ${n}/5"></div>`;}).join('');
+ $('cc-daily').innerHTML=`<h3 style="margin-bottom:4px;">🌅 Today's Non-Negotiables · ${today.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'})}</h3>
+ <p style="font-size:11.5px;color:var(--teal);margin-bottom:10px;">${rhythm}</p>
+ ${DAILY.map((d,i)=>`<label class="chk"><input type="checkbox" ${t[i]?'checked':''} onchange="ccDaily(${i},this.checked)"><span class="tx">${d[1]}</span></label>`).join('')}
+ <div class="dotrow">${last14}</div>
+ <p style="text-align:center;font-size:10px;color:var(--muted);margin-top:5px;">last 14 days · gold = 4/5 or better</p>`;
+}
+function rMilestones(){
+ const open=store.get('msopen',0);
+ $('cc-milestones').innerHTML=MS.map((g,gi)=>{
+  const dn=g.items.filter(i=>done(i[0])).length;const pct=Math.round(dn/g.items.length*100);
+  const isOpen=open===gi;
+  return `<div class="card" style="border-left:4px solid ${g.c};">
+   <div class="cchead" onclick="ccOpen(${gi})">
+    <h3 style="color:${g.c};font-size:14px;">${g.ph}</h3>
+    <div style="display:flex;align-items:center;flex:1;max-width:55%;"><div class="msbar"><div style="width:${pct}%;background:${g.c};"></div></div><span style="font-size:11px;font-weight:800;color:${g.c};min-width:56px;text-align:right;">${dn}/${g.items.length} ${isOpen?'▲':'▼'}</span></div>
+   </div>
+   ${isOpen?`<div style="margin-top:10px;">${g.items.map(i=>`<label class="chk"><input type="checkbox" ${done(i[0])?'checked':''} onchange="ccTick('${i[0]}',this.checked)"><span class="tx">${i[1]}</span></label>`).join('')}</div>`:''}
+  </div>`;}).join('');
+}
+function rOdds(){
+ const o=odds();
+ const doors=[['CAT → any IIM',14],['CUET PG → JNU/Jamia',52],['MS abroad (Top 100)',38],['Data analyst job',76]];
+ const pNone=doors.reduce((a,d)=>a*(1-d[1]/100),1);
+ $('cc-odds').innerHTML=`<h3 style="margin-bottom:4px;">🎲 Live Odds Engine</h3>
+ <p style="font-size:11px;color:var(--muted);margin-bottom:12px;">Modeled estimate — the point is direction, not decimals. Baseline 27% moves with what you actually complete.</p>
+ <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px;">
+  ${ringHTML(o.total,o.total>=40?'var(--green)':o.total>=27?'var(--gold)':'var(--orange)')}
+  <div><p style="font-size:13px;color:#e2e8f0;font-weight:700;">₹50 LPA by 27–28: ${o.total}% <span style="font-size:11px;color:var(--muted);font-weight:400;">(baseline 27%)</span></p>
+  <p style="font-size:11.5px;color:var(--muted);">Tick milestones and log SGPAs — watch this number respond to reality.</p></div>
+ </div>
+ ${o.c.length?o.c.map(x=>`<div class="oddrow"><span>${x[0]}</span><span style="color:${x[1]>0?'var(--green)':'var(--red)'};font-weight:700;">${x[1]>0?'+':''}${x[1]}%</span></div>`).join(''):'<p style="font-size:12px;color:var(--muted);">No signals yet — the engine is waiting for your first completed milestone.</p>'}
+ <div style="margin-top:14px;background:#0d2d1a;border-radius:8px;padding:12px;">
+  <p style="font-size:12.5px;color:var(--green);line-height:1.6;"><b>The insight nobody computes:</b> each door alone looks scary — 14%, 52%, 38%, 76%. But the probability that <b>at least one</b> of the four opens is <b>${Math.round((1-pNone)*100)}%</b>. The blueprint isn't a bet on one door. It's a system — and the system is far stronger than any single path.</p>
+ </div>`;
+}
+function rInsights(){
+ const e=engine();const out=[];
+ const wk=d=>Math.max(1,Math.round(dTo(d)/7));
+ if(dTo(e.cfa)>0){const h=Math.ceil(350/wk(e.cfa));out.push(`<b>CFA pace-maker:</b> ${dTo(e.cfa)} days to the August L1 sitting. 350 hours needed = <b>${h} hrs/week from today</b>. ${h<=8?'Comfortably inside your 2-daily-hours budget.':h<=14?'Tight but feasible — weekends carry the load.':'Not feasible at this start date — this is exactly why prep begins in Sem 3, not later.'}`);}
+ if(dTo(e.cat)>0){const hrs=Math.round(dTo(e.cat)*20/60);out.push(`<b>The invisible compounding:</b> the 20-min daily editorial habit between now and CAT = <b>~${hrs} hours of RC training</b> — more than most aspirants' entire paid verbal course, acquired at breakfast.`);}
+ const cagr=Math.round((Math.pow(50/6,1/6)-1)*100);
+ out.push(`<b>The salary math decoded:</b> ₹6 → ₹50 LPA in 6 years = <b>${cagr}% compound growth per year</b>. Sounds impossible — but it decomposes into 3 job switches at +45% each plus normal promotions. The ladder is standard in analytics/finance; what's rare is starting it at 22 with certs already done.`);
+ if(dTo(e.grad)>0){out.push(`<b>Rest is strategy:</b> 7-hour sleep × ${dTo(e.grad)} days to graduation ≈ <b>${Math.round(dTo(e.grad)*7/24)} full days asleep</b>. The plan allocates a third of itself to recovery — because a 20–30% cognitive penalty from bad sleep silently deletes CGPA, CFA and archery at once.`);}
+ const g=cgpa();
+ if(g!==null&&g<8){const s=store.get('sgpa',[]).filter(x=>x>0);const need=Math.min(10,Math.round((8*(s.length+1)-s.reduce((a,b)=>a+b,0))*100)/100);out.push(`<b>CGPA recovery, exactly:</b> you need <b>${need.toFixed(2)} next semester</b> to pull the average back to 8.0. ${need>10?'Two semesters needed — start now.':'One strong semester. That is the entire distance.'}`);}
+ $('cc-insights').innerHTML=`<h3 style="margin-bottom:10px;">🔮 Computed Insights</h3>`+out.map(t=>`<div class="insight"><span style="font-size:14px;">▸</span><p>${t}</p></div>`).join('');
+}
+function rSettings(){
+ const s=store.get('sgpa',[]);
+ $('cc-settings').innerHTML=`<h3 style="margin-bottom:10px;">⚙️ Settings & Data</h3>
+ <div class="grid2" style="margin-bottom:12px;">
+  <div><p style="font-size:11px;color:var(--muted);margin-bottom:4px;">College start date (anchors every clock)</p>
+   <input class="ccin" type="date" value="${anchorStr}" onchange="ccAnchor(this.value)"></div>
+  <div><p style="font-size:11px;color:var(--muted);margin-bottom:4px;">Semester SGPAs (fill as results arrive)</p>
+   <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px;">
+   ${[0,1,2,3,4,5].map(i=>`<input class="ccin" style="padding:6px 4px;text-align:center;" type="number" min="0" max="10" step="0.01" placeholder="S${i+1}" value="${s[i]||''}" onchange="ccSGPA(${i},this.value)">`).join('')}</div></div>
+ </div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <button class="ccbtn" onclick="ccExport()">📤 Export progress</button>
+  <button class="ccbtn" onclick="ccImport()">📥 Import</button>
+  <button class="ccbtn" style="color:var(--red);" onclick="ccReset()">Reset all</button>
+ </div>
+ <p style="font-size:10.5px;color:var(--muted);margin-top:8px;">Progress lives in this browser. Clearing browser data erases it — export a backup monthly.</p>`;
+}
+
+/* ─── FOCUS TIMER ─── */
+let tLeft=0,tTotal=0,tInt=null;
+function rTimer(){
+ const sess=store.get('sess.'+iso(today),0);
+ $('cc-timer').innerHTML=`<h3 style="margin-bottom:8px;">⏱️ Deep Work Timer</h3>
+ <div class="tdigits" id="tdisp">${tFmt(tLeft)}</div>
+ <div style="display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap;">
+  ${[25,50,120].map(m=>`<button class="ccbtn" onclick="ccTSet(${m})">${m} min</button>`).join('')}
+  <button class="ccbtn gold" id="tgo" onclick="ccTGo()">${tInt?'Pause':'Start'}</button>
+ </div>
+ <p style="text-align:center;font-size:11px;color:var(--muted);">🎯 ${sess} focus session${sess===1?'':'s'} completed today · phone in another room</p>`;
+}
+const tFmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+window.ccTSet=m=>{clearInterval(tInt);tInt=null;tLeft=tTotal=m*60;rTimer();};
+window.ccTGo=()=>{
+ if(tInt){clearInterval(tInt);tInt=null;rTimer();return;}
+ if(tLeft<=0)tLeft=tTotal=25*60;
+ tInt=setInterval(()=>{
+  tLeft--;const d=$('tdisp');if(d)d.textContent=tFmt(tLeft);document.title=tFmt(tLeft)+' · Deep Work';
+  if(tLeft<=0){clearInterval(tInt);tInt=null;store.set('sess.'+iso(today),store.get('sess.'+iso(today),0)+1);document.title='✅ Session done · My Blueprint';rTimer();}
+ },1000);rTimer();};
+
+/* ─── ARSENAL ─── */
+let aFilter=store.get('afilter','all');
+function rArsenal(){
+ const F=$('arsenal-filter');
+ const chips=[['all','All'],['B','🌱 Beginner'],['I','⚡ Intermediate'],['P','🎖️ Professional'],['mk','🛠️ Produces proof']];
+ F.innerHTML=chips.map(c=>`<button class="fchip ${aFilter===c[0]?'on':''}" onclick="ccAF('${c[0]}')">${c[1]}</button>`).join('');
+ $('arsenal-container').innerHTML=TOOLS.map(cat=>{
+  const its=cat.items.filter(t=>aFilter==='all'||(aFilter==='mk'?!!t.mk:t.t===aFilter));
+  if(!its.length)return '';
+  return `<div class="card" style="border-left:4px solid ${cat.col};">
+   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:4px;">
+    <h3 style="color:${cat.col};">${cat.c}</h3><span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">${cat.ph}</span></div>
+   ${its.map(t=>`<div style="padding:9px 0;border-bottom:1px dashed rgba(30,41,59,.6);">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+     <span style="font-size:13px;font-weight:700;color:#e2e8f0;">${t.n}</span>
+     <span style="display:flex;gap:6px;align-items:center;"><span class="tier ${t.t}">${t.t==='B'?'Beginner':t.t==='I'?'Intermediate':'Pro'}</span><span style="font-size:10px;color:var(--muted);">${t.cost}</span></span>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px;">${t.u}</p>
+    ${t.mk?`<span class="mkbadge">🛠️ produces: ${t.mk}</span>`:''}
+   </div>`).join('')}
+  </div>`;}).join('');
+}
+
+/* ─── GLOBAL HANDLERS ─── */
+window.ccTick=(id,v)=>{store.set('ms.'+id,v);rMilestones();rStats();rOdds();rInsights();};
+window.ccOpen=gi=>{store.set('msopen',store.get('msopen',0)===gi?-1:gi);rMilestones();};
+window.ccDaily=(i,v)=>{const k=iso(today);const m=dailyMap();const t=m[k]||DAILY.map(()=>false);t[i]=v;m[k]=t;store.set('daily',m);rDaily();rStats();rOdds();};
+window.ccSGPA=(i,v)=>{const s=store.get('sgpa',[]);s[i]=parseFloat(v)||0;store.set('sgpa',s);rCGPA();rStats();rOdds();rInsights();};
+window.ccAnchor=v=>{if(v){anchorStr=v;store.set('anchor',v);rStats();rCountdowns();rInsights();}};
+window.ccAF=f=>{aFilter=f;store.set('afilter',f);rArsenal();};
+window.ccExport=()=>{
+ const dump={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith(K))dump[k]=localStorage.getItem(k);}
+ const txt=JSON.stringify(dump);
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>alert('Progress copied to clipboard. Paste it somewhere safe (Notes/Notion).')).catch(()=>prompt('Copy this backup:',txt));}
+ else prompt('Copy this backup:',txt);};
+window.ccImport=()=>{
+ const txt=prompt('Paste your exported backup:');if(!txt)return;
+ try{const d=JSON.parse(txt);Object.keys(d).forEach(k=>{if(k.startsWith(K))localStorage.setItem(k,d[k]);});location.reload();}catch(e){alert('Invalid backup data.');}};
+window.ccReset=()=>{if(confirm('Erase ALL tracked progress? This cannot be undone.')){const del=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith(K))del.push(k);}del.forEach(k=>localStorage.removeItem(k));location.reload();}};
+
+/* ─── INIT ─── */
+rStats();rCountdowns();rCGPA();rDaily();rTimer();rMilestones();rOdds();rInsights();rSettings();rArsenal();
+})();
+
+</script>
+<script>if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{});}</script>
+</body>
+</html>
